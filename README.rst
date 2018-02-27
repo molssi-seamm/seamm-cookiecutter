@@ -71,6 +71,45 @@ For more details, see the `cookiecutter-pypackage tutorial`_.
 
 .. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
 
+My steps
+~~~~~~~~
+After running cookie cutter, do the following to create the initial local git repository::
+   
+   cd mypackage
+   git init .
+   git add .
+   git commit -m "Initial skeleton."
+   git remote add origin git@github.com:myusername/mypackage.git
+
+Then create the same-named repository in GitHub, just gicing the LICENSE type.
+Now you need to merge the two::
+
+   bash-3.2$ git remote add origin git@github.com:paulsaxe/forcefield_step.git
+   bash-3.2$ git pull --allow-unrelated-histories origin master
+   warning: no common commits
+   remote: Counting objects: 3, done.        
+   remote: Compressing objects: 100% (2/2), done.        
+   remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0        
+   Unpacking objects: 100% (3/3), done.
+   From github.com:paulsaxe/forcefield_step
+    * branch            master     -> FETCH_HEAD
+    * [new branch]      master     -> origin/master
+   error: Terminal is dumb, but EDITOR unset
+   Not committing merge; use 'git commit' to complete the merge.
+   bash-3.2$ git push --set-upstream origin master
+   Counting objects: 54, done.
+   Delta compression using up to 4 threads.
+   Compressing objects: 100% (48/48), done.
+   Writing objects: 100% (54/54), 20.43 KiB | 261.00 KiB/s, done.
+   Total 54 (delta 10), reused 0 (delta 0)
+   remote: Resolving deltas: 100% (10/10), completed with 1 local object.        
+   To github.com:paulsaxe/forcefield_step.git
+      30251d7..e2761fc  master -> master
+   Branch master set up to track remote branch master from origin.
+   bash-3.2$ 
+
+I do the commit (of LICENSE) via emacs git-status.
+
 Not Exactly What You Want?
 --------------------------
 

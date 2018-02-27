@@ -12,10 +12,9 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-    {%- if cookiecutter.command_line_interface|lower == 'click' %}
-    'Click>=6.0',
-    {%- endif %}
-    # TODO: put package requirements here
+    'molssi_workflow>=0.1',
+    'molssi_util>=0.1'
+    # TODO: put any other package requirements here
 ]
 
 setup_requirements = [
@@ -35,9 +34,10 @@ test_requirements = [
 {%- set license_classifiers = {
     'MIT license': 'License :: OSI Approved :: MIT License',
     'BSD license': 'License :: OSI Approved :: BSD License',
-    'ISC license': 'License :: OSI Approved :: ISC License (ISCL)',
     'Apache Software License 2.0': 'License :: OSI Approved :: Apache Software License',
-    'GNU General Public License v3': 'License :: OSI Approved :: GNU General Public License v3 (GPLv3)'
+    'GNU General Public License v3': 'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+    'GNU Lesser General Public License v3': 'License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)',
+    'Not open source': 'License :: Other/Proprietary License',
 } %}
 
 setup(
@@ -49,13 +49,6 @@ setup(
     author_email='{{ cookiecutter.email }}',
     url='https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}',
     packages=find_packages(include=['{{ cookiecutter.project_slug }}']),
-    {%- if 'no' not in cookiecutter.command_line_interface|lower %}
-    entry_points={
-        'console_scripts': [
-            '{{ cookiecutter.project_slug }}={{ cookiecutter.project_slug }}.cli:main'
-        ]
-    },
-    {%- endif %}
     include_package_data=True,
     install_requires=requirements,
 {%- if cookiecutter.open_source_license in license_classifiers %}
@@ -65,18 +58,21 @@ setup(
     keywords='{{ cookiecutter.project_slug }}',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
-        'Intended Audience :: Developers',
+        'Intended Audience :: Science/Research',
+        'Topic :: Scientific/Engineering :: Chemistry',
+        'Topic :: Scientific/Engineering :: Physics',
+        'Topic :: Scientific/Engineering :: Materials Science',
+        'Topic :: Scientific/Engineering :: Computational Materials Science',
+        'Topic :: Scientific/Engineering :: Computational Molecular Science',
 {%- if cookiecutter.open_source_license in license_classifiers %}
         '{{ license_classifiers[cookiecutter.open_source_license] }}',
 {%- endif %}
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3  :: Only',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
     test_suite='tests',
     tests_require=test_requirements,
