@@ -27,4 +27,12 @@ setup(
         'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Software Development',
     ],
+    entry_points={
+        'org.molssi.workflow': [
+            '{{cookiecutter.step}} = {{cookiecutter.step_slug}}:{{cookiecutter.step}}Step',
+        ],
+        'org.molssi.workflow.tk': [
+            '{{cookiecutter.step}} = {{cookiecutter.step_slug}}:{{cookiecutter.step}}Step',
+        ],
+    }
 )
