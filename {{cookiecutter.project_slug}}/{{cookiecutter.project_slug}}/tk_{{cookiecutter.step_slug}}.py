@@ -55,7 +55,7 @@ class Tk{{ cookiecutter.step }}(molssi_workflow.TkNode):
         w['method'] = method
 
         # Unit entry field for example
-	example = mw.UnitEntry(frame, width=15)
+        example = mw.UnitEntry(frame, width=15)
         example.set(self.node.example)
         w['example'] = example
 
@@ -68,13 +68,13 @@ class Tk{{ cookiecutter.step }}(molssi_workflow.TkNode):
 
     def reset_dialog(self, widget=None):
         # set up our shorthand for the widgets
-    	w = self._widget
+        w = self._widget
 
         # and get the method, which in this example controls
         # how the widgets are laid out.
         method = w['method'].get()
 
-	# Remove any widgets previously packed
+        # Remove any widgets previously packed
         frame = w['frame']
         for slave in frame.grid_slaves():
             slave.grid_forget()
@@ -127,7 +127,7 @@ class Tk{{ cookiecutter.step }}(molssi_workflow.TkNode):
         self.dialog.deactivate(result)
 
         # set up our shorthand for the widgets
-    	w = self._widget
+        w = self._widget
 
         # and get the method, which in this example tells
         # whether to use the value ditrectly or get it from
