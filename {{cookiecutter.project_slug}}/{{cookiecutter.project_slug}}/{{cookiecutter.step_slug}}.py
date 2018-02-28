@@ -9,11 +9,10 @@ logger = logging.getLogger(__name__)
 
 
 class {{ cookiecutter.step }}(molssi_workflow.Node):
-    def __init__(self, workflow=None, gui_object=None, extension=None):
+    def __init__(self, workflow=None, extension=None):
         '''Setup the non-graphical part of the {{ cookiecutter.step }} step in a
         MolSSI workflow.
 
-        
         Keyword arguments:
         '''
         logger.debug('Creating {{ cookiecutter.step }} {}'.format(self))
@@ -23,7 +22,8 @@ class {{ cookiecutter.step }}(molssi_workflow.Node):
         self.example_variable = 'my_variable'
 
         super().__init__(
-            workflow=workflow, title='{{ cookiecutter.step }}', gui_object=gui_object,
+            workflow=workflow,
+            title='{{ cookiecutter.step }}',
             extension=extension)
 
     def run(self):
@@ -40,6 +40,5 @@ class {{ cookiecutter.step }}(molssi_workflow.Node):
             )
             logger.info('The example value in {{ cookiecutter.step }} is in ' +
                         'the variable {}'.format(self.example_variable))
-
 
         return super().run()

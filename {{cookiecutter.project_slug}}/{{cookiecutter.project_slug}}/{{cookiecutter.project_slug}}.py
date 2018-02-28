@@ -11,7 +11,7 @@ class {{cookiecutter.step}}Step(object):
     my_description = {
         'description':
         'An interface for {{cookiecutter.step}}',
-        'group': 'Building',
+        'group': 'Simulations',
         'name': '{{cookiecutter.step}}'
     }
 
@@ -27,9 +27,10 @@ class {{cookiecutter.step}}Step(object):
         """
         return {{cookiecutter.step}}Step.my_description
 
-    def factory(self, graphical=False, workflow=None, canvas=None, **kwargs):
-        """Return the node object or graphical node object"""
-        if graphical:
-            return {{cookiecutter.project_slug}}.Tk{{cookiecutter.step}}(canvas=canvas, **kwargs)
-        else:
-            return {{cookiecutter.project_slug}}.{{cookiecutter.step}}(workflow=workflow, **kwargs)
+    def create_node(self, workflow=None, **kwargs):
+        """Return the new node object"""
+        return {{cookiecutter.project_slug}}.{{cookiecutter.step}}(workflow=workflow, **kwargs)
+
+    def create_tk_node(self, canvas=None, **kwargs):
+        """Return the graphical Tk node object"""
+        return {{cookiecutter.project_slug}}.Tk{{cookiecutter.step}}(canvas=canvas, **kwargs)

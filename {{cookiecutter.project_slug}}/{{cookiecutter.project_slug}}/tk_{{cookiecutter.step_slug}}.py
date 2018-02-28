@@ -17,7 +17,8 @@ class Tk{{ cookiecutter.step }}(molssi_workflow.TkNode):
 
     node_class = {{ cookiecutter.project_slug }}.{{ cookiecutter.step }}
 
-    def __init__(self, node=None, canvas=None, x=None, y=None, w=None, h=None):
+    def __init__(self, tk_workflow=None, node=None, canvas=None,
+                 x=None, y=None, w=None, h=None):
         '''Initialize a node
 
         Keyword arguments:
@@ -25,7 +26,8 @@ class Tk{{ cookiecutter.step }}(molssi_workflow.TkNode):
 
         self.dialog = None
 
-        super().__init__(node=node, canvas=canvas, x=x, y=y, w=w, h=h)
+        super().__init__(tk_workflow=tk_workflow, node=node,
+                         canvas=canvas, x=x, y=y, w=w, h=h)
 
     def create_dialog(self):
         """Create the dialog!"""
@@ -47,6 +49,11 @@ class Tk{{ cookiecutter.step }}(molssi_workflow.TkNode):
         w['frame'] = frame
 
         # Set the first parameter -- which will be exactly matched
+        method_label = ttk.Label(
+            frame, text='Example value'
+        )
+        w['method_label'] = method_label
+
         method = ttk.Combobox(
             frame, state='readonly', values=['is', 'from variable'],
             justify=tk.RIGHT, width=15
@@ -82,8 +89,8 @@ class Tk{{ cookiecutter.step }}(molssi_workflow.TkNode):
         # keep track of the row in a variable, so that the layout is flexible
         # if e.g. rows are skipped to control such as 'method' here
         row = 0
-        method_label.grid(row=row, column=0, sticky=tk.E)
-        method_widget.grid(row=row, column=1, sticky=tk.EW)
+        w['method_label'].grid(row=row, column=0, sticky=tk.E)
+        w['method'].grid(row=row, column=1, sticky=tk.EW)
         if method == 'is':
             w['example'].grid(row=row, column=2, sticky=tk.W)
         elif 'variable' in method:
