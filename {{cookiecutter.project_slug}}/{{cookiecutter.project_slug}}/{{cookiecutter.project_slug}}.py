@@ -7,7 +7,7 @@ nodes."""
 import {{cookiecutter.project_slug}}
 
 
-class {{cookiecutter.step}}Step(object):
+class {{cookiecutter.step.replace(' ', '')}}Step(object):
     my_description = {
         'description':
         'An interface for {{cookiecutter.step}}',
@@ -25,12 +25,12 @@ class {{cookiecutter.step}}Step(object):
     def description(self):
         """Return a description of what this extension does
         """
-        return {{cookiecutter.step}}Step.my_description
+        return {{cookiecutter.step.replace(' ', '')}}Step.my_description
 
     def create_node(self, workflow=None, **kwargs):
         """Return the new node object"""
-        return {{cookiecutter.project_slug}}.{{cookiecutter.step}}(workflow=workflow, **kwargs)
+        return {{cookiecutter.project_slug}}.{{cookiecutter.step.replace(' ', '')}}(workflow=workflow, **kwargs)
 
     def create_tk_node(self, canvas=None, **kwargs):
         """Return the graphical Tk node object"""
-        return {{cookiecutter.project_slug}}.Tk{{cookiecutter.step}}(canvas=canvas, **kwargs)
+        return {{cookiecutter.project_slug}}.Tk{{cookiecutter.step.replace(' ', '')}}(canvas=canvas, **kwargs)
