@@ -114,9 +114,13 @@ class {{ cookiecutter.class_name }}(molssi_workflow.Node):
         if result['stderr'] != '':
             logger.warning('stderr:\n' + result['stderr'])
 {%- else %}
+        # Get the values of the parameters, dereferencing any variables
+        P = self.parameters.current_values_to_dict(
+            context=molssi_workflow.workflow_variables._data
+        )
+
         # Temporary code just to print the parameters. You will need to change
         # this!
-        P = self.parameters
         for key in P:
             print('{:>15s} = {}'.format(key, P[key]))
             printer.normal(__(
