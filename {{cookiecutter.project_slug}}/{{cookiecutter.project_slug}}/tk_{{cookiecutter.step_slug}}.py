@@ -2,6 +2,7 @@
 """The graphical part of a {{ cookiecutter.step }} step"""
 
 import molssi_workflow
+from molssi_workflow import ureg, Q_, units_class  # nopep8
 import molssi_util.molssi_widgets as mw
 import {{ cookiecutter.project_slug }}
 import Pmw
@@ -10,12 +11,10 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 
-class Tk{{ cookiecutter.step.replace(' ', '') }}(molssi_workflow.TkNode):
-    """The node_class is the class of the 'real' node that this
-    class is the Tk graphics partner for
-    """
+class Tk{{ cookiecutter.class_name }}(molssi_workflow.TkNode):
+    """The graphical part of a {{ cookiecutter.step }} step in a MolSSI flowchart.
 
-    node_class = {{ cookiecutter.project_slug }}.{{ cookiecutter.step.replace(' ', '') }}
+    """
 
     def __init__(self, tk_workflow=None, node=None, canvas=None,
 {%- if cookiecutter.use_subflowchart == 'y' %}
@@ -32,7 +31,7 @@ class Tk{{ cookiecutter.step.replace(' ', '') }}(molssi_workflow.TkNode):
         self.dialog = None
 
         super().__init__(tk_workflow=tk_workflow, node=node,
-                         canvas=canvas, x=x, y=y, w=w, h=h)
+                         canvas=canvas, x=None, y=None, w=200, h=50)
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
         self.create_dialog()
@@ -49,13 +48,13 @@ class Tk{{ cookiecutter.step.replace(' ', '') }}(molssi_workflow.TkNode):
             command=self.handle_dialog)
         self.dialog.withdraw()
 
-        # self._widget, which is inherited from the base class, is
-        # a place to store the pointers to the widgets so that we can access
-        # them later. We'll set up a short hand 'w' just to keep lines short
-        w = self._widget
-        frame = ttk.Frame(self.dialog.interior())
-        frame.pack(expand=tk.YES, fill=tk.BOTH)
-        w['frame'] = frame
+        # The information about widgets is held in self['xxxx'], i.e. this
+        # class is in part a dictionary of widgets. This makes accessing
+        # the widgets easier and allows loops, etc.
+
+        # Create a frame to hold everything. This is always called 'frame'.
+        self['frame'] = ttk.Frame(self.dialog.interior())
+        self['frame'].pack(expand=tk.YES, fill=tk.BOTH)
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
         # make it large!
@@ -75,57 +74,43 @@ class Tk{{ cookiecutter.step.replace(' ', '') }}(molssi_workflow.TkNode):
         )
         self.{{ cookiecutter.step_slug }}_tk_workflow.draw()
 {%- else %}
-        # Set the first parameter -- which will be exactly matched
-        method_label = ttk.Label(
-            frame, text='Example value'
-        )
-        w['method_label'] = method_label
+        # Shortcut for parameters
+        P = self.node.parameters
 
-        method = ttk.Combobox(
-            frame, state='readonly', values=['is', 'from variable'],
-            justify=tk.RIGHT, width=15
-        )
-        method.set(self.node.method)
-        w['method'] = method
+        # The create the widgets
+        for key in P:
+            self[key] = P[key].widget(self['frame'])
 
-        # Unit entry field for example
-        example = mw.UnitEntry(frame, width=15)
-        example.set(self.node.example)
-        w['example'] = example
-
-        # Variable for example
-        example_variable = ttk.Entry(frame, width=15)
-        example_variable.insert(0, self.node.example_variable)
-        w['example_variable'] = example_variable
-
+        # and lay them out
         self.reset_dialog()
 
     def reset_dialog(self, widget=None):
-        # set up our shorthand for the widgets
-        w = self._widget
+        """Layout the widgets in the dialog
 
-        # and get the method, which in this example controls
-        # how the widgets are laid out.
-        method = w['method'].get()
+        This initial function simply lays them out row by rows with
+        aligned labels. You may wish a more complicated layout that
+        is controlled by values of some of the control parameters.
+        """
 
         # Remove any widgets previously packed
-        frame = w['frame']
+        frame = self['frame']
         for slave in frame.grid_slaves():
             slave.grid_forget()
+
+        # Shortcut for parameters
+        P = self.node.parameters
 
         # keep track of the row in a variable, so that the layout is flexible
         # if e.g. rows are skipped to control such as 'method' here
         row = 0
-        w['method_label'].grid(row=row, column=0, sticky=tk.E)
-        w['method'].grid(row=row, column=1, sticky=tk.EW)
-        if method == 'is':
-            w['example'].grid(row=row, column=2, sticky=tk.W)
-        elif 'variable' in method:
-            w['example_variable'].grid(row=row, column=1, sticky=tk.W)
-        else:
-            raise RuntimeError(
-                "Don't recognize the method {}".format(method))
-        row += 1
+        widgets = []
+        for key in P:
+            self[key].grid(row=row, column=0, sticky=tk.EW)
+            widgets.append(self[key])
+            row += 1
+
+        # Align the labels
+        mw.align_labels(widgets)
 {%- endif %}
 
     def right_click(self, event):
@@ -146,7 +131,13 @@ class Tk{{ cookiecutter.step.replace(' ', '') }}(molssi_workflow.TkNode):
         self.dialog.activate(geometry='centerscreenfirst')
 
     def handle_dialog(self, result):
-        if result == 'Cancel':
+        """Handle the closing of the edit dialog
+
+        What to do depends on the button used to close the dialog. If
+        the user closes it by clicking the 'x' of the dialog window, 
+        None is returned, which we take as equivalent to cancel.
+        """
+        if result is None or result == 'Cancel':
             self.dialog.deactivate(result)
             return
 
@@ -161,23 +152,15 @@ class Tk{{ cookiecutter.step.replace(' ', '') }}(molssi_workflow.TkNode):
 
         self.dialog.deactivate(result)
 
-        # set up our shorthand for the widgets
-        w = self._widget
-
 {%- if cookiecutter.use_subflowchart == 'n' %}
-        # and get the method, which in this example tells
-        # whether to use the value ditrectly or get it from
-        # a variable in the workflow
-        method = w['method'].get()
+        # Shortcut for parameters
+        P = self.node.parameters
 
-        self.node.method = method
-        if method == 'is':
-            self.node.example = w['example'].get()
-        elif 'variable' in method:
-            self.node.example_variable = w['example_variable'].get()
-        else:
-            raise RuntimeError(
-                "Don't recognize the method {}".format(method))
+        # Get the values for all the widgets. This may be overkill, but
+        # it is easy! You can sort out what it all means later, or
+        # be a bit more selective.
+        for key in P:
+            P[key].set_from_widget()
 {%- endif %}
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
@@ -202,4 +185,4 @@ class Tk{{ cookiecutter.step.replace(' ', '') }}(molssi_workflow.TkNode):
 
     def handle_help(self):
         """Not implemented yet ... you'll need to fill this out!"""
-        print('Help!')
+        print('Help not implemented yet for {{ cookiecutter.step }}!')

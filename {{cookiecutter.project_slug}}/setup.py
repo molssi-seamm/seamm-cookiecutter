@@ -79,10 +79,10 @@ setup(
     setup_requires=setup_requirements,
     entry_points={
         'org.molssi.workflow': [
-            '{{ cookiecutter.step }} = {{ cookiecutter.project_slug }}:{{ cookiecutter.step.replace(' ', '') }}Step',
+            '{{ cookiecutter.step }} = {{ cookiecutter.project_slug }}:{{ cookiecutter.class_name }}Step',
         ],
         'org.molssi.workflow.tk': [
-            '{{ cookiecutter.step }} = {{ cookiecutter.project_slug }}:{{ cookiecutter.step.replace(' ', '') }}Step',
+            '{{ cookiecutter.step }} = {{ cookiecutter.project_slug }}:{{ cookiecutter.class_name }}Step',
         ],
     }
 )
