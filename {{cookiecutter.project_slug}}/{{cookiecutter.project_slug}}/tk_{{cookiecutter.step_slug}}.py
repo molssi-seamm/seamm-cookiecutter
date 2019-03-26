@@ -134,7 +134,7 @@ class Tk{{ cookiecutter.class_name }}(molssi_workflow.TkNode):
         """Handle the closing of the edit dialog
 
         What to do depends on the button used to close the dialog. If
-        the user closes it by clicking the 'x' of the dialog window, 
+        the user closes it by clicking the 'x' of the dialog window,
         None is returned, which we take as equivalent to cancel.
         """
         if result is None or result == 'Cancel':

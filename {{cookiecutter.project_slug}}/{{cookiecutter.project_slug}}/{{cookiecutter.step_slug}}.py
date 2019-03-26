@@ -62,7 +62,7 @@ class {{ cookiecutter.class_name }}(molssi_workflow.Node):
                 '{{ cookiecutter.step}} step, including key parameters.')
 
         return text
-    
+
     def describe(self, indent='', json_dict=None):
         """Write out information about what this step will do
         If json_dict is passed in, add information to that dictionary
