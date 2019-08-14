@@ -1,31 +1,44 @@
-# Config file for automatic testing at travis-ci.org
-# This file will be regenerated if you run travis_pypi_setup.py
-
 language: python
-python:
-  - 3.5
-  - 3.4
-  - 3.3
-  - 2.7
-  - 2.6
-
-# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: pip install -U tox-travis
-
-# command to run tests, e.g. python setup.py test
-script: tox
+matrix:
+  include:
+  - os: osx
+    language: generic
+    env: PYTHON_VER=3.6
+  - os: osx
+    language: generic
+    env: PYTHON_VER=3.7
+  - os: linux
+    language: generic
+    env: PYTHON_VER=3.6
+  - os: linux
+    language: generic
+    env: PYTHON_VER=3.7
+before_install:
+- uname -a
+- df -h
+- ulimit -a
+- source devtools/travis-ci/before_install.sh
+- python -V
+install:
+- python devtools/scripts/create_conda_env.py -n=test -p=$PYTHON_VER devtools/conda-envs/test_env.yaml
+- conda activate test
+- python setup.py develop --no-deps
+script:
+- pytest -v --cov={{ cookiecutter.project_slug }} tests/
+notifications:
+  email: false
+after_success:
+- codecov
 
 {% if cookiecutter.use_pypi_deployment_with_travis == 'y' -%}
-# After you create the Github repo and add it to Travis, run the
-# travis_pypi_setup.py script to finish PyPI deployment setup
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
+  on:
+    condition: "$TRAVIS_OS_NAME = linux"
+    repo: {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
+    tags: true
   user: {{ cookiecutter.pypi_username }}
   password:
     secure: PLEASE_REPLACE_ME
-  on:
-    tags: true
-    repo: {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
-    python: 2.7
 {%- endif %}
