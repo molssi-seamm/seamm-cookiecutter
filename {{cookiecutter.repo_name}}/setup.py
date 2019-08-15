@@ -31,57 +31,49 @@ requirements = [
 ]
 
 {%- set license_classifiers = {
-    'MIT license': 'License :: OSI Approved :: MIT License',
-    'BSD license': 'License :: OSI Approved :: BSD License',
+    'BSD-3-Clause': 'License :: OSI Approved :: BSD License',
+    'MIT': 'License :: OSI Approved :: MIT License',
     'Apache Software License 2.0': 'License :: OSI Approved :: Apache Software License',
-    'GNU General Public License v3': 'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
-    'GNU Lesser General Public License v3': 'License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)',
-    'Not open source': 'License :: Other/Proprietary License',
+    'GNU General Public License v3+': 'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+    'GNU Lesser General Public License v3+': 'License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)',
+    'other': 'License :: Other/Proprietary License',
 } %}
 
 setup(
-    name='{{ cookiecutter.project_slug }}',
-    version='{{ cookiecutter.version }}',
+    name='{{ cookiecutter.repo_name }}',
+    version=versioneer.get_version(),
     description="{{ cookiecutter.project_short_description }}",
     long_description=readme + '\n\n' + history,
     author="{{ cookiecutter.full_name.replace('\"', '\\\"') }}",
     author_email='{{ cookiecutter.email }}',
-    url='https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}',
-    packages=find_packages(include=['{{ cookiecutter.project_slug }}']),
+    url='https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}',
+    packages=find_packages(include=['{{ cookiecutter.repo_name }}']),
     include_package_data=True,
     install_requires=requirements,
-{%- if cookiecutter.open_source_license in license_classifiers %}
-    license="{{ cookiecutter.open_source_license }}",
+{%- if cookiecutter.license in license_classifiers %}
+    license="{{ cookiecutter.license }}",
 {%- endif %}
     zip_safe=False,
-    keywords='{{ cookiecutter.project_slug }}',
+    keywords='{{ cookiecutter.repo_name }}',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Chemistry',
         'Topic :: Scientific/Engineering :: Physics',
-        'Topic :: Scientific/Engineering :: Materials Science',
-        'Topic :: Scientific/Engineering :: Computational Materials Science',
-        'Topic :: Scientific/Engineering :: Computational Molecular Science',
 {%- if cookiecutter.open_source_license in license_classifiers %}
-        '{{ license_classifiers[cookiecutter.open_source_license] }}',
+        '{{ license_classifiers[cookiecutter.license] }}',
 {%- endif %}
         'Natural Language :: English',
-        'Programming Language :: Python :: 3  :: Only',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ],
-    test_suite='tests',
-    tests_require=test_requirements,
-    setup_requires=setup_requirements,
     entry_points={
-        'org.molssi.workflow': [
-            '{{ cookiecutter.step }} = {{ cookiecutter.project_slug }}:{{ cookiecutter.class_name }}Step',
+        'org.molssi.seamm': [
+            '{{ cookiecutter.step }} = {{ cookiecutter.repo_name }}:{{ cookiecutter.first_module_name }}Step',
         ],
-        'org.molssi.workflow.tk': [
-            '{{ cookiecutter.step }} = {{ cookiecutter.project_slug }}:{{ cookiecutter.class_name }}Step',
+        'org.molssi.seamm.tk': [
+            '{{ cookiecutter.step }} = {{ cookiecutter.repo_name }}:{{ cookiecutter.first_module_name }}Step',
         ],
     }
 )

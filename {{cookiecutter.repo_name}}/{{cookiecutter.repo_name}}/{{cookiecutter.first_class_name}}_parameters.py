@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
-"""Control parameters for the {{ cookiecutter.step }} step in a MolSSI flowchart"""
+"""
+Control parameters for the {{ cookiecutter.step }} step in a SEAMM flowchart
+"""
 
 import logging
-import molssi_workflow
+import seamm
 import pprint
 
 logger = logging.getLogger(__name__)
 
 
-class {{ cookiecutter.class_name }}_Parameters(molssi_workflow.Parameters):
+class {{ cookiecutter.first_class_name }}Parameters(seamm.Parameters):
     """The control parameters for {{ cookiecutter.step }}
 
     This is a dictionary of Parameters objects, which themselves are
@@ -43,15 +45,20 @@ class {{ cookiecutter.class_name }}_Parameters(molssi_workflow.Parameters):
         },
     }
 
-    def __init__(self, data=parameters):
-        """Initialize the instance, by default from the default
-        parameters given in the class"""
+    def __init__(self, defaults={}, data=None):
+        """
+        Initialize the parameters, by default with the parameters defined above
 
-        logger.debug('{{ cookiecutter.class_name }}_Parameters.__init__')
+        Args:
+            defaults: A dictionary of parameters to initialize. The parameters
+                above are used first and any given will override/add to them.
+            data: A dictionary of keys and a subdictionary with value and units
+                for updating the current, default values.
+        """
 
-        super().__init__()
+        logger.debug('{{ cookiecutter.first_class_name }}Parameters.__init__')
 
-        logger.debug("Initializing {{ cookiecutter.class_name }}_Parameters object:")
-        logger.debug("\n{}\n".format(pprint.pformat(data)))
-
-        self.update(data)
+        super().__init__(
+            defaults={**{{ cookiecutter.first_class_name }}Parameters.parameters, **defaults},
+            data=data
+        )

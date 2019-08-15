@@ -1,38 +1,59 @@
 # -*- coding: utf-8 -*-
 """The graphical part of a {{ cookiecutter.step }} step"""
 
-import molssi_workflow
-from molssi_workflow import ureg, Q_, units_class  # nopep8
-import molssi_util.molssi_widgets as mw
-import {{ cookiecutter.project_slug }}
+import seamm
+from seamm import ureg, Q_, units_class  # nopep8
+import seamm_widgets as sw
+import {{ cookiecutter.repo_name }}
 import Pmw
-import pprint  # nopep8
+import pprint  # noqa: F401
 import tkinter as tk
 import tkinter.ttk as ttk
 
 
-class Tk{{ cookiecutter.class_name }}(molssi_workflow.TkNode):
-    """The graphical part of a {{ cookiecutter.step }} step in a MolSSI flowchart.
+class Tk{{ cookiecutter.first_class_name }}(seamm.TkNode):
+    """The graphical part of a {{ cookiecutter.step }} step in a flowchart.
 
     """
 
-    def __init__(self, tk_workflow=None, node=None, canvas=None,
+    def __init__(
+        self,
+        tk_flowchart=None,
+        node=None,
 {%- if cookiecutter.use_subflowchart == 'y' %}
-                 namespace='org.molssi.workflow.{{cookiecutter.project_slug}}.tk',
-{%- endif %}
-                 x=None, y=None, w=None, h=None):
-        '''Initialize a node
+        namespace='org.molssi.seamm.{{cookiecutter.repo_name}}.tk',{%- endif %}
+        canvas=None,
+        x=None,
+        y=None,
+        w=200,
+        h=50
+    ):
+        """Initialize a graphical node
 
         Keyword arguments:
-        '''
+            tk_flowchart: The graphical flowchart that we are in.
+            node: The non-graphical node for this step.
+            namespace: The stevedore namespace for finding sub-nodes.
+            canvas: The Tk canvas to draw on.
+            x: The x position of the nodes cetner on the canvas.
+            y: The y position of the nodes cetner on the canvas.
+            w: The nodes graphical width, in pixels.
+            h: The nodes graphical height, in pixels.
+        """
 {%- if cookiecutter.use_subflowchart == 'y' %}
         self.namespace = namespace
 {%- endif %}
         self.dialog = None
 
-        super().__init__(tk_workflow=tk_workflow, node=node,
-                         canvas=canvas, x=None, y=None, w=200, h=50)
-
+        super().__init__(
+            tk_flowchart=tk_flowchart,
+            node=node,
+            canvas=canvas,
+            x=x,
+            y=y,
+            w=w,
+            h=h
+        )
 {%- if cookiecutter.use_subflowchart == 'y' %}
         self.create_dialog()
 {%- endif %}
@@ -67,12 +88,12 @@ class Tk{{ cookiecutter.class_name }}(molssi_workflow.TkNode):
 
         self.dialog.geometry('{}x{}+{}+{}'.format(w, h, x, y))
 
-        self.{{ cookiecutter.step_slug }}_tk_workflow = molssi_workflow.TkWorkflow(
+        self.{{ cookiecutter.first_class_name }}_tk_flowchart = seamm.TkFlowchart(
             master=frame,
-            workflow=self.node.{{ cookiecutter.step_slug }}_workflow,
+            flowchart=self.node.{{ cookiecutter.first_class_name }}_flowchart,
             namespace=self.namespace
         )
-        self.{{ cookiecutter.step_slug }}_tk_workflow.draw()
+        self.{{ cookiecutter.first_class_name }}_tk_flowchart.draw()
 {%- else %}
         # Shortcut for parameters
         P = self.node.parameters
@@ -164,22 +185,26 @@ class Tk{{ cookiecutter.class_name }}(molssi_workflow.TkNode):
 {%- endif %}
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
-    def update_workflow(self, tk_workflow=None, workflow=None):
-        """Update the nongraphical workflow. Only used in nodes that contain
-        workflows"""
+    def update_flowchart(self, tk_flowchart=None, flowchart=None):
+        """Update the nongraphical flowchart.
 
-        super().update_workflow(
-            workflow=self.node.{{ cookiecutter.step_slug }}_workflow,
-            tk_workflow=self.{{ cookiecutter.step_slug }}_tk_workflow
+        This is only used in nodes that contain sub-flowcharts
+        """
+
+        super().update_flowchart(
+            flowchart=self.node.{{ cookiecutter.first_class_name }}_flowchart,
+            tk_flowchart=self.{{ cookiecutter.first_class_name }}_tk_flowchart
         )
 
-    def from_workflow(self, tk_workflow=None, workflow=None):
-        """Recreate the graphics from the non-graphical workflow.
-        Only used in nodes that contain workflow"""
+    def from_flowchart(self, tk_flowchart=None, flowchart=None):
+        """Recreate the graphics from the non-graphical flowchart.
 
-        super().from_workflow(
-            workflow=self.node.{{ cookiecutter.step_slug }}_workflow,
-            tk_workflow=self.{{ cookiecutter.step_slug }}_tk_workflow
+        This is only used in nodes that contain sub-flowcharts.
+        """
+
+        super().from_flowchart(
+            flowchart=self.node.{{ cookiecutter.first_class_name }}_flowchart,
+            tk_flowchart=self.{{ cookiecutter.first_class_name }}_tk_flowchart
         )
 {%- endif %}
 
