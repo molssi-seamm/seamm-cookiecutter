@@ -81,7 +81,7 @@ After running cookie cutter, do the following to create the initial local git re
    git commit -m "Initial skeleton."
    git remote add origin git@github.com:myusername/mypackage.git
 
-Then create the same-named repository in GitHub, just gicing the LICENSE type.
+Then create the same-named repository in GitHub, just giving the LICENSE type.
 Now you need to merge the two::
 
    bash-3.2$ git remote add origin git@github.com:paulsaxe/forcefield_step.git

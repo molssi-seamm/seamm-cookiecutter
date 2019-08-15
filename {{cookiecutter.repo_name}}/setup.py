@@ -1,10 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""The setup script."""
-
+"""
+{{ cookiecutter.project_slug }}
+{{ cookiecutter.project_short_description }}
+"""
+import sys
 from setuptools import setup, find_packages
+import versioneer
 
+short_description = __doc__.split("\n")
+
+{%- if cookiecutter.use_pytest == 'y' %}
+# from https://github.com/pytest-dev/pytest-runner#conditional-requirement
+needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)
+pytest_runner = ['pytest-runner'] if needs_pytest else []
+
+{%- endif %}
 with open('README.rst') as readme_file:
     readme = readme_file.read()
 
@@ -12,23 +24,10 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-    'molssi_workflow>=0.1',
-    'molssi_util>=0.1'
-    # TODO: put any other package requirements here
-]
-
-setup_requirements = [
-{%- if cookiecutter.use_pytest == 'y' %}
-    'pytest-runner',
-{%- endif %}
-    # TODO({{ cookiecutter.github_username }}): put setup requirements (distutils extensions, etc.) here
-]
-
-test_requirements = [
-{%- if cookiecutter.use_pytest == 'y' %}
-    'pytest',
-{%- endif %}
-    # TODO: put package test requirements here
+    'Pmw>=2.0.1<3',
+    'seamm>=0.2.0<1',
+    'seamm-widgets>=0.2.1<1',
+    'seamm-util>=0.2.1<1',
 ]
 
 {%- set license_classifiers = {
