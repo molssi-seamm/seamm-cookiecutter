@@ -8,6 +8,5 @@ Sphinx
 {% if cookiecutter.use_pypi_deployment_with_travis == 'y' -%}
 cryptography
 PyYAML>5.1{% endif %}
-{% if cookiecutter.use_pytest == 'y' -%}
 pytest
-pytest-runner{% endif %}
+pytest-runner
