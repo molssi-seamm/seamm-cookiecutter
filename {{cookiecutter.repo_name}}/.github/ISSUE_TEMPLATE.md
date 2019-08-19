@@ -1,4 +1,4 @@
-* {{ cookiecutter.project_name }} version:
+* {{ cookiecutter.repo_name }} version:
 * Python version:
 * Operating System:
 

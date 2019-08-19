@@ -38,8 +38,8 @@ and "help wanted" is open to whoever wants to implement it.
 Write Documentation
 ~~~~~~~~~~~~~~~~~~~
 
-{{ cookiecutter.project_name }} could always use more documentation, whether as part of the
-official {{ cookiecutter.project_name }} docs, in docstrings, or even on the web in blog posts,
+{{ cookiecutter.step }} Step could always use more documentation, whether as part of the
+official {{ cookiecutter.step }} Step docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
 Submit Feedback
@@ -110,8 +110,4 @@ Tips
 
 To run a subset of tests::
 
-{% if cookiecutter.use_pytest == 'y' -%}
     $ py.test tests.test_{{ cookiecutter.repo_name }}
-{% else %}
-    $ python -m unittest tests.test_{{ cookiecutter.repo_name }}
-{%- endif %}

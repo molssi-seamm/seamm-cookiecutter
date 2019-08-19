@@ -1,5 +1,5 @@
 {% set is_open_source = cookiecutter.license != 'other' -%}
-{% for _ in cookiecutter.Step %}={% endfor %}=====
+{% for _ in cookiecutter.step %}={% endfor %}=====
 {{ cookiecutter.step }} Step
 {% for _ in cookiecutter.step %}={% endfor %}_____
 

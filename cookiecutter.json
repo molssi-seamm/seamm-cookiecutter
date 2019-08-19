@@ -3,7 +3,7 @@
     "use_subflowchart": "n",
     "repo_name": "{{ cookiecutter.step.lower().replace(' ', '_').replace('-', '_') }}_step",
     "github_username": "The GitHub directory (a username or organization) to use",
-    "first_module_name": "{{ cookiecutter.repo_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "first_module_name": "{{ cookiecutter.step.replace(' ', '_').replace('-', '_') }}",
     "author_name": "Your name (or your organization if appropriate)",
     "author_email": "Your email (or your organization's if appropriate)",
     "description": "A step for {{ cookiecutter.step }} in a SEAMM flowchart",
@@ -18,5 +18,6 @@
 		"MIT",
 		"GNU General Public License v3+",
 		"GNU Lesser General Public License v3+",
-		"other"]
+		"other"],
+    "_plugin_version": 1.0
 }

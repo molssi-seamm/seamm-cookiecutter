@@ -1,4 +1,4 @@
-Welcome to {{ cookiecutter.project_name }}'s documentation!
+Welcome to the documentation for the {{ cookiecutter.step }} Step
 ======================================
 
 Contents:
@@ -11,8 +11,8 @@ Contents:
    usage
    modules
    contributing
-   {% if cookiecutter.create_author_file == 'y' -%}authors
-   {% endif -%}history
+   authors
+   history
 
 Indices and tables
 ==================

@@ -9,7 +9,7 @@ creating the graphical and non-graphical nodes.
 import {{cookiecutter.repo_name}}
 
 
-class {{cookiecutter.first_class_name}}Step(object):
+class {{cookiecutter.first_module_name}}Step(object):
     description = {
         'description':
             (
@@ -37,14 +37,14 @@ class {{cookiecutter.first_class_name}}Step(object):
     def description(self):
         """Return a description of what this extension does
         """
-        return {{cookiecutter.first_class_name}}Step.description
+        return {{cookiecutter.first_module_name}}Step.description
 
     def create_node(self, flowchart=None, **kwargs):
         """Create and return the new node object.
         """
-        return {{cookiecutter.repo_name}}.{{cookiecutter.first_class_name}}(flowchart=flowchart, **kwargs)
+        return {{cookiecutter.repo_name}}.{{cookiecutter.first_module_name}}(flowchart=flowchart, **kwargs)
 
     def create_tk_node(self, canvas=None, **kwargs):
         """Create and return the graphical Tk node object.
         """
-        return {{cookiecutter.repo_name}}.Tk{{cookiecutter.first_class_name}}(canvas=canvas, **kwargs)
+        return {{cookiecutter.repo_name}}.Tk{{cookiecutter.first_module_name}}(canvas=canvas, **kwargs)

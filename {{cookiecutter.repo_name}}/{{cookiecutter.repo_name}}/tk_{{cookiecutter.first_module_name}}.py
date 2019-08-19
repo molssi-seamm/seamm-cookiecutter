@@ -11,7 +11,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 
-class Tk{{ cookiecutter.first_class_name }}(seamm.TkNode):
+class Tk{{ cookiecutter.first_module_name }}(seamm.TkNode):
     """The graphical part of a {{ cookiecutter.step }} step in a flowchart.
 
     """
@@ -88,12 +88,12 @@ class Tk{{ cookiecutter.first_class_name }}(seamm.TkNode):
 
         self.dialog.geometry('{}x{}+{}+{}'.format(w, h, x, y))
 
-        self.{{ cookiecutter.first_class_name }}_tk_flowchart = seamm.TkFlowchart(
+        self.{{ cookiecutter.first_module_name }}_tk_flowchart = seamm.TkFlowchart(
             master=frame,
-            flowchart=self.node.{{ cookiecutter.first_class_name }}_flowchart,
+            flowchart=self.node.{{ cookiecutter.first_module_name }}_flowchart,
             namespace=self.namespace
         )
-        self.{{ cookiecutter.first_class_name }}_tk_flowchart.draw()
+        self.{{ cookiecutter.first_module_name }}_tk_flowchart.draw()
 {%- else %}
         # Shortcut for parameters
         P = self.node.parameters
@@ -192,8 +192,8 @@ class Tk{{ cookiecutter.first_class_name }}(seamm.TkNode):
         """
 
         super().update_flowchart(
-            flowchart=self.node.{{ cookiecutter.first_class_name }}_flowchart,
-            tk_flowchart=self.{{ cookiecutter.first_class_name }}_tk_flowchart
+            flowchart=self.node.{{ cookiecutter.first_module_name }}_flowchart,
+            tk_flowchart=self.{{ cookiecutter.first_module_name }}_tk_flowchart
         )
 
     def from_flowchart(self, tk_flowchart=None, flowchart=None):
@@ -203,8 +203,8 @@ class Tk{{ cookiecutter.first_class_name }}(seamm.TkNode):
         """
 
         super().from_flowchart(
-            flowchart=self.node.{{ cookiecutter.first_class_name }}_flowchart,
-            tk_flowchart=self.{{ cookiecutter.first_class_name }}_tk_flowchart
+            flowchart=self.node.{{ cookiecutter.first_module_name }}_flowchart,
+            tk_flowchart=self.{{ cookiecutter.first_module_name }}_tk_flowchart
         )
 {%- endif %}
 

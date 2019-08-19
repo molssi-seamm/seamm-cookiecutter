@@ -22,7 +22,7 @@ job = printing.getPrinter()
 printer = printing.getPrinter({{ cookiecutter.step }})
 
 
-class {{ cookiecutter.first_class_name }}(seamm.Node):
+class {{ cookiecutter.first_module_name }}(seamm.Node):
     def __init__(self,
                  flowchart=None,
                  title='{{ cookiecutter.step }}',
@@ -40,7 +40,7 @@ class {{ cookiecutter.first_class_name }}(seamm.Node):
         logger.debug('Creating {{ cookiecutter.step }} {}'.format(self))
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
-        self.{{ cookiecutter.first_class_name }}_flowchart = seamm.Flowchart(
+        self.{{ cookiecutter.first_module_name }}_flowchart = seamm.Flowchart(
             parent=self, name='{{ cookiecutter.step }}',
             namespace=namespace)
 {%- endif %}
@@ -50,7 +50,7 @@ class {{ cookiecutter.first_class_name }}(seamm.Node):
             title='{{ cookiecutter.step }}',
             extension=extension)
 
-        self.parameters = {{ cookiecutter.repo_name }}.{{ cookiecutter.first_class_name }}Parameters()
+        self.parameters = {{ cookiecutter.repo_name }}.{{ cookiecutter.first_module_name }}Parameters()
 
     def description(self, P):
         """Create the text description of what this step will do.
@@ -92,7 +92,7 @@ class {{ cookiecutter.first_class_name }}(seamm.Node):
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
         # Get the first real node
-        node = self.{{ cookiecutter.first_class_name }}_flowchart.get_node('1').next()
+        node = self.{{ cookiecutter.first_module_name }}_flowchart.get_node('1').next()
 
         input_data = []
         while node is not None:
@@ -150,7 +150,7 @@ class {{ cookiecutter.first_class_name }}(seamm.Node):
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
         # Get the first real node
-        node = self.{{ cookiecutter.first_class_name }}_flowchart.get_node('1').next()
+        node = self.{{ cookiecutter.first_module_name }}_flowchart.get_node('1').next()
 
         # Loop over the subnodes, asking them to do their analysis
         while node is not None:

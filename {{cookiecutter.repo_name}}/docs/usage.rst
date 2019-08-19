@@ -2,6 +2,6 @@
 Usage
 =====
 
-To use {{ cookiecutter.project_name }} in a project::
+To use the {{ cookiecutter.step }} Step in a project::
 
-    import {{ cookiecutter.project_slug }}
+    import {{ cookiecutter.repo_name }}
