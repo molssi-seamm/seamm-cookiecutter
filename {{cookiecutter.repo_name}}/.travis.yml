@@ -56,7 +56,7 @@ install:
 {% endif %}
 
 script:
-  - pytest -v --cov={{cookiecutter.repo_name}} {{cookiecutter.repo_name}}/tests/
+  - pytest -v --cov={{cookiecutter.repo_name}} tests/
 
 notifications:
     email: false
@@ -76,5 +76,5 @@ deploy:
   on:
     tags: true
     repo: {{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}
-    python: 2.7
+    condition: "$TRAVIS_OS_NAME = linux"
 {%- endif %}
