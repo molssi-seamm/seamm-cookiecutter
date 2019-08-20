@@ -20,7 +20,7 @@ import {{ cookiecutter.repo_name }}
 
 logger = logging.getLogger(__name__)
 job = printing.getPrinter()
-printer = printing.getPrinter({{ cookiecutter.step }})
+printer = printing.getPrinter('{{ cookiecutter.step }}')
 
 
 class {{ cookiecutter.first_module_name }}(seamm.Node):
@@ -41,7 +41,7 @@ class {{ cookiecutter.first_module_name }}(seamm.Node):
         logger.debug('Creating {{ cookiecutter.step }} {}'.format(self))
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
-        self.{{ cookiecutter.first_module_name }}_flowchart = seamm.Flowchart(
+        self.sub_flowchart = seamm.Flowchart(
             parent=self, name='{{ cookiecutter.step }}',
             namespace=namespace)
 {%- endif %}
@@ -93,7 +93,7 @@ class {{ cookiecutter.first_module_name }}(seamm.Node):
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
         # Get the first real node
-        node = self.{{ cookiecutter.first_module_name }}_flowchart.get_node('1').next()
+        node = self.sub_flowchart.get_node('1').next()
 
         input_data = []
         while node is not None:
@@ -106,7 +106,7 @@ class {{ cookiecutter.first_module_name }}(seamm.Node):
 
         local = seamm.ExecLocal()
         result = local.run(
-            cmd=['{{ cookiecutter.step }}', '-in', 'molssi.dat'],  # nopep8
+            cmd=['{{ cookiecutter.step }}', '-in', 'molssi.dat'],
             files=files,
             return_files=[])
 
@@ -151,7 +151,7 @@ class {{ cookiecutter.first_module_name }}(seamm.Node):
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
         # Get the first real node
-        node = self.{{ cookiecutter.first_module_name }}_flowchart.get_node('1').next()
+        node = self.sub_flowchart.get_node('1').next()
 
         # Loop over the subnodes, asking them to do their analysis
         while node is not None:

@@ -10,7 +10,7 @@ import {{cookiecutter.repo_name}}
 
 
 class {{cookiecutter.first_module_name}}Step(object):
-    description = {
+    my_description = {
         'description':
             (
                 'An interface for {{cookiecutter.step}}'
@@ -25,7 +25,7 @@ class {{cookiecutter.first_module_name}}Step(object):
             not exist it will be created. Common groups are 'Building', 
             'Calculations', 'Control' and 'Data'.
         name: The name of this step, to be displayed in the menus.
-    
+    """
 
     def __init__(self, flowchart=None, gui=None):
         """Initialize this helper class, which is used by
@@ -37,7 +37,7 @@ class {{cookiecutter.first_module_name}}Step(object):
     def description(self):
         """Return a description of what this extension does
         """
-        return {{cookiecutter.first_module_name}}Step.description
+        return {{cookiecutter.first_module_name}}Step.my_description
 
     def create_node(self, flowchart=None, **kwargs):
         """Create and return the new node object.

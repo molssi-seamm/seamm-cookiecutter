@@ -2,7 +2,7 @@
 """The graphical part of a {{ cookiecutter.step }} step"""
 
 import seamm
-from seamm import ureg, Q_, units_class  # nopep8
+from seamm_util import ureg, Q_, units_class  # nopep8
 import seamm_widgets as sw
 import {{ cookiecutter.repo_name }}
 import Pmw
@@ -88,12 +88,12 @@ class Tk{{ cookiecutter.first_module_name }}(seamm.TkNode):
 
         self.dialog.geometry('{}x{}+{}+{}'.format(w, h, x, y))
 
-        self.{{ cookiecutter.first_module_name }}_tk_flowchart = seamm.TkFlowchart(
-            master=frame,
-            flowchart=self.node.{{ cookiecutter.first_module_name }}_flowchart,
+        self.sub_tk_flowchart = seamm.TkFlowchart(
+            master=self['frame'],
+            flowchart=self.node.sub_flowchart,
             namespace=self.namespace
         )
-        self.{{ cookiecutter.first_module_name }}_tk_flowchart.draw()
+        self.sub_tk_flowchart.draw()
 {%- else %}
         # Shortcut for parameters
         P = self.node.parameters
@@ -192,8 +192,8 @@ class Tk{{ cookiecutter.first_module_name }}(seamm.TkNode):
         """
 
         super().update_flowchart(
-            flowchart=self.node.{{ cookiecutter.first_module_name }}_flowchart,
-            tk_flowchart=self.{{ cookiecutter.first_module_name }}_tk_flowchart
+            flowchart=self.node.sub_flowchart,
+            tk_flowchart=self.sub_tk_flowchart
         )
 
     def from_flowchart(self, tk_flowchart=None, flowchart=None):
@@ -203,8 +203,8 @@ class Tk{{ cookiecutter.first_module_name }}(seamm.TkNode):
         """
 
         super().from_flowchart(
-            flowchart=self.node.{{ cookiecutter.first_module_name }}_flowchart,
-            tk_flowchart=self.{{ cookiecutter.first_module_name }}_tk_flowchart
+            flowchart=self.node.sub_flowchart,
+            tk_flowchart=self.sub_tk_flowchart
         )
 {%- endif %}
 
