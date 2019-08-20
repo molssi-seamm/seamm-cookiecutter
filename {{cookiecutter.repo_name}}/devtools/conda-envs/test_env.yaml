@@ -12,7 +12,4 @@ dependencies:
     # Pip-only installs
   - pip:
     - codecov
-    - mendeleev
-    - seamm
-    - seamm-util
-    - seamm-widgets
+
