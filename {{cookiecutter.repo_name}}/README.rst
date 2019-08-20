@@ -1,7 +1,7 @@
 {% set is_open_source = cookiecutter.license != 'other' -%}
 {% for _ in cookiecutter.step %}={% endfor %}=====
 {{ cookiecutter.step }} Step
-{% for _ in cookiecutter.step %}={% endfor %}_____
+{% for _ in cookiecutter.step %}={% endfor %}=====
 
 {% if is_open_source %}
 .. image:: https://img.shields.io/travis/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}.svg
