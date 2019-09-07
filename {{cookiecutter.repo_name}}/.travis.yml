@@ -70,6 +70,7 @@ after_success:
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
+  skip_existing: true
   user: {{ cookiecutter.pypi_username }}
   password:
     secure: PLEASE_REPLACE_ME
