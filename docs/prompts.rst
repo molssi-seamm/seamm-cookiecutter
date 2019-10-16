@@ -8,43 +8,75 @@ Templated Values
 
 The following appear in various parts of your generated project.
 
-full_name
-    Your full name.
+step
+    The name of your code or step in SEAMM, e.g. MOPAC or Polymer
+    Builder
 
-email
-    Your email address.
+use_subflowchart
+    Whether this step needs a subflowchart. If the step has an
+    internal language, such as LAMMPS or MOPAC has, where the user can
+    specify multiple steps, a subflowchart may be appropriate. If,
+    however, the code takes a simple input and does one thing you
+    propbably shouldn't use a subflowchart.
+
+repo_name
+    The name of the GitHub repository, which defaults to the
+    lowercased version of the step suffixed with '_step'. This name
+    should not have blanks or hyphens ('-'). Use underscores ('_')
+    instead.
 
 github_username
-    Your GitHub username.
+    The GitHub name or the organization where you will put the
+    repository. This forms the first part of the full path to the
+    GitHub repository, e.g. 'MOLSSI_SEAMM' for MolSSI_SEAMM/seamm
 
-project_name
-    The name of your new Python package project. This is used in documentation, so spaces and any characters are fine here.
-    
-project_slug
-    The namespace of your Python package. This should be Python import-friendly. Typically, it is the slugified version of project_name.
+first_module_name
+    The name of the first module, or file, for the project. The file
+    will be repo_name/first_module_name.py/ Often it this will be the
+    repo_name in which case the file is repo_name/repo_name.py.
 
-project_short_description
-    A 1-sentence description of what your Python package does.
+author_name
+    Your name or your organization's name, as appropriate. This is
+    text for a human to read, e.g. Paul Saxe or the MolSSI.
 
-release_date
-    The date of the first release.
+author_email
+    The email of the appropriate contact, either you or the
+    responsible person in the organization.
+
+description
+    A short description of the project, used as a one-liner in various
+    places.
 
 pypi_username
-    Your Python Package Index account username.
-
-year
-    The year of the initial package copyright in the license file.
-
-version
-    The starting version number of the package.
+    Your PyPi user name, or the username for the appropriate owner in
+    your ogranization.
 
 Options
 -------
 
 The following package configuration options set up different features for your project.
 
+dependency_source
+    Whether to use Conda for the testing environment, and if so
+    whether to prefer conda-forge or the default Anaconda channel for
+    dependencies, with a fall back on pip. Otherwise use a Python
+    environment and rely on pip for depednecies.
+
+Include_Windows_continuous_integration
+    Whether to include CI on Windows using AppVeyor.com
+
 use_pypi_deployment_with_travis
     Whether to use PyPI deployment with Travis.
 
-command_line_interface
-    Whether to create a console script using Click. Console script entry point will match the project_slug. Options: ['Click', "No command-line interface"]
+license
+    The license to use. Options:
+
+    1. BSD-3-Clause
+
+    2. MIT
+
+    3. GNU General Public License v3+
+
+    4. GNU Lesser General Public License v3+
+
+    5. other

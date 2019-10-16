@@ -1,0 +1,2 @@
+{{ cookiecutter.repo_name }}/_version.py
+{{ cookiecutter.repo_name }}/*_parameters.py
