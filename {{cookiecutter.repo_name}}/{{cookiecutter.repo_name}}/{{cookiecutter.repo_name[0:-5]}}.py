@@ -10,6 +10,7 @@ will do in the initial summary of the job.
 directory, and is used for all normal output from this step.
 """
 
+import configargparse
 import logging
 import seamm
 from seamm import data  # noqa: F401
@@ -23,12 +24,20 @@ job = printing.getPrinter()
 printer = printing.getPrinter('{{ cookiecutter.step }}')
 
 
-class {{ cookiecutter.first_module_name }}(seamm.Node):
+def upcase(string):
+    """Return an uppercase version of the string.
+
+    Used for the type argument in argparse/
+    """
+    return string.upper()
+
+
+class {{ cookiecutter.class_name }}(seamm.Node):
     def __init__(self,
                  flowchart=None,
                  title='{{ cookiecutter.step }}',
 {%- if cookiecutter.use_subflowchart == 'y' %}
-                 namespace='org.molssi.seamm.{{ cookiecutter.step.lower().replace(' ', '_').replace('-', '_') }}',
+                 namespace='org.molssi.seamm.{{ cookiecutter.repo_name }}',
 {%- endif %}
                  extension=None):
         """A step for {{ cookiecutter.step }} in a SEAMM flowchart.
@@ -40,6 +49,41 @@ class {{ cookiecutter.first_module_name }}(seamm.Node):
         """
         logger.debug('Creating {{ cookiecutter.step }} {}'.format(self))
 
+        # Argument/config parsing
+        self.parser = configargparse.ArgParser(
+            auto_env_var_prefix='',
+            default_config_files=[
+                '/etc/seamm/{{ cookiecutter.repo_name }}.ini',
+                '/etc/seamm/seamm.ini',
+                '~/.seamm/{{ cookiecutter.repo_name }}.ini',
+                '~/.seamm/seamm.ini',
+            ]
+        )
+
+        self.parser.add_argument(
+            '--seamm-configfile',
+            is_config_file=True,
+            default=None,
+            help='a configuration file to override others'
+        )
+
+        # Options for this plugin
+        self.parser.add_argument(
+            "--{{ cookiecutter.repo_name.replace('_', '-') }}-log-level",
+            default=configargparse.SUPPRESS,
+            choices=[
+                'CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG', 'NOTSET'
+            ],
+            type=upcase,
+            help="the logging level for the {{ cookiecutter.step }} step"
+        )
+
+        self.options, self.unknown = self.parser.parse_known_args()
+
+        # Set the logging level for this module if requested
+        if '{{ cookiecutter.repo_name }}_log_level' in self.options:
+            logger.setLevel(self.options.{{ cookiecutter.repo_name }}_log_level)
+        
 {%- if cookiecutter.use_subflowchart == 'y' %}
         self.sub_flowchart = seamm.Flowchart(
             parent=self, name='{{ cookiecutter.step }}',
@@ -51,7 +95,7 @@ class {{ cookiecutter.first_module_name }}(seamm.Node):
             title='{{ cookiecutter.step }}',
             extension=extension)
 
-        self.parameters = {{ cookiecutter.repo_name }}.{{ cookiecutter.first_module_name }}Parameters()
+        self.parameters = {{ cookiecutter.repo_name }}.{{ cookiecutter.class_name }}Parameters()
 
     def description(self, P):
         """Create the text description of what this step will do.

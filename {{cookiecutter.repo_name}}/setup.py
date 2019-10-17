@@ -94,10 +94,10 @@ setup(
     ],
     entry_points={
         'org.molssi.seamm': [
-            '{{ cookiecutter.step }} = {{ cookiecutter.repo_name }}:{{ cookiecutter.first_module_name }}Step',
+            '{{ cookiecutter.step }} = {{ cookiecutter.repo_name }}:{{ cookiecutter.class_name }}Step',
         ],
         'org.molssi.seamm.tk': [
-            '{{ cookiecutter.step }} = {{ cookiecutter.repo_name }}:{{ cookiecutter.first_module_name }}Step',
+            '{{ cookiecutter.step }} = {{ cookiecutter.repo_name }}:{{ cookiecutter.class_name }}Step',
         ],
     }
 )

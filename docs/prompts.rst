@@ -25,15 +25,13 @@ repo_name
     should not have blanks or hyphens ('-'). Use underscores ('_')
     instead.
 
+class_name
+    The name of the main class in the module, should be in Camel Case.
+
 github_username
     The GitHub name or the organization where you will put the
     repository. This forms the first part of the full path to the
     GitHub repository, e.g. 'MOLSSI_SEAMM' for MolSSI_SEAMM/seamm
-
-first_module_name
-    The name of the first module, or file, for the project. The file
-    will be repo_name/first_module_name.py/ Often it this will be the
-    repo_name in which case the file is repo_name/repo_name.py.
 
 author_name
     Your name or your organization's name, as appropriate. This is

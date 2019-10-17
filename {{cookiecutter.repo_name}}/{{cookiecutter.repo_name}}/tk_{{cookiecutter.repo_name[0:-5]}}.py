@@ -2,7 +2,7 @@
 """The graphical part of a {{ cookiecutter.step }} step"""
 
 import seamm
-from seamm_util import ureg, Q_, units_class  # nopep8
+from seamm_util import ureg, Q_, units_class  # noqa: F401
 import seamm_widgets as sw
 import {{ cookiecutter.repo_name }}
 import Pmw
@@ -11,7 +11,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 
-class Tk{{ cookiecutter.first_module_name }}(seamm.TkNode):
+class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
     """The graphical part of a {{ cookiecutter.step }} step in a flowchart.
 
     """
@@ -131,7 +131,7 @@ class Tk{{ cookiecutter.first_module_name }}(seamm.TkNode):
             row += 1
 
         # Align the labels
-        mw.align_labels(widgets)
+        sw.align_labels(widgets)
 {%- endif %}
 
     def right_click(self, event):
