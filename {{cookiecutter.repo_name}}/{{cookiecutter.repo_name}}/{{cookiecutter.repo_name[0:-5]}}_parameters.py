@@ -10,7 +10,7 @@ import pprint
 logger = logging.getLogger(__name__)
 
 
-class {{ cookiecutter.first_module_name }}Parameters(seamm.Parameters):
+class {{ cookiecutter.class_name }}Parameters(seamm.Parameters):
     """The control parameters for {{ cookiecutter.step }}
 
     This is a dictionary of Parameters objects, which themselves are
@@ -56,9 +56,9 @@ class {{ cookiecutter.first_module_name }}Parameters(seamm.Parameters):
                 for updating the current, default values.
         """
 
-        logger.debug('{{ cookiecutter.first_module_name }}Parameters.__init__')
+        logger.debug('{{ cookiecutter.class_name }}Parameters.__init__')
 
         super().__init__(
-            defaults={**{{ cookiecutter.first_module_name }}Parameters.parameters, **defaults},
+            defaults={**{{ cookiecutter.class_name }}Parameters.parameters, **defaults},
             data=data
         )
