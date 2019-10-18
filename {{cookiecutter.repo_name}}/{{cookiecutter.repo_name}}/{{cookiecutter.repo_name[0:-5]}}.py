@@ -45,7 +45,19 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         You may wish to change the title above, which is the string displayed
         in the box representing the step in the flowchart.
 
-        Keyword arguments:
+        Parameters:
+            flowchart: The flowchart that contains this step.
+            
+            title: The name displayed in the flowchart.
+
+{%- if cookiecutter.use_subflowchart == 'y' %}
+            namespace: The namespace for the plugins of the subflowchart
+{%- endif %}
+
+            extension: ??
+
+        Returns:
+            None
         """
         logger.debug('Creating {{ cookiecutter.step }} {}'.format(self))
 
@@ -97,40 +109,35 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
         self.parameters = {{ cookiecutter.repo_name }}.{{ cookiecutter.class_name }}Parameters()
 
-    def description(self, P):
+    def description_text(self, P=None):
         """Create the text description of what this step will do.
         The dictionary of control values is passed in as P so that
         the code can test values, etc.
 
-        Keyword arguments:
-            P: A dictionary of the current values of the control parameters.
+        Parameters:
+            P: An optional dictionary of the current values of the control
+               parameters.
+
+        Returns:
+            None
         """
+
+        if not P:
+            P = self.parameters.values_to_dict()
 
         text = ('Please replace this with a short summary of the '
                 '{{ cookiecutter.step}} step, including key parameters.')
 
         return text
 
-    def describe(self, indent='', json_dict=None):
-        """Write out information about what this step will do
-        If json_dict is passed in, add information to that dictionary
-        so that it can be written out by the controller as appropriate.
-        """
-
-        # Call superclasses which will print some information
-        next_node = super().describe(indent, json_dict)
-
-        # Local copies of variables in a dictionary
-        P = self.parameters.values_to_dict()
-
-        text = self.description_text(P)
-
-        job.job(__(text, **P, indent=self.indent+'    '))
-
-        return next_node
-
     def run(self):
         """Run a {{ cookiecutter.step }} step.
+
+        Parameters:
+            None
+
+        Returns:
+            None
         """
 
         next_node = super().run(printer)
@@ -191,6 +198,13 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         Also print important results to the local step.out file using
         'printer'.
 
+        Parameters:
+            indent: An extra indentation for the output
+
+            kwargs: Other arguments.
+
+        Returns
+            None
         """
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
