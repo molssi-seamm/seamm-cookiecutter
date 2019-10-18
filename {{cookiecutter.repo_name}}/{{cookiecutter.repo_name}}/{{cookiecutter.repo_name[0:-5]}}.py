@@ -109,6 +109,18 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
         self.parameters = {{ cookiecutter.repo_name }}.{{ cookiecutter.class_name }}Parameters()
 
+    @property
+    def version(self):
+        """The semantic version of this module.
+        """
+        return {{ cookiecutter.repo_name }}.__version__
+
+    @property
+    def git_revision(self):
+        """The git version of this module.
+        """
+        return {{ cookiecutter.repo_name }}.__git_revision__
+
     def description_text(self, P=None):
         """Create the text description of what this step will do.
         The dictionary of control values is passed in as P so that
@@ -128,7 +140,7 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         text = ('Please replace this with a short summary of the '
                 '{{ cookiecutter.step}} step, including key parameters.')
 
-        return text
+        return self.header + '\n' + __(text, **P, indent=4 * ' ').__str__()
 
     def run(self):
         """Run a {{ cookiecutter.step }} step.
@@ -175,6 +187,9 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         P = self.parameters.current_values_to_dict(
             context=seamm.flowchart_variables._data
         )
+
+        # Print what we are doing
+        printer.important(__(self.description_text(P), indent=self.indent))
 
         # Temporary code just to print the parameters. You will need to change
         # this!
