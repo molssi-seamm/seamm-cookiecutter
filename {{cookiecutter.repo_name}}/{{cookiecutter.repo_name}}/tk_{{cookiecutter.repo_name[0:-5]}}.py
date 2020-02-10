@@ -12,8 +12,26 @@ import tkinter.ttk as ttk
 
 
 class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
-    """The graphical part of a {{ cookiecutter.step }} step in a flowchart.
+    """
+    The graphical part of a {{ cookiecutter.step }} step in a flowchart.
+    Attributes
+    ----------
+    namespace : str
+        The namespace of the current step. 
+    node : Node
+        The corresponding node of the non-graphical flowchart
+    dialog : Dialog
+        The Pmw dialog object 
+    sub_tk_flowchart : TkFlowchart
+        A graphical Flowchart representing a subflowchart
+    self[widget] : dict
+        A dictionary of tk widgets built using the information
+        contained in {{ cookiecutter.step }}_parameters.py 
 
+    See Also
+    --------
+    {{ cookiecutter.step }}, tk_{{cookiecutter.step}}.py, {{cookiecutter.step}}.py
+    {{cookiecutter.step}}_parameters.py, {{cookiecutter.step}}_step.py 
     """
 
     def __init__(
@@ -28,17 +46,30 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         w=200,
         h=50
     ):
-        """Initialize a graphical node
+        """
+        Initialize a graphical node.
 
-        Keyword arguments:
-            tk_flowchart: The graphical flowchart that we are in.
-            node: The non-graphical node for this step.
-            namespace: The stevedore namespace for finding sub-nodes.
-            canvas: The Tk canvas to draw on.
-            x: The x position of the nodes cetner on the canvas.
-            y: The y position of the nodes cetner on the canvas.
-            w: The nodes graphical width, in pixels.
-            h: The nodes graphical height, in pixels.
+        Parameters
+        ----------
+        tk_flowchart: Tk_Flowchart
+            The graphical flowchart that we are in.
+        node: Node
+            The non-graphical node for this step.
+        namespace: str
+            The stevedore namespace for finding sub-nodes.
+        canvas: Canvas
+           The Tk canvas to draw on.
+        x: float 
+            The x position of the nodes center on the canvas.
+        y: float
+            The y position of the nodes cetner on the canvas.
+        w: float 
+            The nodes graphical width, in pixels.
+        h: float 
+            The nodes graphical height, in pixels.
+        Returns 
+        -------
+        None
         """
 {%- if cookiecutter.use_subflowchart == 'y' %}
         self.namespace = namespace
@@ -59,7 +90,24 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
 {%- endif %}
 
     def create_dialog(self):
-        """Create the dialog!"""
+        """
+        Create the dialog. A set of widgets will be chosen by default
+        based on what is specified in the 
+        {{ cookiecutter.step }}_parameters module.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
+
+        See Also
+        --------
+        Tk{{ cookiecutter.step }}.reset_dialog
+        """
+
         self.dialog = Pmw.Dialog(
             self.toplevel,
             buttons=('OK', 'Help', 'Cancel'),
@@ -106,11 +154,26 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         self.reset_dialog()
 
     def reset_dialog(self, widget=None):
-        """Layout the widgets in the dialog
+        """Layout the widgets in the dialog.
 
-        This initial function simply lays them out row by rows with
+        The widgets are chosen by default from the information in 
+        {{ cookiecutter.step }}_parameter.
+
+        This function simply lays them out row by row with
         aligned labels. You may wish a more complicated layout that
         is controlled by values of some of the control parameters.
+
+        Parameters
+        ----------
+        widget
+
+        Returns
+        -------
+        None
+
+        See Also
+        --------
+        Tk{{ cookiecutter.step }}.create_dialog
         """
 
         # Remove any widgets previously packed
@@ -135,7 +198,20 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
 {%- endif %}
 
     def right_click(self, event):
-        """Probably need to add our dialog...
+        """
+        Handles the right click event on the node.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
+
+        See Also
+        --------
+        Tk{{ cookiecutter.step }}.edit
         """
 
         super().right_click(event)
@@ -145,7 +221,19 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
 
     def edit(self):
         """Present a dialog for editing the {{ cookiecutter.step }} input
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
+
+        See Also
+        --------
+        Tk{{ cookiecutter.step }}.right_click
         """
+
         if self.dialog is None:
             self.create_dialog()
 
@@ -157,7 +245,18 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         What to do depends on the button used to close the dialog. If
         the user closes it by clicking the 'x' of the dialog window,
         None is returned, which we take as equivalent to cancel.
+
+        Parameters
+        ----------
+        result : None or str
+        The value of this variable depends on what the button
+        the user clicked.
+
+        Returns
+        -------
+        None
         """
+
         if result is None or result == 'Cancel':
             self.dialog.deactivate(result)
             return
@@ -189,6 +288,20 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         """Update the nongraphical flowchart.
 
         This is only used in nodes that contain sub-flowcharts
+        What to do depends on the button used to close the dialog. If
+        the user closes it by clicking the 'x' of the dialog window,
+        None is returned, which we take as equivalent to cancel.
+
+        Parameters
+        ----------
+        tk_flowchart seamm.tk_Flowchart
+            A graphical representation of the SEAMM Flowchart
+        flowchart : seamm.Flowchart
+            A non-graphical representation of the SEAMM Flowchart
+
+        Returns
+        -------
+        None
         """
 
         super().update_flowchart(
@@ -200,6 +313,17 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         """Recreate the graphics from the non-graphical flowchart.
 
         This is only used in nodes that contain sub-flowcharts.
+
+        Parameters
+        ----------
+        tk_flowchart seamm.tk_Flowchart
+            A graphical representation of the SEAMM Flowchart
+        flowchart : seamm.Flowchart
+            A non-graphical representation of the SEAMM Flowchart
+
+        Returns
+        -------
+        None
         """
 
         super().from_flowchart(
@@ -209,5 +333,14 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
 {%- endif %}
 
     def handle_help(self):
-        """Not implemented yet ... you'll need to fill this out!"""
+        """Shows the help to the user when click on help button.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
+        """
         print('Help not implemented yet for {{ cookiecutter.step }}!')
