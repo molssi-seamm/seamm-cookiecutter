@@ -33,6 +33,30 @@ def upcase(string):
 
 
 class {{ cookiecutter.class_name }}(seamm.Node):
+    """
+    The non-graphical part of a {{ cookiecutter.step }} step in a flowchart.
+
+    Attributes
+    ----------
+    parser ; configargparse.ArgParser
+        The parser object
+        
+    options : Tuple
+        It contains a two item tuple containing the populated namespace and the
+        list of remaining argument strings
+    
+    subflowchart : seamm.Flowchart 
+        A SEAMM Flowchart object that represents a subflowchart, if needed.
+    
+    parameters : {{ cookiecutter.repo_name }}.{{ cookiecutter.class_name }}Parameters
+        The control parameters for {{ cookiecutter.step }}.
+
+    See Also
+    --------
+    {{ cookiecutter.step }}, tk_{{cookiecutter.step}}.py, 
+    {{cookiecutter.step}}.py {{cookiecutter.step}}_parameters.py, 
+    {{cookiecutter.step}}_step.py 
+    """
     def __init__(self,
                  flowchart=None,
                  title='{{ cookiecutter.step }}',
@@ -45,18 +69,19 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         You may wish to change the title above, which is the string displayed
         in the box representing the step in the flowchart.
 
-        Parameters:
-            flowchart: The flowchart that contains this step.
-            
-            title: The name displayed in the flowchart.
-
+        Parameters
+        ----------
+            flowchart: Flowchart
+                The non-graphical flowchart that contains this step.
+            title: str
+                The name displayed in the flowchart.
 {%- if cookiecutter.use_subflowchart == 'y' %}
             namespace: The namespace for the plugins of the subflowchart
 {%- endif %}
-
-            extension: ??
-
-        Returns:
+            extension: None
+                Not yet implemented
+        Returns
+        -------
             None
         """
         logger.debug('Creating {{ cookiecutter.step }} {}'.format(self))
@@ -126,11 +151,13 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         The dictionary of control values is passed in as P so that
         the code can test values, etc.
 
-        Parameters:
-            P: An optional dictionary of the current values of the control
-               parameters.
-
-        Returns:
+        Parameters
+        ----------
+            P: dict
+                An optional dictionary of the current values of the control
+                parameters.
+        Returns
+        -------
             None
         """
 
@@ -143,12 +170,15 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         return self.header + '\n' + __(text, **P, indent=4 * ' ').__str__()
 
     def run(self):
-        """Run a {{ cookiecutter.step }} step.
+        """Run a {{ cookiecutter.step }} step. Add the execution call
+        to the underlying program here.
 
-        Parameters:
+        Parameters
+        ----------
             None
 
-        Returns:
+        Returns
+        -------
             None
         """
 
@@ -213,12 +243,13 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         Also print important results to the local step.out file using
         'printer'.
 
-        Parameters:
-            indent: An extra indentation for the output
-
-            kwargs: Other arguments.
+        Parameters
+        ----------
+            indent: str
+                An extra indentation for the output
 
         Returns
+        -------
             None
         """
 
