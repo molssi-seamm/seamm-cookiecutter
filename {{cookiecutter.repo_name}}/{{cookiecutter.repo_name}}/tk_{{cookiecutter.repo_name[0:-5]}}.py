@@ -14,6 +14,7 @@ import tkinter.ttk as ttk
 class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
     """
     The graphical part of a {{ cookiecutter.step }} step in a flowchart.
+
     Attributes
     ----------
     namespace : str
@@ -30,8 +31,9 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
 
     See Also
     --------
-    {{ cookiecutter.step }}, tk_{{cookiecutter.step}}.py, {{cookiecutter.step}}.py
-    {{cookiecutter.step}}_parameters.py, {{cookiecutter.step}}_step.py 
+    {{ cookiecutter.step }}, tk_{{cookiecutter.step}}.py, 
+    {{cookiecutter.step}}.py {{cookiecutter.step}}_parameters.py, 
+    {{cookiecutter.step}}_step.py 
     """
 
     def __init__(
@@ -67,6 +69,7 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
             The nodes graphical width, in pixels.
         h: float 
             The nodes graphical height, in pixels.
+
         Returns 
         -------
         None
@@ -221,6 +224,7 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
 
     def edit(self):
         """Present a dialog for editing the {{ cookiecutter.step }} input
+
         Parameters
         ----------
         None
