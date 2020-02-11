@@ -53,9 +53,8 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
     See Also
     --------
-    tk_{{cookiecutter.class_name}}
-    {{cookiecutter.class_name}}, {{cookiecutter.class_name}}_parameters,
-    {{cookiecutter.class_name}}_{{cookiecutter.class_name}}
+    Tk{{ cookiecutter.class_name }},
+    {{ cookiecutter.class_name }}, {{ cookiecutter.class_name }}Parameters
     """
     def __init__(self,
                  flowchart=None,
@@ -71,12 +70,14 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
         Parameters
         ----------
-            flowchart: Flowchart
+            flowchart: seamm.Flowchart
                 The non-graphical flowchart that contains this step.
+
             title: str
                 The name displayed in the flowchart.
 {%- if cookiecutter.use_subflowchart == 'y' %}
             namespace: The namespace for the plugins of the subflowchart
+
 {%- endif %}
             extension: None
                 Not yet implemented

@@ -282,7 +282,7 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
 
         Parameters
         ----------
-        tk_flowchart seamm.tk_Flowchart
+        tk_flowchart : seamm.tk_Flowchart
             A graphical representation of the SEAMM Flowchart
         flowchart : seamm.Flowchart
             A non-graphical representation of the SEAMM Flowchart

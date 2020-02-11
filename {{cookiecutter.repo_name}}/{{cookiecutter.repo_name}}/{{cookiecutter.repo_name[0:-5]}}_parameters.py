@@ -58,8 +58,8 @@ class {{ cookiecutter.class_name }}Parameters(seamm.Parameters):
 
     See Also
     --------
-    {{ cookiecutter.step }}, tk_{{cookiecutter.step}}.py, {{cookiecutter.step}}.py
-    {{cookiecutter.step}}_parameters.py, {{cookiecutter.step}}_step.py 
+    {{ cookiecutter.class_name }}, Tk{{ cookiecutter.class_name }}, {{ cookiecutter.class_name }}
+    {{ cookiecutter.class_name }}Parameters, {{ cookiecutter.step }}Step
     
     Examples
     --------
