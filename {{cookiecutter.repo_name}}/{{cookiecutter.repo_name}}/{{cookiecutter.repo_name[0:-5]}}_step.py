@@ -75,16 +75,6 @@ class {{cookiecutter.class_name}}Step(object):
 
         return {{cookiecutter.repo_name}}.{{cookiecutter.class_name}}(flowchart=flowchart, **kwargs)
 
-            flowchart: Flowchart
-                The non-graphical flowchart that contains this step.
-            title: str
-                The name displayed in the flowchart.
-{%- if cookiecutter.use_subflowchart == 'y' %}
-            namespace: The namespace for the plugins of the subflowchart
-{%- endif %}
-            extension: None
-                Not yet implemented
-
     def create_tk_node(self, canvas=None, **kwargs):
         """Create and return the graphical Tk node object.
 
