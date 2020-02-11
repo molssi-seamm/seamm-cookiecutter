@@ -39,23 +39,23 @@ class {{ cookiecutter.class_name }}(seamm.Node):
     Attributes
     ----------
     parser : configargparse.ArgParser
-        The parser object
+        The parser object.
         
     options : tuple
         It contains a two item tuple containing the populated namespace and the
-        list of remaining argument strings
+        list of remaining argument strings.
     
     subflowchart : seamm.Flowchart 
         A SEAMM Flowchart object that represents a subflowchart, if needed.
     
-    parameters : {{ cookiecutter.repo_name }}.{{ cookiecutter.class_name }}Parameters
+    parameters : {{ cookiecutter.class_name }}Parameters
         The control parameters for {{ cookiecutter.step }}.
 
     See Also
     --------
-    tk_{{cookiecutter.step}}.py, 
-    {{cookiecutter.step}}.py {{cookiecutter.step}}_parameters.py, 
-    {{cookiecutter.step}}_step.py 
+    tk_{{cookiecutter.class_name}}
+    {{cookiecutter.class_name}}, {{cookiecutter.class_name}}_parameters,
+    {{cookiecutter.class_name}}_{{cookiecutter.class_name}}
     """
     def __init__(self,
                  flowchart=None,
@@ -80,9 +80,6 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 {%- endif %}
             extension: None
                 Not yet implemented
-        Returns
-        -------
-            None
         """
         logger.debug('Creating {{ cookiecutter.step }} {}'.format(self))
 
@@ -173,12 +170,7 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         return description 
 
     def run(self):
-        """Run a {{ cookiecutter.step }} step. Add the execution call
-        to the underlying program here.
-
-        Parameters
-        ----------
-            None
+        """Run a {{ cookiecutter.step }} step. 
 
         Returns
         -------

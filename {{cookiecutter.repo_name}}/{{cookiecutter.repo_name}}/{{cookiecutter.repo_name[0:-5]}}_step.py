@@ -65,11 +65,11 @@ class {{cookiecutter.class_name}}Step(object):
 
         Returns
         -------
-        {{ cookiecutter.class_name }}.{{ cookiecutter.class_name}}
+        {{ cookiecutter.class_name}}
 
         See Also
         --------
-        {{ cookiecutter.class_name }}.py
+        {{ cookiecutter.class_name }}
         
         """
 
@@ -94,7 +94,7 @@ class {{cookiecutter.class_name}}Step(object):
 
         See Also
         --------
-        tk_{{ cookiecutter.step }}.py
+        Tk{{ cookiecutter.class_name}}
         """
 
         return {{cookiecutter.repo_name}}.Tk{{cookiecutter.class_name}}(canvas=canvas, **kwargs)

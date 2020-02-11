@@ -31,9 +31,8 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
 
     See Also
     --------
-    {{ cookiecutter.step }}, tk_{{cookiecutter.step}}.py, 
-    {{cookiecutter.step}}.py {{cookiecutter.step}}_parameters.py, 
-    {{cookiecutter.step}}_step.py 
+    {{ cookiecutter.class_name }}, Tk{{ cookiecutter.class_name }}, 
+    {{ cookiecutter.class_name }}Parameters, 
     """
 
     def __init__(
@@ -69,10 +68,6 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
             The nodes graphical width, in pixels.
         h: float 
             The nodes graphical height, in pixels.
-
-        Returns 
-        -------
-        None
         """
 {%- if cookiecutter.use_subflowchart == 'y' %}
         self.namespace = namespace
@@ -98,17 +93,9 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         based on what is specified in the 
         {{ cookiecutter.step }}_parameters module.
 
-        Parameters
-        ----------
-        None
-
-        Returns
-        -------
-        None
-
         See Also
         --------
-        Tk{{ cookiecutter.step }}.reset_dialog
+        Tk{{ cookiecutter.class_name }}.reset_dialog
         """
 
         self.dialog = Pmw.Dialog(
@@ -170,13 +157,9 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         ----------
         widget
 
-        Returns
-        -------
-        None
-
         See Also
         --------
-        Tk{{ cookiecutter.step }}.create_dialog
+        Tk{{ cookiecutter.class_name }}.create_dialog
         """
 
         # Remove any widgets previously packed
@@ -204,17 +187,9 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         """
         Handles the right click event on the node.
 
-        Parameters
-        ----------
-        None
-
-        Returns
-        -------
-        None
-
         See Also
         --------
-        Tk{{ cookiecutter.step }}.edit
+        Tk{{ cookiecutter.class_name }}.edit
         """
 
         super().right_click(event)
@@ -225,17 +200,9 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
     def edit(self):
         """Present a dialog for editing the {{ cookiecutter.step }} input
 
-        Parameters
-        ----------
-        None
-
-        Returns
-        -------
-        None
-
         See Also
         --------
-        Tk{{ cookiecutter.step }}.right_click
+        Tk{{ cookiecutter.class_name }}.right_click
         """
 
         if self.dialog is None:
@@ -253,12 +220,9 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         Parameters
         ----------
         result : None or str
-        The value of this variable depends on what the button
-        the user clicked.
+            The value of this variable depends on what the button
+            the user clicked.
 
-        Returns
-        -------
-        None
         """
 
         if result is None or result == 'Cancel':
@@ -298,14 +262,12 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
 
         Parameters
         ----------
-        tk_flowchart seamm.tk_Flowchart
+        tk_flowchart : seamm.tk_Flowchart
             A graphical representation of the SEAMM Flowchart
+
         flowchart : seamm.Flowchart
             A non-graphical representation of the SEAMM Flowchart
 
-        Returns
-        -------
-        None
         """
 
         super().update_flowchart(
@@ -325,9 +287,6 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         flowchart : seamm.Flowchart
             A non-graphical representation of the SEAMM Flowchart
 
-        Returns
-        -------
-        None
         """
 
         super().from_flowchart(
@@ -339,12 +298,5 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
     def handle_help(self):
         """Shows the help to the user when click on help button.
 
-        Parameters
-        ----------
-        None
-
-        Returns
-        -------
-        None
         """
         print('Help not implemented yet for {{ cookiecutter.step }}!')
