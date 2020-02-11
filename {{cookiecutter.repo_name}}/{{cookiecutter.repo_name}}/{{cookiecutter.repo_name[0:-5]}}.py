@@ -27,7 +27,7 @@ printer = printing.getPrinter('{{ cookiecutter.step }}')
 def upcase(string):
     """Return an uppercase version of the string.
 
-    Used for the type argument in argparse/
+    Used for the type argument in argparse
     """
     return string.upper()
 
