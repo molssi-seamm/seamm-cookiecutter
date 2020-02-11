@@ -1,13 +1,5 @@
 # -*- coding: utf-8 -*-
 """Non-graphical part of the {{ cookiecutter.step }} step in a SEAMM flowchart
-
-In addition to the normal logger, two logger-like printing facilities are
-defined: 'job' and 'printer'. 'job' send output to the main job.out file for
-the job, and should be used very sparingly, typically to echo what this step
-will do in the initial summary of the job.
-
-'printer' sends output to the file 'step.out' in this steps working
-directory, and is used for all normal output from this step.
 """
 
 import configargparse
@@ -18,6 +10,14 @@ from seamm_util import ureg, Q_  # noqa: F401
 import seamm_util.printing as printing
 from seamm_util.printing import FormattedText as __
 import {{ cookiecutter.repo_name }}
+
+#In addition to the normal logger, two logger-like printing facilities are
+#defined: 'job' and 'printer'. 'job' send output to the main job.out file for
+#the job, and should be used very sparingly, typically to echo what this step
+#will do in the initial summary of the job.
+#
+#'printer' sends output to the file 'step.out' in this steps working
+#directory, and is used for all normal output from this step.
 
 logger = logging.getLogger(__name__)
 job = printing.getPrinter()
@@ -38,10 +38,10 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
     Attributes
     ----------
-    parser ; configargparse.ArgParser
+    parser : configargparse.ArgParser
         The parser object
         
-    options : Tuple
+    options : tuple
         It contains a two item tuple containing the populated namespace and the
         list of remaining argument strings
     
@@ -53,7 +53,7 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
     See Also
     --------
-    {{ cookiecutter.step }}, tk_{{cookiecutter.step}}.py, 
+    tk_{{cookiecutter.step}}.py, 
     {{cookiecutter.step}}.py {{cookiecutter.step}}_parameters.py, 
     {{cookiecutter.step}}_step.py 
     """
@@ -158,7 +158,8 @@ class {{ cookiecutter.class_name }}(seamm.Node):
                 parameters.
         Returns
         -------
-            None
+            description : str
+                A description of the current step.
         """
 
         if not P:
@@ -167,7 +168,9 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         text = ('Please replace this with a short summary of the '
                 '{{ cookiecutter.step}} step, including key parameters.')
 
-        return self.header + '\n' + __(text, **P, indent=4 * ' ').__str__()
+        description = self.header + '\n' + __(text, **P, indent=4 * ' ').__str__()
+
+        return description 
 
     def run(self):
         """Run a {{ cookiecutter.step }} step. Add the execution call
@@ -179,7 +182,10 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
         Returns
         -------
-            None
+        
+        next_node : seamm.Node
+            The next node object in the flowchart.
+
         """
 
         next_node = super().run(printer)
@@ -247,10 +253,6 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         ----------
             indent: str
                 An extra indentation for the output
-
-        Returns
-        -------
-            None
         """
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
