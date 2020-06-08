@@ -4,7 +4,7 @@
 import seamm
 from seamm_util import ureg, Q_, units_class  # noqa: F401
 import seamm_widgets as sw
-import {{ cookiecutter.repo_name }}
+import {{ cookiecutter.repo_name }}  # noqa: F401
 import Pmw
 import pprint  # noqa: F401
 import tkinter as tk
@@ -18,21 +18,21 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
     Attributes
     ----------
     namespace : str
-        The namespace of the current step. 
+        The namespace of the current step.
     node : Node
         The corresponding node of the non-graphical flowchart
     dialog : Dialog
-        The Pmw dialog object 
+        The Pmw dialog object
     sub_tk_flowchart : TkFlowchart
         A graphical Flowchart representing a subflowchart
     self[widget] : dict
         A dictionary of tk widgets built using the information
-        contained in {{ cookiecutter.step }}_parameters.py 
+        contained in {{ cookiecutter.step }}_parameters.py
 
     See Also
     --------
-    {{ cookiecutter.class_name }}, Tk{{ cookiecutter.class_name }}, 
-    {{ cookiecutter.class_name }}Parameters, 
+    {{ cookiecutter.class_name }}, Tk{{ cookiecutter.class_name }},
+    {{ cookiecutter.class_name }}Parameters,
     """
 
     def __init__(
@@ -60,13 +60,13 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
             The stevedore namespace for finding sub-nodes.
         canvas: Canvas
            The Tk canvas to draw on.
-        x: float 
+        x: float
             The x position of the nodes center on the canvas.
         y: float
             The y position of the nodes cetner on the canvas.
-        w: float 
+        w: float
             The nodes graphical width, in pixels.
-        h: float 
+        h: float
             The nodes graphical height, in pixels.
         """
 {%- if cookiecutter.use_subflowchart == 'y' %}
@@ -90,7 +90,7 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
     def create_dialog(self):
         """
         Create the dialog. A set of widgets will be chosen by default
-        based on what is specified in the 
+        based on what is specified in the
         {{ cookiecutter.step }}_parameters module.
 
         See Also
@@ -146,7 +146,7 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
     def reset_dialog(self, widget=None):
         """Layout the widgets in the dialog.
 
-        The widgets are chosen by default from the information in 
+        The widgets are chosen by default from the information in
         {{ cookiecutter.step }}_parameter.
 
         This function simply lays them out row by row with

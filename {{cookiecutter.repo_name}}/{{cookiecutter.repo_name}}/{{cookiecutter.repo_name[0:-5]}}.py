@@ -11,13 +11,13 @@ import seamm_util.printing as printing
 from seamm_util.printing import FormattedText as __
 import {{ cookiecutter.repo_name }}
 
-#In addition to the normal logger, two logger-like printing facilities are
-#defined: 'job' and 'printer'. 'job' send output to the main job.out file for
-#the job, and should be used very sparingly, typically to echo what this step
-#will do in the initial summary of the job.
+# In addition to the normal logger, two logger-like printing facilities are
+# defined: 'job' and 'printer'. 'job' send output to the main job.out file for
+# the job, and should be used very sparingly, typically to echo what this step
+# will do in the initial summary of the job.
 #
-#'printer' sends output to the file 'step.out' in this steps working
-#directory, and is used for all normal output from this step.
+# 'printer' sends output to the file 'step.out' in this steps working
+# directory, and is used for all normal output from this step.
 
 logger = logging.getLogger(__name__)
 job = printing.getPrinter()
@@ -40,14 +40,14 @@ class {{ cookiecutter.class_name }}(seamm.Node):
     ----------
     parser : configargparse.ArgParser
         The parser object.
-        
+
     options : tuple
         It contains a two item tuple containing the populated namespace and the
         list of remaining argument strings.
-    
-    subflowchart : seamm.Flowchart 
+
+    subflowchart : seamm.Flowchart
         A SEAMM Flowchart object that represents a subflowchart, if needed.
-    
+
     parameters : {{ cookiecutter.class_name }}Parameters
         The control parameters for {{ cookiecutter.step }}.
 
@@ -118,7 +118,7 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         # Set the logging level for this module if requested
         if '{{ cookiecutter.repo_name }}_log_level' in self.options:
             logger.setLevel(self.options.{{ cookiecutter.repo_name }}_log_level)
-        
+
 {%- if cookiecutter.use_subflowchart == 'y' %}
         self.sub_flowchart = seamm.Flowchart(
             parent=self, name='{{ cookiecutter.step }}',
@@ -166,16 +166,14 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         text = ('Please replace this with a short summary of the '
                 '{{ cookiecutter.step}} step, including key parameters.')
 
-        description = self.header + '\n' + __(text, **P, indent=4 * ' ').__str__()
-
-        return description 
+        return self.header + '\n' + __(text, **P, indent=4 * ' ').__str__()
 
     def run(self):
-        """Run a {{ cookiecutter.step }} step. 
+        """Run a {{ cookiecutter.step }} step.
 
         Returns
         -------
-        
+
         next_node : seamm.Node
             The next node object in the flowchart.
 
@@ -234,7 +232,6 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         self.analyze()
 
         return next_node
-
 
     def analyze(self, indent='', **kwargs):
         """Do any analysis of the output from this step.

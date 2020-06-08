@@ -5,7 +5,7 @@ Control parameters for the {{ cookiecutter.step }} step in a SEAMM flowchart
 
 import logging
 import seamm
-import pprint
+import pprint  # noqa: F401
 
 logger = logging.getLogger(__name__)
 
@@ -15,15 +15,16 @@ class {{ cookiecutter.class_name }}Parameters(seamm.Parameters):
     The control parameters for {{ cookiecutter.step }}.
 
     The developer will add a dictionary of Parameters to this class.
-    The keys are parameters for the current plugin, which themselves 
-    might be dictionaries.  
-    
-    You need to replace the 'time' example below with one or more 
+    The keys are parameters for the current plugin, which themselves
+    might be dictionaries.
+
+    You need to replace the 'time' example below with one or more
     definitions of the control parameters for your plugin and application.
 
-    Attributes 
+    Attributes
     ----------
-    parameters : {'kind', 'default', 'default_units', 'enumeration', 'format_string', description', help_text'}
+    parameters : {'kind', 'default', 'default_units', 'enumeration',
+                  'format_string', description', help_text'}
         A dictionary containing the parameters for the current step.
         Each key of the dictionary is a dictionary that contains the
         the following keys: kind, default, default_units, enumeration,
@@ -35,32 +36,32 @@ class {{ cookiecutter.class_name }}Parameters(seamm.Parameters):
         meaningful to the user. For instance, if the parameter is
         a convergence criterion for an optimizer, custom values like 'normal',
         'precise', etc, might be adequate. In addition, any
-        parameter can be set to a variable of expression, indicated by having '$'
-        as the first character in the field. For example, $OPTIMIZER_CONV.
+        parameter can be set to a variable of expression, indicated by having
+        '$' as the first character in the field. For example, $OPTIMIZER_CONV.
 
     parameters['default'] : 'integer' or 'float' or 'string' or 'boolean' or
         'enum' The default value of the parameter, used to reset it.
-    
-    parameters['default_units'] : str
-        The default units, used for reseting the value.
 
-    parameters['enumeration']: tuple 
+    parameters['default_units'] : str
+        The default units, used for resetting the value.
+
+    parameters['enumeration']: tuple
         A tuple of enumerated values.
 
-    parameters['format_string']: str 
+    parameters['format_string']: str
         A format string for 'pretty' output.
 
     parameters['description']: str
         A short string used as a prompt in the GUI.
 
-    parameters['help_text']: tuple 
+    parameters['help_text']: tuple
         A longer string to display as help for the user.
 
     See Also
     --------
     {{ cookiecutter.class_name }}, Tk{{ cookiecutter.class_name }}, {{ cookiecutter.class_name }}
     {{ cookiecutter.class_name }}Parameters, {{ cookiecutter.step }}Step
-    
+
     Examples
     --------
     parameters = {
@@ -92,7 +93,7 @@ class {{ cookiecutter.class_name }}Parameters(seamm.Parameters):
         """
         Initialize the parameters, by default with the parameters defined above
 
-        Parameters 
+        Parameters
         ----------
             defaults: dict
                 A dictionary of parameters to initialize. The parameters

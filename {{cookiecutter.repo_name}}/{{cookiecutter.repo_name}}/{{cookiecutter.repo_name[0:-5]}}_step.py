@@ -2,13 +2,13 @@
 
 import {{cookiecutter.repo_name}}
 
+
 class {{cookiecutter.class_name}}Step(object):
     """Helper class needed for the stevedore integration.
 
     This must provide a description() method that returns a dict containing a
-    description of this node, and create_node() and create_tk_node() methods for
-    creating the graphical and non-graphical nodes.
-
+    description of this node, and create_node() and create_tk_node() methods
+    for creating the graphical and non-graphical nodes.
 
     Attributes
     ----------
@@ -26,7 +26,6 @@ class {{cookiecutter.class_name}}Step(object):
     my_description['name'] : str
         The name of this step, to be displayed in the menus.
     """
-
 
     my_description = {
         'description':
@@ -55,12 +54,12 @@ class {{cookiecutter.class_name}}Step(object):
         Parameters
         ----------
         flowchart: seamm.Node
-            A non-graphical SEAMM node 
+            A non-graphical SEAMM node
 
         **kwargs : keyworded arguments
             Various keyworded arguments such as title, namespace or
             extension representing the title displayed in the flowchart,
-            the namespace for the plugins of a subflowchart and 
+            the namespace for the plugins of a subflowchart and
             the extension, respectively.
 
         Returns
@@ -70,7 +69,7 @@ class {{cookiecutter.class_name}}Step(object):
         See Also
         --------
         {{ cookiecutter.class_name }}
-        
+
         """
 
         return {{cookiecutter.repo_name}}.{{cookiecutter.class_name}}(flowchart=flowchart, **kwargs)
@@ -84,9 +83,9 @@ class {{cookiecutter.class_name}}Step(object):
             The Tk Canvas widget
 
         **kwargs : keyworded arguments
-            Various keyworded arguments such as tk_flowchart, node, x, y, w, h representing
-            a graphical flowchart object, a non-graphical node for a step, and dimensions
-            of the graphical node.
+            Various keyworded arguments such as tk_flowchart, node, x, y, w, h
+            representing a graphical flowchart object, a non-graphical node for
+            a step, and dimensions of the graphical node.
 
         Returns
         -------
