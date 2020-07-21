@@ -34,7 +34,7 @@ class {{cookiecutter.class_name}}Step(object):
             ),
         'group': 'Simulations',
         'name': '{{cookiecutter.step}}'
-    }
+    }  # yapf: disable
 
     def __init__(self, flowchart=None, gui=None):
         """Initialize this helper class, which is used by
