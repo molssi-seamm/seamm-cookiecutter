@@ -4,12 +4,17 @@
 
 import configargparse
 import logging
+import pprint
+{%- if cookiecutter.use_subflowchart == 'y' %}
+import sys
+{%- endif %}
+
+import {{ cookiecutter.repo_name }}
 import seamm
 from seamm import data  # noqa: F401
 from seamm_util import ureg, Q_  # noqa: F401
 import seamm_util.printing as printing
 from seamm_util.printing import FormattedText as __
-import {{ cookiecutter.repo_name }}
 
 # In addition to the normal logger, two logger-like printing facilities are
 # defined: 'job' and 'printer'. 'job' send output to the main job.out file for
@@ -56,13 +61,15 @@ class {{ cookiecutter.class_name }}(seamm.Node):
     Tk{{ cookiecutter.class_name }},
     {{ cookiecutter.class_name }}, {{ cookiecutter.class_name }}Parameters
     """
-    def __init__(self,
-                 flowchart=None,
-                 title='{{ cookiecutter.step }}',
+    def __init__(
+        self,
+        flowchart=None,
+        title='{{ cookiecutter.step }}',
 {%- if cookiecutter.use_subflowchart == 'y' %}
-                 namespace='org.molssi.seamm.{{ cookiecutter.repo_name }}',
+        namespace='org.molssi.seamm.{{ cookiecutter.repo_name[0:-5] }}',
 {%- endif %}
-                 extension=None):
+        extension=None
+    ):
         """A step for {{ cookiecutter.step }} in a SEAMM flowchart.
 
         You may wish to change the title above, which is the string displayed
@@ -76,7 +83,7 @@ class {{ cookiecutter.class_name }}(seamm.Node):
             title: str
                 The name displayed in the flowchart.
 {%- if cookiecutter.use_subflowchart == 'y' %}
-            namespace: The namespace for the plugins of the subflowchart
+            namespace: The namespace for the plug-ins of the subflowchart
 
 {%- endif %}
             extension: None
@@ -120,15 +127,18 @@ class {{ cookiecutter.class_name }}(seamm.Node):
             logger.setLevel(self.options.{{ cookiecutter.repo_name }}_log_level)
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
-        self.sub_flowchart = seamm.Flowchart(
-            parent=self, name='{{ cookiecutter.step }}',
-            namespace=namespace)
+        self.subflowchart = seamm.Flowchart(
+            parent=self,
+            name='{{ cookiecutter.step }}',
+            namespace=namespace
+        )  # yapf: disable
 {%- endif %}
 
         super().__init__(
             flowchart=flowchart,
             title='{{ cookiecutter.step }}',
-            extension=extension)
+            extension=extension
+        )  # yapf: disable
 
         self.parameters = {{ cookiecutter.repo_name }}.{{ cookiecutter.class_name }}Parameters()
 
@@ -143,6 +153,17 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         """The git version of this module.
         """
         return {{ cookiecutter.repo_name }}.__git_revision__
+
+{%- if cookiecutter.use_subflowchart == 'y' %}
+    def set_id(self, node_id):
+        """Set the id for node to a given tuple"""
+        self._id = node_id
+
+        # and set our subnodes
+        self.subflowchart.set_ids(self._id)
+
+        return self.next()
+{%- endif %}
 
     def description_text(self, P=None):
         """Create the text description of what this step will do.
@@ -160,13 +181,53 @@ class {{ cookiecutter.class_name }}(seamm.Node):
                 A description of the current step.
         """
 
+{%- if cookiecutter.use_subflowchart == 'y' %}
+        self.subflowchart.root_directory = self.flowchart.root_directory
+
+        # Get the first real node
+        node = self.subflowchart.get_node('1').next()
+
+        text = self.header + '\n\n'
+        while node is not None:
+            try:
+                text += __(node.description_text(), indent=3 * ' ').__str__()
+            except Exception as e:
+                print(
+                    'Error describing {{cookiecutter.repo_name[0:-5]}} flowchart: {} in {}'.format(
+                        str(e), str(node)
+                    )
+                )
+                logger.critical(
+                    'Error describing {{cookiecutter.repo_name[0:-5]}} flowchart: {} in {}'.format(
+                        str(e), str(node)
+                    )
+                )
+                raise
+            except:  # noqa: E722
+                print(
+                    "Unexpected error describing {{cookiecutter.repo_name[0:-5]}} flowchart: {} in {}"
+                    .format(sys.exc_info()[0], str(node))
+                )
+                logger.critical(
+                    "Unexpected error describing {{cookiecutter.repo_name[0:-5]}} flowchart: {} in {}"
+                    .format(sys.exc_info()[0], str(node))
+                )
+                raise
+            text += '\n'
+            node = node.next()
+
+        return text
+{%- else %}
         if not P:
             P = self.parameters.values_to_dict()
 
-        text = ('Please replace this with a short summary of the '
-                '{{ cookiecutter.step}} step, including key parameters.')
+        text = (
+            'Please replace this with a short summary of the '
+            '{{ cookiecutter.step}} step, including key parameters.'
+        )
 
         return self.header + '\n' + __(text, **P, indent=4 * ' ').__str__()
+{%- endif %}
 
     def run(self):
         """Run a {{ cookiecutter.step }} step.
@@ -183,7 +244,7 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
         # Get the first real node
-        node = self.sub_flowchart.get_node('1').next()
+        node = self.subflowchart.get_node('1').next()
 
         input_data = []
         while node is not None:
@@ -198,7 +259,8 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         result = local.run(
             cmd=['{{ cookiecutter.step }}', '-in', 'molssi.dat'],
             files=files,
-            return_files=[])
+            return_files=[]
+        )  # yapf: disable
 
         if result is None:
             logger.error('There was an error running {{ cookiecutter.step }}')
@@ -247,7 +309,7 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
         # Get the first real node
-        node = self.sub_flowchart.get_node('1').next()
+        node = self.subflowchart.get_node('1').next()
 
         # Loop over the subnodes, asking them to do their analysis
         while node is not None:
