@@ -1,12 +1,10 @@
-pip
-wheel
-watchdog
-flake8
-tox
+-r requirements_install.txt
+
 coverage
-Sphinx
-{% if cookiecutter.use_pypi_deployment_with_travis == 'y' -%}
-cryptography
-PyYAML>5.1{% endif %}
+flake8
 pytest
 pytest-runner
+sphinx
+tox
+twine
+yapf

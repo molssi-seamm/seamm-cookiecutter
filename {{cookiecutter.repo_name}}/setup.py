@@ -21,12 +21,8 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = [
-    'Pmw>=2.0.1<3',
-    'seamm>=0.2.0<1',
-    'seamm-widgets>=0.2.1<1',
-    'seamm-util>=0.2.1<1',
-]
+with open('requirements_install.txt') as fd:
+    requirements = fd.read()
 
 {%- set license_classifiers = {
     'BSD-3-Clause': 'License :: OSI Approved :: BSD License',
@@ -76,7 +72,7 @@ setup(
 
     # Manual control if final package is compressible or not, set False to
     # prevent the .egg from being made
-    # zip_safe=False,
+    zip_safe=True,
 
     keywords='{{ cookiecutter.repo_name }}',
     classifiers=[
@@ -99,5 +95,16 @@ setup(
         'org.molssi.seamm.tk': [
             '{{ cookiecutter.step }} = {{ cookiecutter.repo_name }}:{{ cookiecutter.class_name }}Step',
         ],
+{%- if cookiecutter.use_subflowchart == 'y' %}
+        'org.molssi.seamm.{{ cookiecutter.repo_name[0:-5] }}': [
+            # You will need something like the following for substeps
+            # Energy = {{ cookiecutter.repo_name }}:EnergyStep
+        ],
+
+        'org.molssi.seamm.{{ cookiecutter.repo_name[0:-5] }}.tk': [
+            # You will need something like the following for substeps
+            # Energy = {{ cookiecutter.repo_name }}:EnergyStep
+        ],
+{%- endif %}
     }
 )
