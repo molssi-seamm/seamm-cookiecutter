@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """The graphical part of a {{ cookiecutter.step }} step"""
 
 import seamm
@@ -18,14 +19,27 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
 
     Attributes
     ----------
+    tk_flowchart : TkFlowchart = None
+        The flowchart that we belong to.
+    node : Node = None
+        The corresponding node of the non-graphical flowchart
+{%- if cookiecutter.use_subflowchart == 'n' %}
     namespace : str
         The namespace of the current step.
-    node : Node
-        The corresponding node of the non-graphical flowchart
+    sub_tk_flowchart : TkFlowchart
+        A graphical Flowchart representing a subflowchart{%- endif %}
+    canvas: tkCanvas = None
+        The Tk Canvas to draw on
     dialog : Dialog
         The Pmw dialog object
-    sub_tk_flowchart : TkFlowchart
-        A graphical Flowchart representing a subflowchart
+    x : int = None
+        The x-coordinate of the center of the picture of the node
+    y : int = None
+        The y-coordinate of the center of the picture of the node
+    w : int = 200
+        The width in pixels of the picture of the node
+    h : int = 50
+        The height in pixels of the picture of the node
     self[widget] : dict
         A dictionary of tk widgets built using the information
         contained in {{ cookiecutter.step }}_parameters.py
@@ -91,8 +105,8 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
     def create_dialog(self):
         """
         Create the dialog. A set of widgets will be chosen by default
-        based on what is specified in the
-        {{ cookiecutter.step }}_parameters module.
+        based on what is specified in the {{ cookiecutter.step }}_parameters
+        module.
 
         See Also
         --------
@@ -154,10 +168,11 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         This function simply lays them out row by row with
         aligned labels. You may wish a more complicated layout that
         is controlled by values of some of the control parameters.
+        If so, edit or override this method
 
         Parameters
         ----------
-        widget
+        widget = Tk Widget = None
 
         See Also
         --------
@@ -188,6 +203,10 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
     def right_click(self, event):
         """
         Handles the right click event on the node.
+
+        Parameters
+        ----------
+        event : Tk Event
 
         See Also
         --------
