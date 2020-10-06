@@ -116,7 +116,7 @@ class {{ cookiecutter.class_name }}(seamm.Node):
             choices=[
                 'CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG', 'NOTSET'
             ],
-            type=string.upper,
+            type=str.upper,
             help="the logging level for the {{ cookiecutter.step }} step"
         )
 
