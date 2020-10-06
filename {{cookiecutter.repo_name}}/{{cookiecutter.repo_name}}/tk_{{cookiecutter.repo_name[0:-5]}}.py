@@ -83,6 +83,10 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
             The nodes graphical width, in pixels.
         h: float
             The nodes graphical height, in pixels.
+
+        Returns
+        -------
+        None
         """
 {%- if cookiecutter.use_subflowchart == 'y' %}
         self.namespace = namespace
@@ -107,6 +111,14 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         Create the dialog. A set of widgets will be chosen by default
         based on what is specified in the {{ cookiecutter.step }}_parameters
         module.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
 
         See Also
         --------
@@ -172,7 +184,11 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
 
         Parameters
         ----------
-        widget = Tk Widget = None
+        widget : Tk Widget = None
+
+        Returns
+        -------
+        None
 
         See Also
         --------
@@ -208,6 +224,10 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         ----------
         event : Tk Event
 
+        Returns
+        -------
+        None
+
         See Also
         --------
         Tk{{ cookiecutter.class_name }}.edit
@@ -220,6 +240,14 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
 
     def edit(self):
         """Present a dialog for editing the {{ cookiecutter.step }} input
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
 
         See Also
         --------
@@ -244,6 +272,9 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
             The value of this variable depends on what the button
             the user clicked.
 
+        Returns
+        -------
+        None
         """
 
         if result is None or result == 'Cancel':
@@ -291,6 +322,9 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         flowchart : seamm.Flowchart
             A non-graphical representation of the SEAMM Flowchart
 
+        Returns
+        -------
+        None
         """
 
         super().update_flowchart(
@@ -310,6 +344,9 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         flowchart : seamm.Flowchart
             A non-graphical representation of the SEAMM Flowchart
 
+        Returns
+        -------
+        None
         """
 
         super().from_flowchart(
@@ -321,5 +358,12 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
     def handle_help(self):
         """Shows the help to the user when click on help button.
 
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
         """
         print('Help not implemented yet for {{ cookiecutter.step }}!')

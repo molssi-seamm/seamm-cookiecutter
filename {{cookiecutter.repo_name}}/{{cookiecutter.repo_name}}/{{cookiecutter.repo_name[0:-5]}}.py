@@ -30,14 +30,6 @@ job = printing.getPrinter()
 printer = printing.getPrinter('{{ cookiecutter.step }}')
 
 
-def upcase(string):
-    """Return an uppercase version of the string.
-
-    Used for the type argument in argparse
-    """
-    return string.upper()
-
-
 class {{ cookiecutter.class_name }}(seamm.Node):
     """
     The non-graphical part of a {{ cookiecutter.step }} step in a flowchart.
@@ -80,17 +72,22 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
         Parameters
         ----------
-            flowchart: seamm.Flowchart
-                The non-graphical flowchart that contains this step.
+        flowchart: seamm.Flowchart
+            The non-graphical flowchart that contains this step.
 
-            title: str
-                The name displayed in the flowchart.
+        title: str
+            The name displayed in the flowchart.
 {%- if cookiecutter.use_subflowchart == 'y' %}
-            namespace: The namespace for the plug-ins of the subflowchart
+        namespace : str
+            The namespace for the plug-ins of the subflowchart{%- endif %}
+        extension: None
+            Not yet implemented
+        logger : Logger = logger
+            The logger to use and pass to parent classes
 
-{%- endif %}
-            extension: None
-                Not yet implemented
+        Returns
+        -------
+        None
         """
         logger.debug('Creating {{ cookiecutter.step }} {}'.format(self))
 
@@ -119,7 +116,7 @@ class {{ cookiecutter.class_name }}(seamm.Node):
             choices=[
                 'CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG', 'NOTSET'
             ],
-            type=upcase,
+            type=string.upper,
             help="the logging level for the {{ cookiecutter.step }} step"
         )
 
@@ -134,8 +131,7 @@ class {{ cookiecutter.class_name }}(seamm.Node):
             parent=self,
             name='{{ cookiecutter.step }}',
             namespace=namespace
-        )  # yapf: disable
-{%- endif %}
+        )  # yapf: disable{%- endif %}
 
         super().__init__(
             flowchart=flowchart,
@@ -167,8 +163,7 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         # and set our subnodes
         self.subflowchart.set_ids(self._id)
 
-        return self.next()
-{%- endif %}
+        return self.next(){%- endif %}
 
     def description_text(self, P=None):
         """Create the text description of what this step will do.
@@ -177,13 +172,13 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
         Parameters
         ----------
-            P: dict
-                An optional dictionary of the current values of the control
-                parameters.
+        P: dict
+            An optional dictionary of the current values of the control
+            parameters.
         Returns
         -------
-            description : str
-                A description of the current step.
+        str
+            A description of the current step.
         """
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
@@ -237,14 +232,15 @@ class {{ cookiecutter.class_name }}(seamm.Node):
     def run(self):
         """Run a {{ cookiecutter.step }} step.
 
+        Parameters
+        ----------
+        None
+
         Returns
         -------
-
-        next_node : seamm.Node
+        seamm.Node
             The next node object in the flowchart.
-
         """
-
         next_node = super().run(printer)
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
@@ -327,10 +323,9 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
         Parameters
         ----------
-            indent: str
-                An extra indentation for the output
+        indent: str
+            An extra indentation for the output
         """
-
 {%- if cookiecutter.use_subflowchart == 'y' %}
         # Get the first real node
         node = self.subflowchart.get_node('1').next()
