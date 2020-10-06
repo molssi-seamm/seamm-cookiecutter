@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+
 """Non-graphical part of the {{ cookiecutter.step }} step in a SEAMM flowchart
 """
 
 import configargparse
 import logging
-import pprint
+import pprint  # noqa: F401
 {%- if cookiecutter.use_subflowchart == 'y' %}
 import sys
 {%- endif %}
@@ -61,6 +62,7 @@ class {{ cookiecutter.class_name }}(seamm.Node):
     Tk{{ cookiecutter.class_name }},
     {{ cookiecutter.class_name }}, {{ cookiecutter.class_name }}Parameters
     """
+
     def __init__(
         self,
         flowchart=None,
@@ -68,7 +70,8 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 {%- if cookiecutter.use_subflowchart == 'y' %}
         namespace='org.molssi.seamm.{{ cookiecutter.repo_name[0:-5] }}',
 {%- endif %}
-        extension=None
+        extension=None,
+        logger=logger
     ):
         """A step for {{ cookiecutter.step }} in a SEAMM flowchart.
 
@@ -137,7 +140,9 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         super().__init__(
             flowchart=flowchart,
             title='{{ cookiecutter.step }}',
-            extension=extension
+            extension=extension,
+            module=__name__,
+            logger=logger
         )  # yapf: disable
 
         self.parameters = {{ cookiecutter.repo_name }}.{{ cookiecutter.class_name }}Parameters()
@@ -284,14 +289,33 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         # this!
         for key in P:
             print('{:>15s} = {}'.format(key, P[key]))
-            printer.normal(__(
-                '{key:>15s} = {value}', key=key, value=P[key],
-                indent=4*' ', wrap=False, dedent=False)
+            printer.normal(
+                __(
+                    '{key:>15s} = {value}',
+                    key=key,
+                    value=P[key],
+                    indent=4 * ' ',
+                    wrap=False,
+                    dedent=False
+                )
             )
 {%- endif %}
 
         # Analyze the results
         self.analyze()
+
+        # Since we have succeeded, add the citation.
+
+        self.references.cite(
+            raw=self._bibliography['{{cookiecutter.repo_name}}'],
+            alias='{{cookiecutter.repo_name}}',
+            module='{{cookiecutter.repo_name}}',
+            level=1,
+            note='The principle citation for the {{cookiecutter.repo_name.replace('_', ' ')}} in SEAMM.'
+        )
+        # Add other citations here or in the appropriate place in the code.
+        # Add the bibtex to data/references.bib, and add a self.reference.cite
+        # similar to the above to actually add the citation to the references.
 
         return next_node
 
@@ -321,9 +345,13 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
             node = node.next()
 {%- else %}
-        printer.normal(__(
-            'This is a placeholder for the results from the '
-            '{{ cookiecutter.step }} step', indent=4*' ', wrap=True,
-            dedent=False
-        ))
+        printer.normal(
+            __(
+                'This is a placeholder for the results from the '
+                '{{ cookiecutter.step }} step',
+                indent=4 * ' ',
+                wrap=True,
+                dedent=False
+            )
+        )
 {%- endif %}
