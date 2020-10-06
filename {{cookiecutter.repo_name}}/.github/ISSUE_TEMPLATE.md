@@ -1,6 +1,6 @@
-* {{ cookiecutter.repo_name }} version:
-* Python version:
-* Operating System:
+* {{ cookiecutter.repo_name }} version: 
+* Python version: 
+* Operating System: 
 
 ### Description
 
