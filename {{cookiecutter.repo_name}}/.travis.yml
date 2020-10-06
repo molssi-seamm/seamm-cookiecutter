@@ -1,7 +1,6 @@
-# Config file for automatic testing at travis-ci.org
-# This file will be regenerated if you run travis_pypi_setup.py
-
 language: python
+script: pytest
+os: linux
 
 before_install:
     # Additional info about the build
@@ -17,8 +16,7 @@ install:
 {% if cookiecutter.dependency_source == 'Dependencies from pip only (no conda)' %}
     # Install the package locally
   - pip install -U pytest pytest-cov codecov
-  - pip install -e .
-{% else %}
+  - pip install -e .{% else %}
     # Create test environment for package
   - python devtools/scripts/create_conda_env.py -n=test -p=$PYTHON_VER devtools/conda-envs/test_env.yaml
     # Activate the test environment
@@ -28,8 +26,7 @@ install:
   - pip install -e .
     # Print details of the environment
   - conda list
-  - pip freeze
-{% endif %}
+  - pip freeze{% endif %}
 
 notifications:
     email: false
@@ -37,21 +34,19 @@ notifications:
 stages:
   - lint
   - test
-{% if cookiecutter.use_pypi_deployment_with_travis == 'y' -%}
-  - deploy
-{%- endif %}
+{% if cookiecutter.use_pypi_deployment_with_travis == 'y' %}
+  - deploy{%- endif %}
 
 jobs:
+  fast_finish: true
   include:
     - stage: lint
       name: "Check formatting of code for PEP-8"
       os: linux
 {% if cookiecutter.dependency_source == 'Dependencies from pip only (no conda)' %}
       python: 3.8
-      dist: xenial  # Travis Trusty image does not have Python 3.8, Xenial does
-{% else %}
-      language: generic
-{% endif %}
+      dist: xenial  # Travis Trusty image does not have Python 3.8, Xenial does{% else %}
+      language: generic{% endif %}
       env: PYTHON_VER=3.8
       script:
         - flake8 {{ cookiecutter.repo_name }} tests
@@ -79,10 +74,8 @@ jobs:
         - pytest -v tests/
       os: linux
 {% if cookiecutter.dependency_source == 'Dependencies from pip only (no conda)' %}
-      python: 3.7
-{% else %}
-      language: generic  # No need to set Python version since its conda
-{% endif %}
+      python: 3.7{% else %}
+      language: generic  # No need to set Python version since its conda{% endif %}
       env: PYTHON_VER=3.7
 
     - stage: test
@@ -94,17 +87,16 @@ jobs:
       os: linux
 {% if cookiecutter.dependency_source == 'Dependencies from pip only (no conda)' %}
       python: 3.8
-      dist: xenial  # Travis Trusty image does not have Python 3.8, Xenial does
-{% else %}
-      language: generic
-{% endif %}
+      dist: xenial  # Travis Trusty image does not have Python 3.8, Xenial does{% else %}
+      language: generic{% endif %}
       env: PYTHON_VER=3.8
-{% if cookiecutter.use_pypi_deployment_with_travis == 'y' -%}
+{% if cookiecutter.use_pypi_deployment_with_travis == 'y' %}
 
     - stage: deploy
       name: "Deploy to PyPi"
       if: tag IS present
       dist: xenial
+      os: linux
       python: 3.8
       script: skip
       deploy:
