@@ -2,15 +2,15 @@
 
 """The graphical part of a {{ cookiecutter.step }} step"""
 
-import seamm
-from seamm_util import ureg, Q_, units_class  # noqa: F401
-{%- if cookiecutter.use_subflowchart == 'n' %}
-import seamm_widgets as sw{%- endif %}
-import {{ cookiecutter.repo_name }}  # noqa: F401
-import Pmw
 import pprint  # noqa: F401
 import tkinter as tk
-import tkinter.ttk as ttk
+
+import {{ cookiecutter.repo_name }}  # noqa: F401
+import seamm
+from seamm_util import ureg, Q_, units_class  # noqa: F401
+{% if cookiecutter.use_subflowchart == 'n' -%}
+import seamm_widgets as sw
+{%- endif %}
 
 
 class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
@@ -26,7 +26,7 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
 {%- if cookiecutter.use_subflowchart == 'n' %}
     namespace : str
         The namespace of the current step.
-    sub_tk_flowchart : TkFlowchart
+    tk_subflowchart : TkFlowchart
         A graphical Flowchart representing a subflowchart{%- endif %}
     canvas: tkCanvas = None
         The Tk Canvas to draw on
@@ -125,23 +125,7 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         Tk{{ cookiecutter.class_name }}.reset_dialog
         """
 
-        self.dialog = Pmw.Dialog(
-            self.toplevel,
-            buttons=('OK', 'Help', 'Cancel'),
-            defaultbutton='OK',
-            master=self.toplevel,
-            title='Edit {{ cookiecutter.step }} step',
-            command=self.handle_dialog
-        )
-        self.dialog.withdraw()
-
-        # The information about widgets is held in self['xxxx'], i.e. this
-        # class is in part a dictionary of widgets. This makes accessing
-        # the widgets easier and allows loops, etc.
-
-        # Create a frame to hold everything. This is always called 'frame'.
-        self['frame'] = ttk.Frame(self.dialog.interior())
-        self['frame'].pack(expand=tk.YES, fill=tk.BOTH)
+        frame = super().create_dialog(title=' {{- cookiecutter.step -}} ')
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
         # make it large!
@@ -154,19 +138,19 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
 
         self.dialog.geometry('{}x{}+{}+{}'.format(w, h, x, y))
 
-        self.sub_tk_flowchart = seamm.TkFlowchart(
-            master=self['frame'],
-            flowchart=self.node.sub_flowchart,
+        self.tk_subflowchart = seamm.TkFlowchart(
+            master=frame,
+            flowchart=self.node.subflowchart,
             namespace=self.namespace
         )
-        self.sub_tk_flowchart.draw()
+        self.tk_subflowchart.draw()
 {%- else %}
         # Shortcut for parameters
         P = self.node.parameters
 
-        # The create the widgets
+        # Then create the widgets
         for key in P:
-            self[key] = P[key].widget(self['frame'])
+            self[key] = P[key].widget(frame)
 
         # and lay them out
         self.reset_dialog()
@@ -328,8 +312,8 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         """
 
         super().update_flowchart(
-            flowchart=self.node.sub_flowchart,
-            tk_flowchart=self.sub_tk_flowchart
+            flowchart=self.node.subflowchart,
+            tk_flowchart=self.tk_subflowchart
         )
 
     def from_flowchart(self, tk_flowchart=None, flowchart=None):
@@ -350,8 +334,8 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         """
 
         super().from_flowchart(
-            flowchart=self.node.sub_flowchart,
-            tk_flowchart=self.sub_tk_flowchart
+            flowchart=self.node.subflowchart,
+            tk_flowchart=self.tk_subflowchart
         )
 {%- endif %}
 
