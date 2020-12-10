@@ -12,8 +12,8 @@ on:
 
 jobs:
   lint:
-    name: Lint ${{ matrix.os }} Py${{ matrix.python-version }}
-    runs-on: ${{ matrix.os }}
+    name: Lint {{ '${{ matrix.os }}' }} Py{{ '${{ matrix.python-version }}' }}
+    runs-on: {{ '${{ matrix.os }}' }}
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -32,7 +32,7 @@ jobs:
     # More info on options: https://github.com/conda-incubator/setup-miniconda
     - uses: conda-incubator/setup-miniconda@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {{ '${{ matrix.python-version }}' }}
         environment-file: devtools/conda-envs/test_env.yaml
 
         # channels: conda-forge,defaults
@@ -60,8 +60,8 @@ jobs:
         yapf --diff --recursive {{cookiecutter.repo_name}} tests
       
   test:
-    name: Test ${{ matrix.os }} Py${{ matrix.python-version }}
-    runs-on: ${{ matrix.os }}
+    name: Test {{ '${{ matrix.os }}' }} Py{{ '${{ matrix.python-version }}' }}
+    runs-on: {{ '${{ matrix.os }}' }}
     needs: lint
     strategy:
       matrix:
@@ -82,7 +82,7 @@ jobs:
     # More info on options: https://github.com/conda-incubator/setup-miniconda
     - uses: conda-incubator/setup-miniconda@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {{ '${{ matrix.python-version }}' }}
         environment-file: devtools/conda-envs/test_env.yaml
         activate-environment: test
         auto-update-conda: false
@@ -111,13 +111,13 @@ jobs:
       with:
         file: ./coverage.xml
         flags: unittests
-        name: codecov-${{ matrix.os }}-py${{ matrix.python-version }}
+        name: codecov-{{ '${{ matrix.os }}' }}-py{{ '${{ matrix.python-version }}' }}
 
   deploy:
-    name: PyPi ${{ matrix.os }} Py${{ matrix.python-version }}
+    name: PyPi {{ '${{ matrix.os }}' }} Py{{ '${{ matrix.python-version }}' }}
     # Run only for tagged releases.
     if: github.event_name == 'release' && startsWith(github.ref, 'refs/tags')
-    runs-on: ${{ matrix.os }}
+    runs-on: {{ '${{ matrix.os }}' }}
     needs: [lint, test]
     strategy:
       matrix:
@@ -127,10 +127,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python {{ '${{ matrix.python-version }}' }}
       uses: actions/setup-python@v1
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {{ '${{ matrix.python-version }}' }}
 
     - name: Install package
 
@@ -152,11 +152,11 @@ jobs:
     - name: Publish distribution 📦 to Test PyPI
       uses: pypa/gh-action-pypi-publish@master
       with:
-        password: ${{ secrets.test_pypi_password }}
+        password: {{ '${{ secrets.test_pypi_password }}' }}
         repository_url: https://test.pypi.org/legacy/
         skip_existing: true
 
     - name: Publish distribution 📦 to PyPI
       uses: pypa/gh-action-pypi-publish@master
       with:
-        password: ${{ secrets.pypi_password }}
+        password: {{ '${{ secrets.pypi_password }}' }}

@@ -20,8 +20,8 @@ on:
 
 jobs:
   lint:
-    name: Lint ${{ matrix.os }} Py${{ matrix.python-version }}
-    runs-on: ${{ matrix.os }}
+    name: Lint {{ '${{ matrix.os }}' }} Py{{ '${{ matrix.python-version }}' }}
+    runs-on: {{ '${{ matrix.os }}' }}
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -40,7 +40,7 @@ jobs:
     # More info on options: https://github.com/conda-incubator/setup-miniconda
     - uses: conda-incubator/setup-miniconda@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {{ '${{ matrix.python-version }}' }}
         environment-file: devtools/conda-envs/test_env.yaml
 
         # channels: conda-forge,defaults
@@ -68,8 +68,8 @@ jobs:
         yapf --diff --recursive {{cookiecutter.repo_name}} tests
       
   test:
-    name: Test ${{ matrix.os }} Py${{ matrix.python-version }}
-    runs-on: ${{ matrix.os }}
+    name: Test {{ '${{ matrix.os }}' }} Py{{ '${{ matrix.python-version }}' }}
+    runs-on: {{ '${{ matrix.os }}' }}
     needs: lint
     strategy:
       matrix:
@@ -90,7 +90,7 @@ jobs:
     # More info on options: https://github.com/conda-incubator/setup-miniconda
     - uses: conda-incubator/setup-miniconda@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {{ '${{ matrix.python-version }}' }}
         environment-file: devtools/conda-envs/test_env.yaml
         activate-environment: test
         auto-update-conda: false
@@ -119,4 +119,4 @@ jobs:
       with:
         file: ./coverage.xml
         flags: unittests
-        name: codecov-${{ matrix.os }}-py${{ matrix.python-version }}
+        name: codecov-{{ '${{ matrix.os }}' }}-py{{ '${{ matrix.python-version }}' }}
