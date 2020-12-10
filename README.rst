@@ -10,9 +10,9 @@ Features
 --------
 
 * Testing setup with ``unittest`` and ``python setup.py test`` or ``py.test``
-* Travis-CI_: Ready for Travis Continuous Integration testing
+* CI/CD: Ready for Continuous Integration/Continuous Deployment using
+  GitHub Actions.
 * Sphinx_ docs: Documentation ready for generation with, for example, ReadTheDocs_
-* 
 * Auto-release to PyPI_ when you push a new tag to master (optional)
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
@@ -29,35 +29,14 @@ Generate a Python package project::
 
     cookiecutter https://github.com/molssi-seamm/cookiecutter-seamm-plugin.git
 
-Then:
-
-* Create a repo and put it there.
-* Add the repo to your Travis-CI_ account.
-* Install the dev requirements into a virtualenv. (``pip install -r requirements_dev.txt``)
-* Run the script `travis_pypi_setup.py` to encrypt your PyPI password in Travis config
-  and activate automated deployment on PyPI when you push a new tag to master branch.
-* Add the repo to your ReadTheDocs_ account + turn on the ReadTheDocs service hook.
-* Release your package by pushing a new tag to master.
-* Add a `requirements.txt` file that specifies the packages you will need for
-  your project and their versions. For more info see the `pip docs for requirements files`_.
-* Activate your project on `pyup.io`_.
-
-.. _`pip docs for requirements files`: https://pip.pypa.io/en/stable/user_guide/#requirements-files
-
-My steps
-~~~~~~~~
-After running cookie cutter, do the following to create the initial local git repository::
+Then after running cookie cutter, do the following:
    
    cd mypackage
-   git init .
-   git add .
-   git commit -m "Initial skeleton."
-   git remote add origin git@github.com:myusername/mypackage.git
 
 Then create the same-named repository in GitHub, just giving the LICENSE type.
 Now you need to merge the two::
 
-   bash-3.2$ git remote add origin git@github.com:paulsaxe/forcefield_step.git
+   bash-3.2$ git remote add origin git@github.com:molssi-seamm/forcefield_step.git
    bash-3.2$ git pull --allow-unrelated-histories origin master
    warning: no common commits
    remote: Counting objects: 3, done.        
@@ -69,6 +48,12 @@ Now you need to merge the two::
     * [new branch]      master     -> origin/master
    error: Terminal is dumb, but EDITOR unset
    Not committing merge; use 'git commit' to complete the merge.
+
+Depending on what happens here, you may have a conflict in LICENSE. If
+so, edit the file and fix the problem by keeping the appropriate lines.
+
+Once that is done, push to GitHub:
+
    bash-3.2$ git push --set-upstream origin master
    Counting objects: 54, done.
    Delta compression using up to 4 threads.
@@ -81,10 +66,17 @@ Now you need to merge the two::
    Branch master set up to track remote branch master from origin.
    bash-3.2$ 
 
-I do the commit (of LICENSE) via emacs git-status.
+Go to ReadTheDocs_ and import the new repository. It is quite
+simple and obvious (hopefully!). You will need to go to ADMIN /
+Advanced Settings and check "Install project".
 
+Deploy to PyPi. Once the code is in reasonable shape and working, you
+can deploy to PyPi so that users can `pip install` it. You need an
+account at PyPi_ and an api token. See the first part of the
+`packaging guide`_ for how to get the api token and register it with
+GitHub
 
-.. _Travis-CI: http://travis-ci.org/
+.. _packaging guide: https://packaging.python.org/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/
 .. _Sphinx: http://sphinx-doc.org/
 .. _ReadTheDocs: https://readthedocs.io/
 .. _`pyup.io`: https://pyup.io/
