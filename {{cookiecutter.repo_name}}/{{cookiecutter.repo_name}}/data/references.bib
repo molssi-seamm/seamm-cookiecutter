@@ -23,13 +23,18 @@ See the documentation for the Reference Handler for the other arguments to cite(
 
 # End of initial comments #
 
-@Misc{ {{cookiecutter.repo_name}},
-	author = { {{ cookiecutter.author_name.replace('\"', '\\\"') }} },
-	title = { {{cookiecutter.repo_name[0:-5].replace('_', ' ').title()}} plug-in for SEAMM},
-	month = {oct},
-	year = 2020,
-	organization = { {{cookiecutter.github_username}} },
+# This is the citation for this plug-in, generated and used automatically.
+# You might need to edit the author, address, etc. The month, year and version fields
+# are automatically filled in with information about current version of the plug-in.
+# This is handled in seamm/nody.py, the run() method.
+
+@Misc{ {{- cookiecutter.repo_name }},
+	author = { {{- cookiecutter.author_name.replace('\"', '\\\"') -}} },
+	title = { {{- cookiecutter.repo_name[0:-5].replace('_', ' ').title() }} plug-in for SEAMM},
+	month = {$month},
+	year = {$year},
+	organization = { {{- cookiecutter.github_username -}} },
 	url = {https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.repo_name}} },
 	address = {USA},
-	version = {0.1}
+	version = {$version}
 }
