@@ -3,7 +3,6 @@
 """Non-graphical part of the {{ cookiecutter.step }} step in a SEAMM flowchart
 """
 
-import configargparse
 import logging
 import pprint  # noqa: F401
 {%- if cookiecutter.use_subflowchart == 'y' %}
@@ -12,7 +11,6 @@ import sys
 
 import {{ cookiecutter.repo_name }}
 import seamm
-from seamm import data  # noqa: F401
 from seamm_util import ureg, Q_  # noqa: F401
 import seamm_util.printing as printing
 from seamm_util.printing import FormattedText as __
@@ -90,41 +88,6 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         None
         """
         logger.debug('Creating {{ cookiecutter.step }} {}'.format(self))
-
-        # Argument/config parsing
-        self.parser = configargparse.ArgParser(
-            auto_env_var_prefix='',
-            default_config_files=[
-                '/etc/seamm/{{ cookiecutter.repo_name }}.ini',
-                '/etc/seamm/seamm.ini',
-                '~/.seamm/{{ cookiecutter.repo_name }}.ini',
-                '~/.seamm/seamm.ini',
-            ]
-        )
-
-        self.parser.add_argument(
-            '--seamm-configfile',
-            is_config_file=True,
-            default=None,
-            help='a configuration file to override others'
-        )
-
-        # Options for this plugin
-        self.parser.add_argument(
-            "--{{ cookiecutter.repo_name.replace('_', '-') }}-log-level",
-            default=configargparse.SUPPRESS,
-            choices=[
-                'CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG', 'NOTSET'
-            ],
-            type=str.upper,
-            help="the logging level for the {{ cookiecutter.step }} step"
-        )
-
-        self.options, self.unknown = self.parser.parse_known_args()
-
-        # Set the logging level for this module if requested
-        if '{{ cookiecutter.repo_name }}_log_level' in self.options:
-            logger.setLevel(self.options.{{ cookiecutter.repo_name }}_log_level)
 
 {%- if cookiecutter.use_subflowchart == 'y' %}
         self.subflowchart = seamm.Flowchart(
@@ -300,15 +263,6 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         # Analyze the results
         self.analyze()
 
-        # Since we have succeeded, add the citation.
-
-        self.references.cite(
-            raw=self._bibliography['{{cookiecutter.repo_name}}'],
-            alias='{{cookiecutter.repo_name}}',
-            module='{{cookiecutter.repo_name}}',
-            level=1,
-            note='The principle citation for the {{cookiecutter.repo_name.replace('_', ' ')}} in SEAMM.'
-        )
         # Add other citations here or in the appropriate place in the code.
         # Add the bibtex to data/references.bib, and add a self.reference.cite
         # similar to the above to actually add the citation to the references.
