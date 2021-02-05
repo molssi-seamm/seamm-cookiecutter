@@ -13,8 +13,7 @@
 {% else %}
 * License: {{ cookiecutter.license }}
 {% endif -%}
-* Developer Documentation: https://{{ cookiecutter.repo_name | replace("_", "-") }}.readthedocs.io
-* SEAMM Documentation: https://molssi-seamm.github.io
+* Documentation: https://molssi-seamm.github.io/{{ cookiecutter.repo_name }}/index.html
 
 .. |pull| image:: https://img.shields.io/github/issues-pr-raw/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}
    :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/pulls
@@ -24,8 +23,8 @@
    :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/actions?query=workflow%3ACI
    :alt: CI status
 
-.. |docs| image:: https://readthedocs.org/projects/{{ cookiecutter.repo_name | replace("_", "-") }}/badge/?version=latest
-   :target: https://{{ cookiecutter.repo_name | replace("_", "-") }}.readthedocs.io/en/latest/?badge=latest
+.. |docs| image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/workflows/Documentation/badge.svg
+   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/actions?query=workflow%3ADocumentation
    :alt: Documentation Status
 
 .. |coverage| image:: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/branch/master/graph/badge.svg
