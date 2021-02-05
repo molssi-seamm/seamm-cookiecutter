@@ -34,7 +34,7 @@ jobs:
         conda list
     - name: Build documentation
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: {{ '${{ secrets.GITHUB_TOKEN }}' }}
       shell: bash -l {0}
       run: |
         docs/buildDocs.sh
