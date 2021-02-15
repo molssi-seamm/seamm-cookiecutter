@@ -1,15 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-{{ cookiecutter.repo_name }}
-{{ cookiecutter.description }}
+"""{{ cookiecutter.repo_name }}
+A SEAMM plugin for {{ cookiecutter.description }}
 """
 import sys
 from setuptools import setup, find_packages
 import versioneer
 
-short_description = __doc__.split("\n")
 
 # from https://github.com/pytest-dev/pytest-runner#conditional-requirement
 needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)
@@ -37,8 +35,9 @@ setup(
     name='{{ cookiecutter.repo_name }}',
     author="{{ cookiecutter.author_name.replace('\"', '\\\"') }}",
     author_email='{{ cookiecutter.author_email }}',
-    description=short_description[1],
+    description=__doc__.splitlines()[1],
     long_description=readme + '\n\n' + history,
+    long_description_content_type='text/x-rst',
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
 {%- if cookiecutter.license in license_classifiers %}
@@ -74,7 +73,7 @@ setup(
     # prevent the .egg from being made
     zip_safe=True,
 
-    keywords='{{ cookiecutter.repo_name }}',
+    keywords=['SEAMM', 'plug-in', 'flowchart'],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Science/Research',
