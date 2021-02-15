@@ -63,9 +63,6 @@ dependency_source
 Include_Windows_continuous_integration
     Whether to include CI on Windows using AppVeyor.com
 
-use_pypi_deployment_with_travis
-    Whether to use PyPI deployment with Travis.
-
 license
     The license to use. Options:
 

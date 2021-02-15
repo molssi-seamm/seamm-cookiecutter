@@ -43,8 +43,10 @@ def git_init_and_tag():
     if 'fatal' in directory_status:
         # Initialize git
         invoke_shell("git init")
+        invoke_shell("git checkout -b main")
+        invoke_shell("git branch -d master")
 
-        # Add files created by cookiecutter 
+        # Add files created by cookiecutter
         invoke_shell("git add .")
         invoke_shell(
             "git commit -m \"Initial commit after SEAMM plugin Cookiecutter creation, version {}\"".format(
