@@ -57,9 +57,12 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'{{ cookiecutter.step }} Step'
+project = u'SEAMM {{ cookiecutter.step }} Plug-in'
+{% if cookiecutter.github_username != "molssi-seamm" -%}
 copyright = u"{% now 'local', '%Y' %}, {{ cookiecutter.author_name }}"
-
+{% else -%}
+copyright = u"{% now 'local', '%Y' %}, Molecular Sciences Software Institute (MolSSI)"
+{% endif -%}
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
 # the built documents.

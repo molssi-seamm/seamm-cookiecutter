@@ -1,13 +1,5 @@
-=======
-Credits
-=======
-
-Development Lead
+Development Team
 ----------------
 
-* {{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>
-
-Contributors
-------------
-
-None yet. Why not be the first?
+* {{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}> (Lead)
+* Why don't you join the team? Become a contributor!
