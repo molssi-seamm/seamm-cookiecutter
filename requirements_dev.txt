@@ -1,8 +1,0 @@
-PyYAML>=5.1
-pytest==3.1.2
-tox==2.3.1
-cryptography>=3.2
-cookiecutter>=1.4.0
-pytest-cookies==0.2.0
-watchdog==0.8.3
-alabaster==0.7.8

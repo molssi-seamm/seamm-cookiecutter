@@ -2,7 +2,7 @@
 
 
 Console Script Setup
-=================
+====================
 
 Optionally, your package can include a console script
 

@@ -1,0 +1,2 @@
+seamm_cookiecutter/_version.py
+seamm_cookiecutter/plug-in/{{cookiecutter.repo_name}}/*

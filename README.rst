@@ -52,7 +52,7 @@ Now you need to merge the two::
 Depending on what happens here, you may have a conflict in LICENSE. If
 so, edit the file and fix the problem by keeping the appropriate lines.
 
-Once that is done, push to GitHub:
+Once that is done, push to GitHub::
 
    bash-3.2$ git push --set-upstream origin master
    Counting objects: 54, done.
