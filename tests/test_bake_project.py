@@ -6,7 +6,6 @@
 # import datetime
 # from cookiecutter.utils import rmtree
 
-
 # @contextmanager
 # def inside_dir(dirpath):
 #     """
@@ -19,7 +18,6 @@
 #         yield
 #     finally:
 #         os.chdir(old_path)
-
 
 # @contextmanager
 # def bake_in_temp_dir(cookies, *args, **kwargs):
@@ -37,7 +35,6 @@
 #     finally:
 #         rmtree(str(result.project))
 
-
 # def run_inside_dir(command, dirpath):
 #     """
 #     Run a command from inside a given directory, returning the exit status
@@ -47,9 +44,9 @@
 #     with inside_dir(dirpath):
 #         return subprocess.check_call(shlex.split(command))
 
-
 # def check_output_inside_dir(command, dirpath):
-#     "Run a command from inside a given directory, returning the command output"
+#     """"Run a command from inside a given directory, returning the command
+#     output"""
 #     with inside_dir(dirpath):
 #         return subprocess.check_output(shlex.split(command))
 
@@ -65,14 +62,12 @@ def test_null():
 #         now = datetime.datetime.now()
 #         assert str(now.year) in license_file_path.read()
 
-
 # def project_info(result):
 #     """Get toplevel dir, project_slug, and project dir from baked cookies"""
 #     project_path = str(result.project)
 #     project_slug = os.path.split(project_path)[-1]
 #     project_dir = os.path.join(project_path, project_slug)
 #     return project_path, project_slug, project_dir
-
 
 # def test_bake_with_defaults(cookies):
 #     with bake_in_temp_dir(cookies) as result:
@@ -87,13 +82,11 @@ def test_null():
 #         assert 'tests' in found_toplevel_files
 #         assert 'travis_pypi_setup.py' in found_toplevel_files
 
-
 # def test_bake_and_run_tests(cookies):
 #     with bake_in_temp_dir(cookies) as result:
 #         assert result.project.isdir()
 #         run_inside_dir('python setup.py test', str(result.project)) == 0
 #         print("test_bake_and_run_tests path", str(result.project))
-
 
 # def test_bake_withspecialchars_and_run_tests(cookies):
 #     """Ensure that a `author_name` with double quotes does not break setup.py
@@ -104,15 +97,14 @@ def test_null():
 #         assert result.project.isdir()
 #         run_inside_dir('python setup.py test', str(result.project)) == 0
 
-
 # def test_bake_with_apostrophe_and_run_tests(cookies):
-#     """Ensure that a `author_name` with apostrophes does not break setup.py"""
+#     """Ensure that a `author_name` with apostrophes does not break
+#     setup.py"""
 #     with bake_in_temp_dir(
 #         cookies, extra_context={'author_name': "O'connor"}
 #     ) as result:
 #         assert result.project.isdir()
 #         run_inside_dir('python setup.py test', str(result.project)) == 0
-
 
 # def test_bake_and_run_travis_pypi_setup(cookies):
 #     # given:
@@ -135,12 +127,11 @@ def test_null():
 #             min_size_of_encrypted_password
 #         )
 
-
 # def test_make_help(cookies):
 #     with bake_in_temp_dir(cookies) as result:
 #         output = check_output_inside_dir('make help', str(result.project))
-#         assert b"check code coverage quickly with the default Python" in output
-
+#         assert b"check code coverage quickly with the default Python" \
+#            in output
 
 # def test_bake_selecting_license(cookies):
 #     license_strings = {
@@ -163,7 +154,6 @@ def test_null():
 #             assert target_string in result.project.join('LICENSE').read()
 #             assert license in result.project.join('setup.py').read()
 
-
 # def test_bake_not_open_source(cookies):
 #     with bake_in_temp_dir(
 #         cookies, extra_context={'license': 'other'}
@@ -172,7 +162,6 @@ def test_null():
 #         assert 'setup.py' in found_toplevel_files
 #         assert 'LICENSE' not in found_toplevel_files
 #         assert 'License' not in result.project.join('README.rst').read()
-
 
 # def test_using_pytest(cookies):
 #     with bake_in_temp_dir(cookies) as result:
@@ -187,7 +176,6 @@ def test_null():
 #         # Test the test alias (which invokes pytest)
 #         run_inside_dir('python setup.py test', str(result.project)) == 0
 
-
 # def test_not_using_pytest(cookies):
 #     with bake_in_temp_dir(cookies) as result:
 #         assert result.project.isdir()
@@ -197,7 +185,6 @@ def test_null():
 #         lines = test_file_path.readlines()
 #         assert "import unittest" in ''.join(lines)
 #         assert "import pytest" not in ''.join(lines)
-
 
 # def test_project_with_hyphen_in_module_name(cookies):
 #     result = cookies.bake(extra_context={'step': 'something-with-a-dash'})
