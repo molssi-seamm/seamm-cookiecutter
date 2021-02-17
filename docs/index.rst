@@ -1,5 +1,5 @@
-Welcome to the SEAMM CookieCutter's Documentation!
-==================================================
+SEAMM Cookiecutter
+==================
 
 Getting Started
 ---------------

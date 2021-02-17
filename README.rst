@@ -20,32 +20,36 @@ Features
 Quickstart
 ----------
 
-Install the latest Cookiecutter if you haven't installed it yet (this requires
+Install the SEAMM Cookiecutter if you haven't installed it yet (this requires
 Cookiecutter 1.4.0 or higher)::
 
-    pip install -U cookiecutter
+    pip install -U seamm-cookiecutter
 
 Generate a Python package project::
 
-    cookiecutter https://github.com/molssi-seamm/cookiecutter-seamm-plugin.git
+    seamm-cookiecutter
 
-Then after running cookie cutter, do the following:
+And answer the prompts about your plug-in, etc. Then change to the new
+directory::
    
-   cd mypackage
+   cd <plug-in name>
 
-Then create the same-named repository in GitHub, just giving the LICENSE type.
-Now you need to merge the two::
+Then create repository in GitHub with exactly the same name, just
+giving the LICENSE type. Note that GitHub has changed the default
+branch to `main`, which is what the SEAMM cookiecutter also uses. Now
+you need to merge the two:: 
 
-   bash-3.2$ git remote add origin git@github.com:molssi-seamm/forcefield_step.git
+   bash-3.2$ git remote add origin
+   git@github.com:<organization>/<plug-in name> .git
    bash-3.2$ git pull --allow-unrelated-histories origin master
    warning: no common commits
    remote: Counting objects: 3, done.        
    remote: Compressing objects: 100% (2/2), done.        
    remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0        
    Unpacking objects: 100% (3/3), done.
-   From github.com:paulsaxe/forcefield_step
-    * branch            master     -> FETCH_HEAD
-    * [new branch]      master     -> origin/master
+   From github.com:<organization>/<plug-in name>
+    * branch            main     -> FETCH_HEAD
+    * [new branch]      main     -> origin/main
    error: Terminal is dumb, but EDITOR unset
    Not committing merge; use 'git commit' to complete the merge.
 
@@ -54,27 +58,21 @@ so, edit the file and fix the problem by keeping the appropriate lines.
 
 Once that is done, push to GitHub::
 
-   bash-3.2$ git push --set-upstream origin master
+   bash-3.2$ git push --set-upstream origin main
    Counting objects: 54, done.
    Delta compression using up to 4 threads.
    Compressing objects: 100% (48/48), done.
    Writing objects: 100% (54/54), 20.43 KiB | 261.00 KiB/s, done.
    Total 54 (delta 10), reused 0 (delta 0)
    remote: Resolving deltas: 100% (10/10), completed with 1 local object.        
-   To github.com:paulsaxe/forcefield_step.git
-      30251d7..e2761fc  master -> master
-   Branch master set up to track remote branch master from origin.
+   To github.com:<organization>/<plug-in name>.git
+      30251d7..e2761fc  main -> main
+   Branch main set up to track remote branch main from origin.
    bash-3.2$ 
-
-Go to ReadTheDocs_ and import the new repository. It is quite
-simple and obvious (hopefully!). You will need to go to ADMIN /
-Advanced Settings and check "Install project".
 
 Deploy to PyPi. Once the code is in reasonable shape and working, you
 can deploy to PyPi so that users can `pip install` it. You need an
-account at PyPi_ and an api token. See the first part of the
-`packaging guide`_ for how to get the api token and register it with
-GitHub
+account at PyPi_. 
 
 .. _packaging guide: https://packaging.python.org/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/
 .. _Sphinx: http://sphinx-doc.org/
