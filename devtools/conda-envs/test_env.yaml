@@ -1,28 +1,26 @@
 name: test
 
 channels:
-  - default
+  - conda-forge
   
 dependencies:
     # Base depends
   - python
   - pip
-  - configargparse
-  - py-cpuinfo
 
     # Testing
-  - coverage
+  - codecov
   - flake8
   - pytest
   - pytest-cov
-  - pytest-runner
 
     # Pip-only installs
   - pip:
-    - seamm>=0.9
-    - seamm-util>=0.9
-    - seamm-widgets>=0.9
-
       # Testing
-    - codecov
     - yapf
+
+    # Documentation
+    - rinohtype
+    - pygments
+    - sphinx-rtd-theme
+    - pystemmer
