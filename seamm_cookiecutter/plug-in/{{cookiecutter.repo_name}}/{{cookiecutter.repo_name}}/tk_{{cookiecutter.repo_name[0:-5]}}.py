@@ -8,9 +8,9 @@ import tkinter as tk
 import {{ cookiecutter.repo_name }}  # noqa: F401
 import seamm
 from seamm_util import ureg, Q_, units_class  # noqa: F401
-{% if cookiecutter.use_subflowchart == 'n' -%}
+#{% if cookiecutter.use_subflowchart == 'n' -%}
 import seamm_widgets as sw
-{%- endif %}
+#{%- endif %}
 
 
 class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
