@@ -5,7 +5,7 @@
 
 import logging
 import pprint  # noqa: F401
-{%- if cookiecutter.use_subflowchart == 'y' %}
+{%- if cookiecutter.use_subflowchart == "y" %}
 import sys
 {%- endif %}
 
@@ -16,16 +16,16 @@ import seamm_util.printing as printing
 from seamm_util.printing import FormattedText as __
 
 # In addition to the normal logger, two logger-like printing facilities are
-# defined: 'job' and 'printer'. 'job' send output to the main job.out file for
+# defined: "job" and "printer". "job" send output to the main job.out file for
 # the job, and should be used very sparingly, typically to echo what this step
 # will do in the initial summary of the job.
 #
-# 'printer' sends output to the file 'step.out' in this steps working
+# "printer" sends output to the file "step.out" in this steps working
 # directory, and is used for all normal output from this step.
 
 logger = logging.getLogger(__name__)
 job = printing.getPrinter()
-printer = printing.getPrinter('{{ cookiecutter.step }}')
+printer = printing.getPrinter("{{ cookiecutter.step }}")
 
 
 class {{ cookiecutter.class_name }}(seamm.Node):
@@ -56,9 +56,9 @@ class {{ cookiecutter.class_name }}(seamm.Node):
     def __init__(
         self,
         flowchart=None,
-        title='{{ cookiecutter.step }}',
-{%- if cookiecutter.use_subflowchart == 'y' %}
-        namespace='org.molssi.seamm.{{ cookiecutter.repo_name[0:-5] }}',
+        title="{{ cookiecutter.step }}",
+{%- if cookiecutter.use_subflowchart == "y" %}
+        namespace="org.molssi.seamm.{{ cookiecutter.repo_name[0:-5] }}",
 {%- endif %}
         extension=None,
         logger=logger
@@ -75,7 +75,7 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
         title: str
             The name displayed in the flowchart.
-{%- if cookiecutter.use_subflowchart == 'y' %}
+{%- if cookiecutter.use_subflowchart == "y" %}
         namespace : str
             The namespace for the plug-ins of the subflowchart{%- endif %}
         extension: None
@@ -87,38 +87,36 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         -------
         None
         """
-        logger.debug('Creating {{ cookiecutter.step }} {}'.format(self))
+        logger.debug(f"Creating {{ cookiecutter.step }} {self}")
 
-{%- if cookiecutter.use_subflowchart == 'y' %}
+{%- if cookiecutter.use_subflowchart == "y" %}
         self.subflowchart = seamm.Flowchart(
             parent=self,
-            name='{{ cookiecutter.step }}',
+            name="{{ cookiecutter.step }}",
             namespace=namespace
         )  # yapf: disable{%- endif %}
 
         super().__init__(
             flowchart=flowchart,
-            title='{{ cookiecutter.step }}',
+            title="{{ cookiecutter.step }}",
             extension=extension,
             module=__name__,
-            logger=logger
+            logger=logger,
         )  # yapf: disable
 
         self.parameters = {{ cookiecutter.repo_name }}.{{ cookiecutter.class_name }}Parameters()
 
     @property
     def version(self):
-        """The semantic version of this module.
-        """
+        """The semantic version of this module."""
         return {{ cookiecutter.repo_name }}.__version__
 
     @property
     def git_revision(self):
-        """The git version of this module.
-        """
+        """The git version of this module."""
         return {{ cookiecutter.repo_name }}.__git_revision__
 
-{%- if cookiecutter.use_subflowchart == 'y' %}
+{%- if cookiecutter.use_subflowchart == "y" %}
     def set_id(self, node_id):
         """Set the id for node to a given tuple"""
         self._id = node_id
@@ -144,26 +142,22 @@ class {{ cookiecutter.class_name }}(seamm.Node):
             A description of the current step.
         """
 
-{%- if cookiecutter.use_subflowchart == 'y' %}
+{%- if cookiecutter.use_subflowchart == "y" %}
         self.subflowchart.root_directory = self.flowchart.root_directory
 
         # Get the first real node
-        node = self.subflowchart.get_node('1').next()
+        node = self.subflowchart.get_node("1").next()
 
-        text = self.header + '\n\n'
+        text = self.header + "\n\n"
         while node is not None:
             try:
-                text += __(node.description_text(), indent=3 * ' ').__str__()
+                text += __(node.description_text(), indent=3 * " ").__str__()
             except Exception as e:
                 print(
-                    'Error describing {{cookiecutter.repo_name[0:-5]}} flowchart: {} in {}'.format(
-                        str(e), str(node)
-                    )
+                    f"Error describing {{cookiecutter.repo_name[0:-5]}} flowchart: {e} in {node}"
                 )
                 logger.critical(
-                    'Error describing {{cookiecutter.repo_name[0:-5]}} flowchart: {} in {}'.format(
-                        str(e), str(node)
-                    )
+                    f"Error describing {{cookiecutter.repo_name[0:-5]}} flowchart: {e} in {node}"
                 )
                 raise
             except:  # noqa: E722
@@ -176,7 +170,7 @@ class {{ cookiecutter.class_name }}(seamm.Node):
                     .format(sys.exc_info()[0], str(node))
                 )
                 raise
-            text += '\n'
+            text += "\n"
             node = node.next()
 
         return text
@@ -185,11 +179,11 @@ class {{ cookiecutter.class_name }}(seamm.Node):
             P = self.parameters.values_to_dict()
 
         text = (
-            'Please replace this with a short summary of the '
-            '{{ cookiecutter.step}} step, including key parameters.'
+            "Please replace this with a short summary of the "
+            "{{ cookiecutter.step}} step, including key parameters."
         )
 
-        return self.header + '\n' + __(text, **P, indent=4 * ' ').__str__()
+        return self.header + "\n" + __(text, **P, indent=4 * " ").__str__()
 {%- endif %}
 
     def run(self):
@@ -206,35 +200,35 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         """
         next_node = super().run(printer)
 
-{%- if cookiecutter.use_subflowchart == 'y' %}
+{%- if cookiecutter.use_subflowchart == "y" %}
         # Get the first real node
-        node = self.subflowchart.get_node('1').next()
+        node = self.subflowchart.get_node("1").next()
 
         input_data = []
         while node is not None:
             keywords = node.get_input()
-            input_data.append(' '.join(keywords))
+            input_data.append(" ".join(keywords))
             node = node.next()
 
-        files = {'molssi.dat': '\n'.join(input_data)}
-        logger.info('molssi.dat:\n' + files['molssi.dat'])
+        files = {"molssi.dat": "\n".join(input_data)}
+        logger.info("molssi.dat:\n" + files["molssi.dat"])
 
         local = seamm.ExecLocal()
         result = local.run(
-            cmd=['{{ cookiecutter.step }}', '-in', 'molssi.dat'],
+            cmd=["{{ cookiecutter.step }}", "-in", "molssi.dat"],
             files=files,
             return_files=[]
         )  # yapf: disable
 
         if result is None:
-            logger.error('There was an error running {{ cookiecutter.step }}')
+            logger.error("There was an error running {{ cookiecutter.step }}")
             return None
 
-        logger.debug('\n' + pprint.pformat(result))
+        logger.debug("\n" + pprint.pformat(result))
 
-        logger.info('stdout:\n' + result['stdout'])
-        if result['stderr'] != '':
-            logger.warning('stderr:\n' + result['stderr'])
+        logger.info("stdout:\n" + result["stdout"])
+        if result["stderr"] != "":
+            logger.warning("stderr:\n" + result["stderr"])
 {%- else %}
         # Get the values of the parameters, dereferencing any variables
         P = self.parameters.current_values_to_dict(
@@ -247,15 +241,15 @@ class {{ cookiecutter.class_name }}(seamm.Node):
         # Temporary code just to print the parameters. You will need to change
         # this!
         for key in P:
-            print('{:>15s} = {}'.format(key, P[key]))
+            print("{:>15s} = {}".format(key, P[key]))
             printer.normal(
                 __(
-                    '{key:>15s} = {value}',
+                    "{key:>15s} = {value}",
                     key=key,
                     value=P[key],
-                    indent=4 * ' ',
+                    indent=4 * " ",
                     wrap=False,
-                    dedent=False
+                    dedent=False,
                 )
             )
 {%- endif %}
@@ -269,26 +263,26 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
         return next_node
 
-    def analyze(self, indent='', **kwargs):
+    def analyze(self, indent="", **kwargs):
         """Do any analysis of the output from this step.
 
         Also print important results to the local step.out file using
-        'printer'.
+        "printer".
 
         Parameters
         ----------
         indent: str
             An extra indentation for the output
         """
-{%- if cookiecutter.use_subflowchart == 'y' %}
+{%- if cookiecutter.use_subflowchart == "y" %}
         # Get the first real node
-        node = self.subflowchart.get_node('1').next()
+        node = self.subflowchart.get_node("1").next()
 
         # Loop over the subnodes, asking them to do their analysis
         while node is not None:
             for value in node.description:
                 printer.important(value)
-                printer.important(' ')
+                printer.important(" ")
 
             node.analyze()
 
@@ -296,11 +290,10 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 {%- else %}
         printer.normal(
             __(
-                'This is a placeholder for the results from the '
-                '{{ cookiecutter.step }} step',
-                indent=4 * ' ',
+                "This is a placeholder for the results from the {{ cookiecutter.step }} step",
+                indent=4 * " ",
                 wrap=True,
-                dedent=False
+                dedent=False,
             )
         )
 {%- endif %}

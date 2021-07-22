@@ -18,43 +18,43 @@ class {{ cookiecutter.class_name }}Parameters(seamm.Parameters):
     The keys are parameters for the current plugin, which themselves
     might be dictionaries.
 
-    You need to replace the 'time' example below with one or more
+    You need to replace the "time" example below with one or more
     definitions of the control parameters for your plugin and application.
 
     Attributes
     ----------
-    parameters : {'kind', 'default', 'default_units', 'enumeration',
-                  'format_string', description', help_text'}
+    parameters : {"kind", "default", "default_units", "enumeration",
+                  "format_string", description", help_text"}
         A dictionary containing the parameters for the current step.
         Each key of the dictionary is a dictionary that contains the
         the following keys: kind, default, default_units, enumeration,
         format_string, description and help text.
 
-    parameters['kind']: custom
-        Specifies the kind of a variable. While the 'kind' of a variable might
+    parameters["kind"]: custom
+        Specifies the kind of a variable. While the "kind" of a variable might
         be a numeric value, it may still have enumerated custom values
         meaningful to the user. For instance, if the parameter is
-        a convergence criterion for an optimizer, custom values like 'normal',
-        'precise', etc, might be adequate. In addition, any
+        a convergence criterion for an optimizer, custom values like "normal",
+        "precise", etc, might be adequate. In addition, any
         parameter can be set to a variable of expression, indicated by having
-        '$' as the first character in the field. For example, $OPTIMIZER_CONV.
+        "$" as the first character in the field. For example, $OPTIMIZER_CONV.
 
-    parameters['default'] : 'integer' or 'float' or 'string' or 'boolean' or
-        'enum' The default value of the parameter, used to reset it.
+    parameters["default"] : "integer" or "float" or "string" or "boolean" or
+        "enum" The default value of the parameter, used to reset it.
 
-    parameters['default_units'] : str
+    parameters["default_units"] : str
         The default units, used for resetting the value.
 
-    parameters['enumeration']: tuple
+    parameters["enumeration"]: tuple
         A tuple of enumerated values.
 
-    parameters['format_string']: str
-        A format string for 'pretty' output.
+    parameters["format_string"]: str
+        A format string for "pretty" output.
 
-    parameters['description']: str
+    parameters["description"]: str
         A short string used as a prompt in the GUI.
 
-    parameters['help_text']: tuple
+    parameters["help_text"]: tuple
         A longer string to display as help for the user.
 
     See Also
@@ -85,7 +85,7 @@ class {{ cookiecutter.class_name }}Parameters(seamm.Parameters):
             "enumeration": tuple(),
             "format_string": ".1f",
             "description": "Simulation time:",
-            "help_text": ("The time to simulate in the dynamics run.")
+            "help_text": ("The time to simulate in the dynamics run."),
         },
     }
 
@@ -107,9 +107,8 @@ class {{ cookiecutter.class_name }}Parameters(seamm.Parameters):
         None
         """
 
-        logger.debug('{{ cookiecutter.class_name }}Parameters.__init__')
+        logger.debug("{{ cookiecutter.class_name }}Parameters.__init__")
 
         super().__init__(
-            defaults={**{{ cookiecutter.class_name }}Parameters.parameters, **defaults},
-            data=data
+            defaults={**{{ cookiecutter.class_name }}Parameters.parameters, **defaults}, data=data
         )

@@ -15,9 +15,10 @@ from {{ cookiecutter.repo_name }}.tk_{{ cookiecutter.repo_name[0:-5] }} import T
 
 # Handle versioneer
 from ._version import get_versions
-__author__ = """{{ cookiecutter.author_name }}"""
-__email__ = '{{ cookiecutter.author_email }}'
+
+__author__ = "{{ cookiecutter.author_name }}"
+__email__ = "{{ cookiecutter.author_email }}"
 versions = get_versions()
-__version__ = versions['version']
-__git_revision__ = versions['full-revisionid']
+__version__ = versions["version"]
+__git_revision__ = versions["full-revisionid"]
 del get_versions, versions

@@ -8,9 +8,9 @@ import tkinter as tk
 import {{ cookiecutter.repo_name }}  # noqa: F401
 import seamm
 from seamm_util import ureg, Q_, units_class  # noqa: F401
-#{% if cookiecutter.use_subflowchart == 'n' -%}
+{% if cookiecutter.use_subflowchart == "n" -%}
 import seamm_widgets as sw
-#{%- endif %}
+{%- endif %}
 
 
 class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
@@ -23,7 +23,7 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         The flowchart that we belong to.
     node : Node = None
         The corresponding node of the non-graphical flowchart
-{%- if cookiecutter.use_subflowchart == 'n' %}
+{%- if cookiecutter.use_subflowchart == "n" %}
     namespace : str
         The namespace of the current step.
     tk_subflowchart : TkFlowchart
@@ -54,13 +54,13 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         self,
         tk_flowchart=None,
         node=None,
-{%- if cookiecutter.use_subflowchart == 'y' %}
-        namespace='org.molssi.seamm.{{cookiecutter.repo_name}}.tk',{%- endif %}
+{%- if cookiecutter.use_subflowchart == "y" %}
+        namespace="org.molssi.seamm.{{cookiecutter.repo_name}}.tk",{%- endif %}
         canvas=None,
         x=None,
         y=None,
         w=200,
-        h=50
+        h=50,
     ):
         """
         Initialize a graphical node.
@@ -88,7 +88,7 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         -------
         None
         """
-{%- if cookiecutter.use_subflowchart == 'y' %}
+{%- if cookiecutter.use_subflowchart == "y" %}
         self.namespace = namespace
 {%- endif %}
         self.dialog = None
@@ -100,9 +100,9 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
             x=x,
             y=y,
             w=w,
-            h=h
+            h=h,
         )
-{%- if cookiecutter.use_subflowchart == 'y' %}
+{%- if cookiecutter.use_subflowchart == "y" %}
         self.create_dialog()
 {%- endif %}
 
@@ -125,9 +125,9 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         Tk{{ cookiecutter.class_name }}.reset_dialog
         """
 
-        frame = super().create_dialog(title=' {{- cookiecutter.step -}} ')
+        frame = super().create_dialog(title=" {{- cookiecutter.step -}} ")
 
-{%- if cookiecutter.use_subflowchart == 'y' %}
+{%- if cookiecutter.use_subflowchart == "y" %}
         # make it large!
         screen_w = self.dialog.winfo_screenwidth()
         screen_h = self.dialog.winfo_screenheight()
@@ -136,7 +136,7 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         x = int(0.05 * screen_w / 2)
         y = int(0.1 * screen_h / 2)
 
-        self.dialog.geometry('{}x{}+{}+{}'.format(w, h, x, y))
+        self.dialog.geometry(f"{w}x{h}+{x}+{y}")
 
         self.tk_subflowchart = seamm.TkFlowchart(
             master=frame,
@@ -180,7 +180,7 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         """
 
         # Remove any widgets previously packed
-        frame = self['frame']
+        frame = self["frame"]
         for slave in frame.grid_slaves():
             slave.grid_forget()
 
@@ -188,7 +188,7 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         P = self.node.parameters
 
         # keep track of the row in a variable, so that the layout is flexible
-        # if e.g. rows are skipped to control such as 'method' here
+        # if e.g. rows are skipped to control such as "method" here
         row = 0
         widgets = []
         for key in P:
@@ -241,13 +241,13 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         if self.dialog is None:
             self.create_dialog()
 
-        self.dialog.activate(geometry='centerscreenfirst')
+        self.dialog.activate(geometry="centerscreenfirst")
 
     def handle_dialog(self, result):
         """Handle the closing of the edit dialog
 
         What to do depends on the button used to close the dialog. If
-        the user closes it by clicking the 'x' of the dialog window,
+        the user closes it by clicking the "x" of the dialog window,
         None is returned, which we take as equivalent to cancel.
 
         Parameters
@@ -261,23 +261,21 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         None
         """
 
-        if result is None or result == 'Cancel':
+        if result is None or result == "Cancel":
             self.dialog.deactivate(result)
             return
 
-        if result == 'Help':
+        if result == "Help":
             # display help!!!
             return
 
         if result != "OK":
             self.dialog.deactivate(result)
-            raise RuntimeError(
-                "Don't recognize dialog result '{}'".format(result)
-            )
+            raise RuntimeError(f"Don't recognize dialog result '{result}'")
 
         self.dialog.deactivate(result)
 
-{%- if cookiecutter.use_subflowchart == 'n' %}
+{%- if cookiecutter.use_subflowchart == "n" %}
         # Shortcut for parameters
         P = self.node.parameters
 
@@ -288,14 +286,14 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
             P[key].set_from_widget()
 {%- endif %}
 
-{%- if cookiecutter.use_subflowchart == 'y' %}
+{%- if cookiecutter.use_subflowchart == "y" %}
 
     def update_flowchart(self, tk_flowchart=None, flowchart=None):
         """Update the nongraphical flowchart.
 
         This is only used in nodes that contain sub-flowcharts
         What to do depends on the button used to close the dialog. If
-        the user closes it by clicking the 'x' of the dialog window,
+        the user closes it by clicking the "x" of the dialog window,
         None is returned, which we take as equivalent to cancel.
 
         Parameters
@@ -350,4 +348,4 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
         -------
         None
         """
-        print('Help not implemented yet for {{ cookiecutter.step }}!')
+        print("Help not implemented yet for {{ cookiecutter.step }}!")
