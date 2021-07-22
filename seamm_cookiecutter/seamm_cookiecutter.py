@@ -14,18 +14,18 @@ def run():
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
-        '--replay', action='store_true', help="Replay the last installation."
+        "--replay", action="store_true", help="Replay the last installation."
     )
     parser.add_argument(
-        '-t',
-        '--type',
-        action='store',
-        choices=['plug-in', 'substep', 'forcefield'],
-        default='plug-in',
+        "-t",
+        "--type",
+        action="store",
+        choices=["plug-in", "substep", "forcefield"],
+        default="plug-in",
         help=(
             "The type of SEAMM object to create, one of %(choices)s.\n"
             "Defaults to %(default)s"
-        )
+        ),
     )
     options = parser.parse_args()
 
@@ -35,14 +35,12 @@ def run():
     date = today.date().isoformat()
     version = today.strftime("%Y.%-m.%-d")
 
-    extra_context = {'_release_date': date, '_plugin_version': version}
+    extra_context = {"_release_date": date, "_plugin_version": version}
 
     if options.replay:
         cookiecutter(curdir, replay=True, directory=options.type)
     else:
-        cookiecutter(
-            curdir, extra_context=extra_context, directory=options.type
-        )
+        cookiecutter(curdir, extra_context=extra_context, directory=options.type)
 
 
 if __file__ == "__main__":

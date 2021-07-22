@@ -44,7 +44,7 @@ def git_init_and_tag():
         "git status", expected_error=True, print_output=False
     )
     # Create a repository and commit if not in one.
-    if 'fatal' in directory_status:
+    if "fatal" in directory_status:
         # Initialize git
         invoke_shell("git init")
         invoke_shell("git checkout -b main")
@@ -53,7 +53,7 @@ def git_init_and_tag():
         # Add files created by cookiecutter
         invoke_shell("git add .")
         invoke_shell(
-            "git commit -m \"Initial commit after SEAMM plugin Cookiecutter "
+            'git commit -m "Initial commit after SEAMM plugin Cookiecutter '
             "creation, version '{{ cookiecutter._plugin_version }}'\""
         )
 

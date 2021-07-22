@@ -11,9 +11,10 @@ import seamm_cookiecutter  # noqa: F401
 
 # Handle versioneer
 from ._version import get_versions
+
 __author__ = """Paul Saxe"""
-__email__ = 'psaxe@molssi.org'
+__email__ = "psaxe@molssi.org"
 versions = get_versions()
-__version__ = versions['version']
-__git_revision__ = versions['full-revisionid']
+__version__ = versions["version"]
+__git_revision__ = versions["full-revisionid"]
 del get_versions, versions
