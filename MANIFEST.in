@@ -1,9 +1,12 @@
 include CONTRIBUTING.rst
 include README.rst
+include requirements*
+include versioneer.py
 
 recursive-include tests *
-recursive-include seamm_cookiecutter/plug-in *
+recursive-include seamm_cookiecutter *
+recursive-include docs *.rst conf.py Makefile make.bat *.jpg *.png *.gif
+
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
 
-recursive-include docs *.rst conf.py Makefile make.bat *.jpg *.png *.gif
