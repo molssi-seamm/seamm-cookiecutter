@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import versioneer
 
 with open('requirements_install.txt') as fd:
     requirements = fd.read()
 
 setup(
     name='seamm-cookiecutter',
-    version='2021.2.15',
+    version=versioneer.get_version(),
+    cmdclass=versioneer.get_cmdclass(),
     description='Cookiecutter for SEAMM plug-ins, substeps and forcefields',
     author='Paul Saxe',
     license='BSD',
