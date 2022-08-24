@@ -4,6 +4,7 @@
 """
 
 import logging
+from pathlib import Path
 import pprint  # noqa: F401
 {%- if cookiecutter.use_subflowchart == "y" %}
 import sys
@@ -237,6 +238,12 @@ class {{ cookiecutter.class_name }}(seamm.Node):
 
         # Print what we are doing
         printer.important(__(self.description_text(P), indent=self.indent))
+
+        directory = Path(self.directory)
+        directory.mkdir(parents=True, exist_ok=True)
+
+        # Get the current system and configuration (ignoring the system...)
+        _, configuration = self.get_system_configuration(None)
 
         # Temporary code just to print the parameters. You will need to change
         # this!

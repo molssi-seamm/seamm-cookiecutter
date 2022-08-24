@@ -19,7 +19,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-with open('requirements_install.txt') as fd:
+with open('requirements.txt') as fd:
     requirements = fd.read()
 
 {%- set license_classifiers = {
@@ -84,8 +84,8 @@ setup(
 {%- endif %}
         'Natural Language :: English',
         'Programming Language :: Python :: 3 :: Only',
-        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
     ],
     entry_points={
         'org.molssi.seamm': [
