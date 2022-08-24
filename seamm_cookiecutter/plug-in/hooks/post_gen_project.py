@@ -46,7 +46,8 @@ def git_init_and_tag():
     # Create a repository and commit if not in one.
     if "fatal" in directory_status:
         # Initialize git
-        invoke_shell("git init -b main")
+        invoke_shell("git init")
+        invoke_shell("git branch -m main")
 
         # Add files created by cookiecutter
         invoke_shell("git add .")
