@@ -47,7 +47,6 @@ def git_init_and_tag():
     if "fatal" in directory_status:
         # Initialize git
         invoke_shell("git init")
-        invoke_shell("git branch -m main")
 
         # Add files created by cookiecutter
         invoke_shell("git add .")
@@ -55,6 +54,7 @@ def git_init_and_tag():
             'git commit -m "Initial commit after SEAMM plugin Cookiecutter '
             "creation, version '{{ cookiecutter._plugin_version }}'\""
         )
+        invoke_shell("git branch -m main")
 
         # Check for a tag
         version = invoke_shell("git tag", expected_error=True)
