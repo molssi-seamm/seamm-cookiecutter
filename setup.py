@@ -4,6 +4,12 @@
 from setuptools import setup, find_packages
 import versioneer
 
+with open('README.rst') as readme_file:
+    readme = readme_file.read()
+
+with open('HISTORY.rst') as history_file:
+    history = history_file.read()
+
 with open('requirements_install.txt') as fd:
     requirements = fd.read()
 
@@ -12,6 +18,8 @@ setup(
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     description='Cookiecutter for SEAMM plug-ins, substeps and forcefields',
+    long_description=readme + '\n\n' + history,
+    long_description_content_type='text/x-rst',
     author='Paul Saxe',
     license='BSD',
     author_email='psaxe@molssi.org',
