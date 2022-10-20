@@ -197,7 +197,7 @@ class Tk{{ cookiecutter.class_name }}(seamm.TkNode):
             row += 1
 
         # Align the labels
-        sw.align_labels(widgets)
+        sw.align_labels(widgets, sticky=tk.E)
 {%- endif %}
 
     def right_click(self, event):
