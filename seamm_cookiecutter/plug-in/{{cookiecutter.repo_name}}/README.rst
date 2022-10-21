@@ -23,10 +23,6 @@ SEAMM {{ cookiecutter.step }} Plug-in
    :target: https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.repo_name }}/index.html
    :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/shield.svg
-   :target: https://pyup.io/repos/github/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/
-   :alt: Updates for Dependencies
-
 .. image:: https://img.shields.io/pypi/v/{{ cookiecutter.repo_name }}.svg
    :target: https://pypi.python.org/pypi/{{ cookiecutter.repo_name }}
    :alt: PyPi VERSION
@@ -49,8 +45,8 @@ Features
 Acknowledgements
 ----------------
 
-This package was created with Cookiecutter_ and the
-`molssi-seamm/cookiecutter-seamm-plugin`_ project template.
+This package was created with the `molssi-seamm/cookiecutter-seamm-plugin`_ tool, which
+is based on the excellent Cookiecutter_.
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`molssi-seamm/cookiecutter-seamm-plugin`: https://github.com/molssi-seamm/cookiecutter-seamm-plugin
@@ -58,7 +54,7 @@ This package was created with Cookiecutter_ and the
 {% if cookiecutter.github_username == "molssi-seamm" -%}
 Developed by the Molecular Sciences Software Institute (MolSSI_),
 which receives funding from the `National Science Foundation`_ under
-award ACI-1547580
+awards CHE-2136142.
 
 .. _MolSSI: https://molssi.org
 .. _`National Science Foundation`: https://www.nsf.gov
