@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial &mdash; SEAMM cookiecutter 2022.10.20+5.g5fcb68f documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="PyPI Release Checklist" href="pypi_release_checklist.html" />
+    <link rel="prev" title="Cookiecutter for SEAMM Plugins" href="readme.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> SEAMM cookiecutter
+          </a>
+              <div class="version">
+                2022.10.20+5.g5fcb68f
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">Cookiecutter for SEAMM Plugins</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-install-cookiecutter">Step 1: Install Cookiecutter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-generate-your-package">Step 2: Generate Your Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-create-a-github-repo">Step 3: Create a GitHub Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-4-install-dev-requirements">Step 4: Install Dev Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-5-set-up-travis-ci">Step 5: Set Up Travis CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-6-set-up-readthedocs">Step 6: Set Up ReadTheDocs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-7-set-up-pyup-io">Step 7: Set Up pyup.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-8-release-on-pypi">Step 8: Release on PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#having-problems">Having problems?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pypi_release_checklist.html">PyPI Release Checklist</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="prompts.html">Prompts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="console_script_setup.html">Console Script Setup</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://molssi-seamm.github.io">Main SEAMM documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SEAMM cookiecutter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Did you find any of these instructions confusing? <a class="reference external" href="https://github.com/audreyr/cookiecutter-pypackage/blob/master/docs/tutorial.rst">Edit this file</a>
+and submit a pull request with your improvements!</p>
+</div>
+<p>To start with, you will need a <a class="reference external" href="https://github.com/">GitHub account</a> and an account on <a class="reference external" href="https://pypi.python.org/pypi">PyPI</a>. Create these before you get started on this tutorial. If you are new to Git and GitHub, you should probably spend a few minutes on some of the tutorials at the top of the page at <a class="reference external" href="https://help.github.com/">GitHub Help</a>.</p>
+<section id="step-1-install-cookiecutter">
+<h2>Step 1: Install Cookiecutter<a class="headerlink" href="#step-1-install-cookiecutter" title="Permalink to this heading"></a></h2>
+<p>First, you need to create and activate a virtualenv for the package project. Use your favorite method, or create a virtualenv for your new package like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>virtualenv<span class="w"> </span>~/.virtualenvs/mypackage
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">mypackage</span></code> is the name of the package that you’ll create.</p>
+<p>Activate your environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>bin/activate
+</pre></div>
+</div>
+<p>On Windows, activate it like this. You may find that using a Command Prompt window works better than gitbash.</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">&gt;</span> <span class="p">\</span><span class="n">path</span><span class="p">\</span><span class="n">to</span><span class="p">\</span><span class="n">env</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">activate</span>
+</pre></div>
+</div>
+<p>Install cookiecutter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>cookiecutter
+</pre></div>
+</div>
+</section>
+<section id="step-2-generate-your-package">
+<h2>Step 2: Generate Your Package<a class="headerlink" href="#step-2-generate-your-package" title="Permalink to this heading"></a></h2>
+<p>Now it’s time to generate your Python package.</p>
+<p>Use cookiecutter, pointing it at the cookiecutter-pypackage repo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cookiecutter<span class="w"> </span>https://github.com/audreyr/cookiecutter-pypackage.git
+</pre></div>
+</div>
+<p>You’ll be asked to enter a bunch of values to set the package up.
+If you don’t know what to enter, stick with the defaults.</p>
+</section>
+<section id="step-3-create-a-github-repo">
+<h2>Step 3: Create a GitHub Repo<a class="headerlink" href="#step-3-create-a-github-repo" title="Permalink to this heading"></a></h2>
+<p>Go to your GitHub account and create a new repo named <code class="docutils literal notranslate"><span class="pre">mypackage</span></code>, where <code class="docutils literal notranslate"><span class="pre">mypackage</span></code> matches the <code class="docutils literal notranslate"><span class="pre">[project_slug]</span></code> from your answers to running cookiecutter. This is so that Travis CI and pyup.io can find it when we get to Step 5.</p>
+<p><code class="docutils literal notranslate"><span class="pre">If</span> <span class="pre">your</span> <span class="pre">virtualenv</span> <span class="pre">folder</span> <span class="pre">is</span> <span class="pre">within</span> <span class="pre">your</span> <span class="pre">project</span> <span class="pre">folder,</span> <span class="pre">be</span> <span class="pre">sure</span> <span class="pre">to</span> <span class="pre">add</span> <span class="pre">the</span> <span class="pre">virtualenv</span> <span class="pre">folder</span> <span class="pre">name</span> <span class="pre">to</span> <span class="pre">your</span> <span class="pre">.gitignore</span> <span class="pre">file.</span></code></p>
+<p>You will find one folder named after the <code class="docutils literal notranslate"><span class="pre">[project_slug]</span></code>. Move into this folder, and then setup git to use your GitHub repo and upload the code:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>mypackage
+git<span class="w"> </span>init<span class="w"> </span>.
+git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initial skeleton.&quot;</span>
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>git@github.com:myusername/mypackage.git
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>master
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">myusername</span></code> and <code class="docutils literal notranslate"><span class="pre">mypackage</span></code> are adjusted for your username and package name.</p>
+<p>You’ll need a ssh key to push the repo. You can <a class="reference external" href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/">Generate</a> a key or <a class="reference external" href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/">Add</a> an existing one.</p>
+</section>
+<section id="step-4-install-dev-requirements">
+<h2>Step 4: Install Dev Requirements<a class="headerlink" href="#step-4-install-dev-requirements" title="Permalink to this heading"></a></h2>
+<p>You should still be in the folder containing the <code class="docutils literal notranslate"><span class="pre">requirements_dev.txt</span></code> file.</p>
+<p>Your virtualenv should still be activated. If it isn’t, activate it now. Install the new project’s local development requirements:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements_dev.txt
+</pre></div>
+</div>
+<p>If you have issues building the wheel for cryptography, make sure that the required dependencies are installed. Follow the <a class="reference external" href="https://cryptography.io/en/latest/installation/">Cryptography Instruction</a> for your OS</p>
+</section>
+<section id="step-5-set-up-travis-ci">
+<h2>Step 5: Set Up Travis CI<a class="headerlink" href="#step-5-set-up-travis-ci" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://travis-ci.org/">Travis CI org</a> <a class="footnote-reference brackets" href="#id2" id="id1">*</a> is a continuous integration tool used to prevent integration problems. Every commit to the master branch will trigger automated builds of the application.</p>
+<p>Login using your Github credentials. It may take a few minutes for Travis CI to load up a list of all your GitHub repos. They will be listed with boxes to the left of the repo name, where the boxes have an <code class="docutils literal notranslate"><span class="pre">X</span></code> in them, meaning it is not connected to Travis CI.</p>
+<p>Add the public repo to your Travis CI account by clicking the <code class="docutils literal notranslate"><span class="pre">X</span></code> to switch it “on” in the box next to the <code class="docutils literal notranslate"><span class="pre">mypackage</span></code> repo. Do not try to follow the other instructions, that will be taken care of next.</p>
+<p>In your terminal, your virtualenv should still be activated. If it isn’t, activate it now. Run the script to do your Travis CI setup:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>travis_pypi_setup.py
+</pre></div>
+</div>
+<p>This will:</p>
+<ul class="simple">
+<li><p>Encrypt your PyPI password in your Travis config.</p></li>
+<li><p>Activate automated deployment on PyPI when you push a new tag to master branch.</p></li>
+</ul>
+<p>See <span class="xref std std-ref">travis-pypi-setup</span> for more information.</p>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">*</a></span></dt>
+<dd><p>For private projects go to <a class="reference external" href="https://travis-ci.com/">Travis CI com</a></p>
+</dd>
+</dl>
+</section>
+<section id="step-6-set-up-readthedocs">
+<h2>Step 6: Set Up ReadTheDocs<a class="headerlink" href="#step-6-set-up-readthedocs" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://readthedocs.org/">ReadTheDocs</a> hosts documentation for the open source community. Think of it as Continuous Documentation.</p>
+<p>Log into your account at <a class="reference external" href="https://readthedocs.org/">ReadTheDocs</a> . If you don’t have one, create one and log into it.</p>
+<p>If you are not at your dashboard, choose the pull-down next to your username in the upper right, and select “My Projects”. Choose the button to Import the repository and follow the directions.</p>
+<p>In your GitHub repo, select Settings &gt; Webhooks &amp; Services, turn on the ReadTheDocs service hook.</p>
+<p>Now your documentation will get rebuilt when you make documentation changes to your package.</p>
+</section>
+<section id="step-7-set-up-pyup-io">
+<h2>Step 7: Set Up pyup.io<a class="headerlink" href="#step-7-set-up-pyup-io" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://pyup.io/">pyup.io</a> is a service that helps you to keep your requirements files up to date. It sends you automated
+pull requests whenever there’s a new release for one of your dependencies.</p>
+<p>To use it, create a new account at <a class="reference external" href="https://pyup.io/">pyup.io</a> or log into your existing account.</p>
+<p>Click on the green <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Repo</span></code> button in the top left corner and select the repo you created in Step 3. A popup will
+ask you whether you want to pin your dependencies. Click on <code class="docutils literal notranslate"><span class="pre">Pin</span></code> to add the repo.</p>
+<p>Once your repo is set up correctly, the pyup.io badge will show your current update status.</p>
+</section>
+<section id="step-8-release-on-pypi">
+<h2>Step 8: Release on PyPI<a class="headerlink" href="#step-8-release-on-pypi" title="Permalink to this heading"></a></h2>
+<p>The Python Package Index or <a class="reference external" href="https://pypi.python.org/pypi">PyPI</a> is the official third-party software repository for the Python programming language. Python developers intend it to be a comprehensive catalog of all open source Python packages.</p>
+<p>When you are ready, release your package the standard Python way.</p>
+<p>See <a class="reference external" href="http://peterdowns.com/posts/first-time-with-pypi.html">PyPI Help</a> for more information about submitting a package.</p>
+<p>Here’s a release checklist you can use: <a class="reference external" href="https://gist.github.com/audreyr/5990987">https://gist.github.com/audreyr/5990987</a></p>
+</section>
+<section id="having-problems">
+<h2>Having problems?<a class="headerlink" href="#having-problems" title="Permalink to this heading"></a></h2>
+<p>Visit our <a class="reference internal" href="troubleshooting.html#troubleshooting"><span class="std std-ref">Troubleshooting</span></a> page for help. If that doesn’t help, go to our <a class="reference external" href="https://github.com/audreyr/cookiecutter-pypackage/issues">Issues</a> page and create a new Issue. Be sure to give as much information as possible.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="readme.html" class="btn btn-neutral float-left" title="Cookiecutter for SEAMM Plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pypi_release_checklist.html" class="btn btn-neutral float-right" title="PyPI Release Checklist" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

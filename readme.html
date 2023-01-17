@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookiecutter for SEAMM Plugins &mdash; SEAMM cookiecutter 2022.10.20 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorial" href="tutorial.html" />
+    <link rel="prev" title="SEAMM Cookiecutter" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> SEAMM cookiecutter
+          </a>
+              <div class="version">
+                2022.10.20
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Cookiecutter for SEAMM Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quickstart">Quickstart</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pypi_release_checklist.html">PyPI Release Checklist</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="prompts.html">Prompts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="console_script_setup.html">Console Script Setup</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://molssi-seamm.github.io">Main SEAMM documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SEAMM cookiecutter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Cookiecutter for SEAMM Plugins</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/readme.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cookiecutter-for-seamm-plugins">
+<span id="readme"></span><h1>Cookiecutter for SEAMM Plugins<a class="headerlink" href="#cookiecutter-for-seamm-plugins" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="https://github.com/audreyr/cookiecutter">Cookiecutter</a> template for a SEAMM plugin.</p>
+<ul class="simple">
+<li><p>GitHub repo: <a class="reference external" href="https://github.com/molssi-seamm/cookiecutter-seamm-plugin">https://github.com/molssi-seamm/cookiecutter-seamm-plugin</a></p></li>
+<li><p>Free software: BSD license</p></li>
+</ul>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Testing setup with <code class="docutils literal notranslate"><span class="pre">unittest</span></code> and <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">test</span></code> or <code class="docutils literal notranslate"><span class="pre">py.test</span></code></p></li>
+<li><p>CI/CD: Ready for Continuous Integration/Continuous Deployment using
+GitHub Actions.</p></li>
+<li><p><a class="reference external" href="http://sphinx-doc.org/">Sphinx</a> docs: Documentation ready for generation with, for example, <a class="reference external" href="https://readthedocs.io/">ReadTheDocs</a></p></li>
+<li><p>Auto-release to <a class="reference external" href="https://pypi.python.org/pypi">PyPI</a> when you push a new tag to master (optional)</p></li>
+</ul>
+</section>
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading"></a></h2>
+<p>Install the SEAMM Cookiecutter if you haven’t installed it yet (this requires
+Cookiecutter 1.4.0 or higher):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">seamm</span><span class="o">-</span><span class="n">cookiecutter</span>
+</pre></div>
+</div>
+<p>Generate a Python package project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">seamm</span><span class="o">-</span><span class="n">cookiecutter</span>
+</pre></div>
+</div>
+<p>And answer the prompts about your plug-in, etc. Then change to the new
+directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">&lt;</span><span class="n">plug</span><span class="o">-</span><span class="ow">in</span> <span class="n">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Then create repository in GitHub with exactly the same name, just
+giving the LICENSE type. Note that GitHub has changed the default
+branch to <cite>main</cite>, which is what the SEAMM cookiecutter also uses. Now
+you need to merge the two:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bash-3.2$ git remote add origin
+git@github.com:&lt;organization&gt;/&lt;plug-in name&gt; .git
+bash-3.2$ git pull --allow-unrelated-histories origin master
+warning: no common commits
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From github.com:&lt;organization&gt;/&lt;plug-in name&gt;
+ * branch            main     -&gt; FETCH_HEAD
+ * [new branch]      main     -&gt; origin/main
+error: Terminal is dumb, but EDITOR unset
+Not committing merge; use &#39;git commit&#39; to complete the merge.
+</pre></div>
+</div>
+<p>Depending on what happens here, you may have a conflict in LICENSE. If
+so, edit the file and fix the problem by keeping the appropriate lines.</p>
+<p>Once that is done, push to GitHub:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bash-3.2$ git push --set-upstream origin main
+Counting objects: 54, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (48/48), done.
+Writing objects: 100% (54/54), 20.43 KiB | 261.00 KiB/s, done.
+Total 54 (delta 10), reused 0 (delta 0)
+remote: Resolving deltas: 100% (10/10), completed with 1 local object.
+To github.com:&lt;organization&gt;/&lt;plug-in name&gt;.git
+   30251d7..e2761fc  main -&gt; main
+Branch main set up to track remote branch main from origin.
+bash-3.2$
+</pre></div>
+</div>
+<p>Deploy to PyPi. Once the code is in reasonable shape and working, you
+can deploy to PyPi so that users can <cite>pip install</cite> it. You need an
+account at <a class="reference external" href="https://pypi.python.org/pypi">PyPi</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="SEAMM Cookiecutter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

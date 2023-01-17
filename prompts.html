@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prompts &mdash; SEAMM cookiecutter 2022.10.20 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Console Script Setup" href="console_script_setup.html" />
+    <link rel="prev" title="PyPI Release Checklist" href="pypi_release_checklist.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> SEAMM cookiecutter
+          </a>
+              <div class="version">
+                2022.10.20
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">Cookiecutter for SEAMM Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pypi_release_checklist.html">PyPI Release Checklist</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Prompts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#templated-values">Templated Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="console_script_setup.html">Console Script Setup</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://molssi-seamm.github.io">Main SEAMM documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SEAMM cookiecutter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Prompts</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/prompts.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="prompts">
+<h1>Prompts<a class="headerlink" href="#prompts" title="Permalink to this heading"></a></h1>
+<p>When you create a package, you are prompted to enter these values.</p>
+<section id="templated-values">
+<h2>Templated Values<a class="headerlink" href="#templated-values" title="Permalink to this heading"></a></h2>
+<p>The following appear in various parts of your generated project.</p>
+<dl class="simple">
+<dt>step</dt><dd><p>The name of your code or step in SEAMM, e.g. MOPAC or Polymer
+Builder</p>
+</dd>
+<dt>use_subflowchart</dt><dd><p>Whether this step needs a subflowchart. If the step has an
+internal language, such as LAMMPS or MOPAC has, where the user can
+specify multiple steps, a subflowchart may be appropriate. If,
+however, the code takes a simple input and does one thing you
+propbably shouldn’t use a subflowchart.</p>
+</dd>
+<dt>repo_name</dt><dd><p>The name of the GitHub repository, which defaults to the
+lowercased version of the step suffixed with ‘_step’. This name
+should not have blanks or hyphens (‘-‘). Use underscores (‘_’)
+instead.</p>
+</dd>
+<dt>class_name</dt><dd><p>The name of the main class in the module, should be in Camel Case.</p>
+</dd>
+<dt>github_username</dt><dd><p>The GitHub name or the organization where you will put the
+repository. This forms the first part of the full path to the
+GitHub repository, e.g. ‘MOLSSI_SEAMM’ for MolSSI_SEAMM/seamm</p>
+</dd>
+<dt>author_name</dt><dd><p>Your name or your organization’s name, as appropriate. This is
+text for a human to read, e.g. Paul Saxe or the MolSSI.</p>
+</dd>
+<dt>author_email</dt><dd><p>The email of the appropriate contact, either you or the
+responsible person in the organization.</p>
+</dd>
+<dt>description</dt><dd><p>A short description of the project, used as a one-liner in various
+places.</p>
+</dd>
+<dt>pypi_username</dt><dd><p>Your PyPi user name, or the username for the appropriate owner in
+your ogranization.</p>
+</dd>
+</dl>
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
+<p>The following package configuration options set up different features for your project.</p>
+<dl class="simple">
+<dt>dependency_source</dt><dd><p>Whether to use Conda for the testing environment, and if so
+whether to prefer conda-forge or the default Anaconda channel for
+dependencies, with a fall back on pip. Otherwise use a Python
+environment and rely on pip for depednecies.</p>
+</dd>
+<dt>Include_Windows_continuous_integration</dt><dd><p>Whether to include CI on Windows using AppVeyor.com</p>
+</dd>
+<dt>license</dt><dd><p>The license to use. Options:</p>
+<ol class="arabic simple">
+<li><p>BSD-3-Clause</p></li>
+<li><p>MIT</p></li>
+<li><p>GNU General Public License v3+</p></li>
+<li><p>GNU Lesser General Public License v3+</p></li>
+<li><p>other</p></li>
+</ol>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pypi_release_checklist.html" class="btn btn-neutral float-left" title="PyPI Release Checklist" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="console_script_setup.html" class="btn btn-neutral float-right" title="Console Script Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
