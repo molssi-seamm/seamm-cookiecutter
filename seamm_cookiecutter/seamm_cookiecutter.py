@@ -4,9 +4,12 @@
 """
 import argparse
 import datetime
+import logging
 import os.path
 
 from cookiecutter.main import cookiecutter
+
+logging.basicConfig(level=logging.WARNING)
 
 
 def run():
@@ -37,10 +40,24 @@ def run():
 
     extra_context = {"_release_date": date, "_plugin_version": version}
 
-    if options.replay:
-        cookiecutter(curdir, replay=True, directory=options.type)
+    step_type = options.type
+    print(f"Preparing a {step_type}")
+    if step_type == "substep":
+        overwrite = True
     else:
-        cookiecutter(curdir, extra_context=extra_context, directory=options.type)
+        overwrite = False
+
+    if options.replay:
+        cookiecutter(
+            curdir, replay=True, directory=step_type, overwrite_if_exists=overwrite
+        )
+    else:
+        cookiecutter(
+            curdir,
+            extra_context=extra_context,
+            directory=step_type,
+            overwrite_if_exists=overwrite
+        )
 
 
 if __file__ == "__main__":

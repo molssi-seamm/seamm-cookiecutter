@@ -1,22 +1,24 @@
 {
     "step": "Name of your code or step, e.g. MOPAC or Polymer Builder",
     "use_subflowchart": "n",
-    "repo_name": "{{ cookiecutter.step.lower().replace(' ', '_').replace('-', '_') }}_step",
+    "organization": "Your GitHub organization  (https://<organization>/<repository>)",
+    "repository": "{{ cookiecutter.step.lower().replace(' ', '_').replace('-', '_') }}_step",
     "class_name": "{{ cookiecutter.step.replace('_', ' ').replace('-', ' ').title().replace(' ', '') }}",
-    "github_username": "The GitHub directory (a username or organization) to use",
-    "author_name": "Your name (or your organization if appropriate)",
-    "author_email": "Your email (or your organization's if appropriate)",
+    "author": "Your name",
+    "email": "Your email",
     "description": "A SEAMM plug-in for {{ cookiecutter.step }}",
     "dependency_source": [
         "Prefer conda-forge over the default anaconda channel with pip fallback",
         "Prefer default anaconda channel with pip fallback",
         "Dependencies from pip only (no conda)"],
-    "pypi_username": "{{ cookiecutter.github_username }}",
+    "pypi_username": "{{ cookiecutter.organization }}",
     "license": ["BSD-3-Clause",
 		"MIT",
 		"GNU General Public License v3+",
 		"GNU Lesser General Public License v3+",
 		"other"],
     "_plugin_version": "",
-    "_release_date": ""
+    "_release_date": "",
+    "_copy_without_render": [
+    ]
 }

@@ -7,7 +7,18 @@ These scripts are executed from the output folder.
 If any error is raised, the cookie cutter creation fails and crashes
 """
 
+from pathlib import Path
 import subprocess as sp
+
+
+def remove_unneeded_files():
+    """Remove files that aren't needed, based on project type."""
+    subflowchart = "{{ cookiecutter.use_subflowchart }}" == "y"
+
+    src_dir = Path("{{cookiecutter.repository}}")
+    if subflowchart:
+        path = src_dir / "{{cookiecutter.repository[0:-5]}}_parameters.py"
+        path.unlink(missing_ok=True)
 
 
 def decode_string(string):
@@ -64,8 +75,9 @@ def git_init_and_tag():
     else:
         print(
             "\ngit repository detected. CookieCutter files have been created "
-            "in {{ cookiecutter.repo_name }} directory."
+            "in {{ cookiecutter.repository }} directory."
         )
 
 
+remove_unneeded_files()
 git_init_and_tag()

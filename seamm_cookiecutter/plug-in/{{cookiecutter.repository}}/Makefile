@@ -1,6 +1,7 @@
-MODULE := seamm_cookiecutter
-.PHONY: help clean clean-build clean-pyc clean-test lint format typing test dependencies
-.PHONY: test-all coverage html docs servedocs release check-release dist install uninstall
+MODULE := {{ cookiecutter.repository }}
+.PHONY: help clean clean-build clean-docs clean-pyc clean-test lint format typing test
+.PHONY: dependencies test-all coverage html docs servedocs release check-release
+.PHONY: dist install uninstall
 .DEFAULT_GOAL := help
 define BROWSER_PYSCRIPT
 import os, webbrowser, sys
@@ -51,37 +52,32 @@ clean-test: ## remove test and coverage artifacts
 	find . -name '.pytype' -exec rm -fr {} +
 
 lint: ## check style with black and flake8
-	black --extend-exclude {{cookiecutter.repository}} --check --diff $(MODULE) tests
+	black --extend-exclude '_version.py' --check --diff $(MODULE) tests
 	flake8 --color never $(MODULE) tests
 
-format: ## reformat with with black
-	black --extend-exclude {{cookiecutter.repository}} $(MODULE) tests
-
-typing: ## check typing
-	pytype $(MODULE)
+format: ## reformat with with yapf and isort
+	black --extend-exclude '_version.py' $(MODULE) tests
 
 test: ## run tests quickly with the default Python
-	py.test
-
-dependencies:
-	pur -r requirements_dev.txt
-	pip install -r requirements_dev.txt
-
-test-all: ## run tests on every Python version with tox
-	tox
+	pytest tests/
 
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source $(MODULE) -m pytest
-	coverage report -m
-	coverage html
+	pytest -v --cov=$(MODULE) --cov-report term --color=yes tests/
+
+coverage-html: ## check code coverage quickly with the default Python, showing as html
+	pytest -v --cov=$(MODULE) --cov-report=html:htmlcov --cov-report term --color=yes tests/
 	$(BROWSER) htmlcov/index.html
 
-html: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/developer/$(MODULE).rst
-	rm -f docs/developer/modules.rst
-	sphinx-apidoc -o docs/developer $(MODULE)
+clean-docs: ## remove files associated with building the docs
+	rm -f docs/api/$(MODULE).rst
+	rm -f docs/api/modules.rst
 	$(MAKE) -C docs clean
+
+html: clean-docs ## generate Sphinx HTML documentation, including API docs
+	sphinx-apidoc -o docs/api $(MODULE)
 	$(MAKE) -C docs html
+	rm -f docs/api/$(MODULE).rst
+	rm -f docs/api/modules.rst
 
 docs: html ## Make the html docs and show in the browser
 	$(BROWSER) docs/_build/html/index.html
@@ -104,16 +100,3 @@ install: uninstall ## install the package to the active Python's site-packages
 
 uninstall: clean ## uninstall the package
 	pip uninstall --yes $(MODULE)
-
-# From original cookiecutter:
-BAKE_OPTIONS=--no-input
-
-bake: ## generate project using defaults
-	cookiecutter $(BAKE_OPTIONS) . --overwrite-if-exists
-
-watch: bake ## generate project using defaults and watch for changes
-	watchmedo shell-command -p '*.*' -c 'make bake -e BAKE_OPTIONS=$(BAKE_OPTIONS)' -W -R -D \{{cookiecutter.repository}}/
-
-replay: BAKE_OPTIONS=--replay
-replay: watch ## replay last cookiecutter run and watch for changes
-	;
