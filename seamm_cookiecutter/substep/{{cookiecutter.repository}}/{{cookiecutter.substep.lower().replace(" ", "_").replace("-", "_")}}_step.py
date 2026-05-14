@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import {{cookiecutter.repository}}
+import {{cookiecutter.repository}}  # noqa: E999
 
 
 class {{cookiecutter.class_name}}Step(object):

@@ -21,15 +21,23 @@ if cwd.name != repository or cwd.parent.name != repository:
     sys.exit(1)
 
 if not re.match(MODULE_REGEX, repository):
-    print(key, re.match(MODULE_REGEX, key))
-    print('ERROR: "{}", the repo name, is not a valid Python module name!'.format(key))
+    print(repository, re.match(MODULE_REGEX, repository))
+    print(
+        'ERROR: "{}", the repo name, is not a valid Python module name!'.format(
+            repository
+        )
+    )
 
     # exits with status 1 to indicate failure
     sys.exit(1)
 
 if not re.match(CLASS_REGEX, class_name):
-    print(key, re.match(CLASS_REGEX, key))
-    print('ERROR: "{}", the class name, is not a valid Python class name!'.format(key))
+    print(class_name, re.match(CLASS_REGEX, class_name))
+    print(
+        'ERROR: "{}", the class name, is not a valid Python class name!'.format(
+            class_name
+        )
+    )
 
     # exits with status 1 to indicate failure
     sys.exit(1)

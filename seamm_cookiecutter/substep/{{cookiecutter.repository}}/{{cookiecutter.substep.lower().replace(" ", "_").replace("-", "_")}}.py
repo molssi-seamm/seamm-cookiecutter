@@ -8,7 +8,7 @@ from pathlib import Path
 import pkg_resources
 import pprint  # noqa: F401
 
-import {{ cookiecutter.repository }}
+import {{ cookiecutter.repository }}  # noqa: E999
 import molsystem
 import seamm
 from seamm_util import ureg, Q_  # noqa: F401

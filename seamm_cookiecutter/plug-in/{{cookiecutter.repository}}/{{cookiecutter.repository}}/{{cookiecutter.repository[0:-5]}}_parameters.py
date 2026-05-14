@@ -56,16 +56,16 @@ class {{ cookiecutter.class_name }}Parameters(seamm.Parameters):
     parameters["default_units"] : str
         The default units, used for resetting the value.
 
-    parameters["enumeration"]: tuple
+    parameters["enumeration"] : tuple
         A tuple of enumerated values.
 
-    parameters["format_string"]: str
+    parameters["format_string"] : str
         A format string for "pretty" output.
 
-    parameters["description"]: str
+    parameters["description"] : str
         A short string used as a prompt in the GUI.
 
-    parameters["help_text"]: str
+    parameters["help_text"] : str
         A longer string to display as help for the user.
 
     See Also

@@ -10,7 +10,7 @@ import pprint  # noqa: F401
 logger = logging.getLogger(__name__)
 
 
-class {{ cookiecutter.class_name }}Parameters(seamm.Parameters):
+class {{ cookiecutter.class_name }}Parameters(seamm.Parameters):  # noqa: E999
     """
     The control parameters for {{ cookiecutter.substep }}.
 

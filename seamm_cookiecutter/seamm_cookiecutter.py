@@ -56,7 +56,7 @@ def run():
             curdir,
             extra_context=extra_context,
             directory=step_type,
-            overwrite_if_exists=overwrite
+            overwrite_if_exists=overwrite,
         )
 
 

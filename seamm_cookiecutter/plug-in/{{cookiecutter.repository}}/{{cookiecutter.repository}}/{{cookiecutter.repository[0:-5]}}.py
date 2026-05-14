@@ -174,12 +174,12 @@ class {{ cookiecutter.class_name }}(seamm.Node):
                 raise
             except:  # noqa: E722
                 print(
-                    "Unexpected error describing {{cookiecutter.repository[0:-5]}} flowchart: {} in {}"
-                    .format(sys.exc_info()[0], str(node))
+                    "Unexpected error describing {{cookiecutter.repository[0:-5]}} flowchart: "
+                    f"{sys.exc_info()[0]} in {str(node)}"
                 )
-                logger.critical(
-                    "Unexpected error describing {{cookiecutter.repository[0:-5]}} flowchart: {} in {}"
-                    .format(sys.exc_info()[0], str(node))
+                self.logger.critical(
+                    "Unexpected error describing {{cookiecutter.repository[0:-5]}} flowchart: "
+                    f"{sys.exc_info()[0]} in {str(node)}"
                 )
                 raise
             text += "\n"

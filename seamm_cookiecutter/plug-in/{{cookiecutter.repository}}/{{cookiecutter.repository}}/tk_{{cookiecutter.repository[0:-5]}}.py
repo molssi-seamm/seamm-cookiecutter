@@ -3,6 +3,7 @@
 """The graphical part of a {{ cookiecutter.step }} step"""
 
 import pprint  # noqa: F401
+import tkinter as tk  # noqa: F401
 
 import {{ cookiecutter.repository }}  # noqa: F401
 import seamm

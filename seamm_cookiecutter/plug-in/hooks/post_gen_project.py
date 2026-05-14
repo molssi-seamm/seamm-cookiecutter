@@ -31,7 +31,6 @@ def decode_string(string):
 
 
 def invoke_shell(command, expected_error=True, print_output=True):
-
     try:
         output = sp.check_output(command, shell=True, stderr=sp.STDOUT)
     except sp.CalledProcessError as e:

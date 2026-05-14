@@ -9,7 +9,7 @@
 # the {{ cookiecutter.repository }} package.
 
 from .{{ cookiecutter.repository[0:-5] }} import {{ cookiecutter.class_name }}  # noqa: F401, E501
-{%- if cookiecutter.use_subflowchart != "y" -%}
+{%- if cookiecutter.use_subflowchart != "y" %}
 from .{{ cookiecutter.repository[0:-5] }}_parameters import {{ cookiecutter.class_name }}Parameters  # noqa: F401, E501
 {%- endif %}
 from .{{ cookiecutter.repository[0:-5] }}_step import {{ cookiecutter.class_name }}Step  # noqa: F401, E501

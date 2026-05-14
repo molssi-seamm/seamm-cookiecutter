@@ -5,9 +5,9 @@
 import pprint  # noqa: F401
 import tkinter as tk
 
-import {{ cookiecutter.repository }}  # noqa: F401
+import {{ cookiecutter.repository }}  # noqa: F401, E999
 import seamm
-from seamm_util import ureg, Q_, units_class  # noqa: F401
+from seamm_util import ureg, Q_, units_class  # noqa: F401, E999
 import seamm_widgets as sw
 
 
