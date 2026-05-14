@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-"""The main module for running the SEAMM cookiecutter.
-"""
+"""The main module for running the SEAMM cookiecutter."""
+
 import argparse
 import datetime
 import logging

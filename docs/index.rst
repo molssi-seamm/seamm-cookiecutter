@@ -1,53 +1,73 @@
+==================
 SEAMM Cookiecutter
 ==================
 
-Getting Started
----------------
+The SEAMM Cookiecutter creates the initial directory structure and files for a new
+plug-in for SEAMM, or for a new substep for a plug-in that itself contains a flowchart
+to represent a multi-step calculation.
 
-.. toctree::
-   :maxdepth: 2
+.. grid:: 1 1 2 2
 
-   readme
-   tutorial
-   pypi_release_checklist
+   .. grid-item-card:: Getting Started
+      :margin: 0 3 0 0
 
-Basics
-------
+      A simple introduction
 
-.. toctree::
-   :maxdepth: 2
+      .. button-link:: ./getting_started/index.html
+	 :color: primary
+	 :expand:
 
-   prompts
+         To the Getting Started Guide
 
-Advanced Features
------------------
+   .. grid-item-card::  User Guide
+      :margin: 0 3 0 0
 
-.. toctree::
-   :maxdepth: 2
+      A complete guide to using this step
 
-   console_script_setup
+      .. button-link:: ./user_guide/index.html
+	 :color: primary
+	 :expand:
 
+         To the User Guide
 
-Indices and tables
-==================
+   .. grid-item-card::  Developer Guide
+      :margin: 0 3 0 0
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+      Contributing to the code. Fixing bugs, adding functionality
 
-Versions of this Documentation
-==============================
+      .. button-link:: ./developer_guide/index.html
+	 :color: primary
+	 :expand:
 
-.. raw:: html
+         To the Developer Guide
 
-   <iframe
-   src="https://molssi-seamm.github.io/table_step/dev/versions.html"
-   title="Documentation Versions"  style="border:none;">
-   </iframe>
+   .. grid-item-card:: API Reference
+      :margin: 0 3 0 0
+
+      The API for the Geometry Analysis Step
+
+      .. button-link:: ./api/index.html
+	 :color: primary
+	 :expand:
+
+	 To the API Reference.
+
 
 .. toctree::
    :hidden:
    :maxdepth: 1
    :titlesonly:
 
-   Main SEAMM documentation <https://molssi-seamm.github.io>
+   getting_started/index
+   user_guide/index
+   developer_guide/index
+   api/index
+
+More Information
+================
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+   authors
+   history

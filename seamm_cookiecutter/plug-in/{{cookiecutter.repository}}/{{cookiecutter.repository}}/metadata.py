@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""This file contains metadata describing the results from {{ cookiecutter.class_name }}
-"""
+"""This file contains metadata describing the results from {{ cookiecutter.class_name }}"""
 
 metadata = {}
 
