@@ -1,0 +1,10 @@
+{
+    "step": "Name of the current step, e.g. MOPAC or Polymer Builder (without _step)",
+    "repository": "{{ cookiecutter.step.lower().replace(' ', '_').replace('-', '_') }}_step",
+    "substep": "Name of the substep, e.g. Energy, Optimization, or Force Constants",
+    "class_name": "{{ cookiecutter.substep.replace('_', ' ').replace('-', ' ').title().replace(' ', '') }}",
+    "_plugin_version": "",
+    "_release_date": "",
+    "_copy_without_render": [
+    ]
+}

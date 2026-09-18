@@ -1,3 +1,27 @@
+.. image:: https://img.shields.io/github/issues-pr-raw/molssi-seamm/seamm-cookiecutter
+   :target: https://github.com/molssi-seamm/seamm-cookiecutter/pulls
+   :alt: GitHub pull requests
+
+.. image:: https://github.com/molssi-seamm/seamm-cookiecutter/workflows/CI/badge.svg
+   :target: https://github.com/molssi-seamm/seamm-cookiecutter/actions
+   :alt: Build Status
+
+.. image:: https://codecov.io/gh/molssi-seamm/seamm-cookiecutter/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/molssi-seamm/seamm-cookiecutter
+   :alt: Code Coverage
+
+.. image:: https://github.com/molssi-seamm/seamm-cookiecutter/workflows/CodeQL/badge.svg
+   :target: https://github.com/molssi-seamm/seamm-cookiecutter/security/code-scanning
+   :alt: Code Quality
+
+.. image:: https://github.com/molssi-seamm/seamm-cookiecutter/workflows/Release/badge.svg
+   :target: https://molssi-seamm.github.io/seamm-cookiecutter/index.html
+   :alt: Documentation Status
+
+.. image:: https://img.shields.io/pypi/v/seamm-cookiecutter.svg
+   :target: https://pypi.python.org/pypi/seamm-cookiecutter
+   :alt: PyPi VERSION
+
 ==============================
 Cookiecutter for SEAMM Plugins
 ==============================

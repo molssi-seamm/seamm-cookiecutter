@@ -1,7 +1,9 @@
 MODULE := seamm_cookiecutter
-.PHONY: help clean clean-build clean-pyc clean-test lint format typing test dependencies
-.PHONY: test-all coverage html docs servedocs release check-release dist install uninstall
+.PHONY: help clean clean-build clean-docs clean-pyc clean-test lint format typing test
+.PHONY: dependencies test-all coverage html docs servedocs release check-release
+.PHONY: dist install uninstall
 .DEFAULT_GOAL := help
+
 define BROWSER_PYSCRIPT
 import os, webbrowser, sys
 try:
@@ -11,6 +13,7 @@ except:
 
 webbrowser.open("file://" + pathname2url(os.path.abspath(sys.argv[1])))
 endef
+
 export BROWSER_PYSCRIPT
 
 define PRINT_HELP_PYSCRIPT
@@ -22,7 +25,9 @@ for line in sys.stdin:
 		target, help = match.groups()
 		print("%-20s %s" % (target, help))
 endef
+
 export PRINT_HELP_PYSCRIPT
+
 BROWSER := python -c "$$BROWSER_PYSCRIPT"
 
 help:
@@ -51,37 +56,28 @@ clean-test: ## remove test and coverage artifacts
 	find . -name '.pytype' -exec rm -fr {} +
 
 lint: ## check style with black and flake8
-	black --extend-exclude {{cookiecutter.repo_name}} --check --diff $(MODULE) tests
-	flake8 $(MODULE) tests
+	black --extend-exclude '_version.py|plug-in|substep' --check --diff $(MODULE) tests
+	flake8 --color never $(MODULE) tests
 
-format: ## reformat with with black
-	black --extend-exclude {{cookiecutter.repo_name}} $(MODULE) tests
-
-typing: ## check typing
-	pytype $(MODULE)
+format: ## reformat with with yapf and isort
+	black --extend-exclude '_version.py|plug-in|substep' $(MODULE) tests
 
 test: ## run tests quickly with the default Python
-	py.test
+	pytest --doctest-modules tests $(MODULE)
 
 dependencies:
 	pur -r requirements_dev.txt
 	pip install -r requirements_dev.txt
 
-test-all: ## run tests on every Python version with tox
-	tox
-
-coverage: ## check code coverage quickly with the default Python
-	coverage run --source $(MODULE) -m pytest
-	coverage report -m
-	coverage html
+coverage: clean-test ## check code coverage quickly with the default Python
+	pytest -v --doctest-modules --cov=$(MODULE) --cov-report=html tests/ $(MODULE)
 	$(BROWSER) htmlcov/index.html
 
-html: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/developer/$(MODULE).rst
-	rm -f docs/developer/modules.rst
-	sphinx-apidoc -o docs/developer $(MODULE)
-	$(MAKE) -C docs clean
+html: clean-docs ## generate Sphinx HTML documentation, including API docs
+	sphinx-apidoc -o docs/api $(MODULE)
 	$(MAKE) -C docs html
+	rm -f docs/api/$(MODULE).rst
+	rm -f docs/api/modules.rst
 
 docs: html ## Make the html docs and show in the browser
 	$(BROWSER) docs/_build/html/index.html
@@ -105,15 +101,11 @@ install: uninstall ## install the package to the active Python's site-packages
 uninstall: clean ## uninstall the package
 	pip uninstall --yes $(MODULE)
 
-# From original cookiecutter:
-BAKE_OPTIONS=--no-input
-
-bake: ## generate project using defaults
-	cookiecutter $(BAKE_OPTIONS) . --overwrite-if-exists
-
-watch: bake ## generate project using defaults and watch for changes
-	watchmedo shell-command -p '*.*' -c 'make bake -e BAKE_OPTIONS=$(BAKE_OPTIONS)' -W -R -D \{{cookiecutter.repo_name}}/
-
-replay: BAKE_OPTIONS=--replay
-replay: watch ## replay last cookiecutter run and watch for changes
-	;
+.PHONY: update
+update: ## post-release: sync main and dev, reinstall, run checks, push dev
+	git checkout main
+	git pull
+	git checkout dev
+	git merge --ff-only main
+	$(MAKE) lint install test
+	git push

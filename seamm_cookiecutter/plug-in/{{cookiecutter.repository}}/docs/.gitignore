@@ -1,0 +1,3 @@
+/{{ cookiecutter.repository }}.rst
+/{{ cookiecutter.repository }}.*.rst
+/modules.rst

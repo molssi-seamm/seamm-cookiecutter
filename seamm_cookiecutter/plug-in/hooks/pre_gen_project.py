@@ -11,12 +11,12 @@ MODULE_REGEX = r"^[_a-zA-Z][_a-zA-Z0-9]+$"
 CLASS_REGEX = r"^[a-zA-Z][a-zA-Z0-9]*$"
 EMAIL_REGEX = r"[^@]+@[^@]+\.[^@]+"
 
-repo_name = "{{ cookiecutter.repo_name }}"
+repository = "{{ cookiecutter.repository }}"
 class_name = "{{ cookiecutter.class_name }}"
 
-author_email = "{{ cookiecutter.author_email }}"
+email = "{{ cookiecutter.email }}"
 
-if not re.match(MODULE_REGEX, repo_name):
+if not re.match(MODULE_REGEX, repository):
     print(key, re.match(MODULE_REGEX, key))
     print('ERROR: "{}", the repo name, is not a valid Python module name!'.format(key))
 
@@ -30,8 +30,8 @@ if not re.match(CLASS_REGEX, class_name):
     # exits with status 1 to indicate failure
     sys.exit(1)
 
-if not re.match(EMAIL_REGEX, author_email):
-    print('ERROR: "{}" is not a valid email address!'.format(author_email))
+if not re.match(EMAIL_REGEX, email):
+    print('ERROR: "{}" is not a valid email address!'.format(email))
 
     # exits with status 1 to indicate failure
     sys.exit(1)
